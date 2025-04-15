@@ -15,13 +15,32 @@
       background-size: cover;
       color: #fff;
     }
+    nav {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-around;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
+    nav a:hover {
+      background: #00aaff;
+    }
     .container {
-      max-width: 600px;
-      margin: auto;
+      max-width: 800px;
+      margin: 80px auto 20px;
       background-color: rgba(0, 0, 0, 0.6);
       padding: 20px;
       border-radius: 12px;
-      margin-top: 20px;
     }
     h1, h2 {
       text-align: center;
@@ -51,24 +70,43 @@
       border-radius: 10px;
       margin-top: 20px;
     }
-    .blog-post {
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 10px;
-      margin-bottom: 10px;
+    #whatsapp {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25D366;
+      color: white;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 30px;
+      text-align: center;
+      line-height: 60px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      z-index: 1001;
     }
-    img.blog-img {
-      width: 100%;
-      border-radius: 8px;
+    .region-card {
+      margin-bottom: 15px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
     }
   </style>
 </head>
 <body>
+  <nav>
+    <a href="#meteo">Meteo</a>
+    <a href="#login">Login</a>
+    <a href="#blog">Blog</a>
+    <a href="#licenze">Licenze</a>
+    <a href="https://www.mgfishing.eu" target="_blank">MG Fishing</a>
+  </nav>
+
+  <a id="whatsapp" href="https://wa.me/393494166335" target="_blank">📱</a>
+
   <div class="container">
     <h1>MG Fishing Pro 🎣</h1>
 
-    <button class="button" onclick="window.open('https://www.mgfishing.eu', '_blank')">Visita MG Fishing</button>
-
-    <div class="card">
+    <div class="card" id="meteo">
       <h2>Meteo e Condizioni</h2>
       <input class="input" id="cityInput" placeholder="Inserisci città" />
       <button class="button" onclick="getWeatherByCity()">Cerca</button>
@@ -77,14 +115,14 @@
       <div id="fishingAdvice"></div>
     </div>
 
-    <div class="card">
+    <div class="card" id="login">
       <h2>Login</h2>
       <input class="input" type="email" placeholder="Email">
       <input class="input" type="password" placeholder="Password">
       <button class="button">Accedi</button>
     </div>
 
-    <div class="card">
+    <div class="card" id="blog">
       <h2>Blog pescatori 🐟</h2>
       <input class="input" type="text" placeholder="Titolo post">
       <textarea class="input" placeholder="Scrivi qualcosa..."></textarea>
@@ -93,8 +131,28 @@
       <div class="blog-post">
         <h3>Grande cattura al tramonto</h3>
         <p>Spot perfetto, mare calmo e luna piena 🌕</p>
-        <img class="blog-img" src="https://images.unsplash.com/photo-1597848212624-6a261c4bba06?auto=format&fit=crop&w=600&q=80" alt="pesce" />
+        <img class="input" src="https://images.unsplash.com/photo-1597848212624-6a261c4bba06?auto=format&fit=crop&w=600&q=80" alt="pesce" style="border-radius: 10px; max-width: 100%;" />
       </div>
+    </div>
+
+    <div class="card" id="licenze">
+      <h2>Licenza Tipo B – Info per Regione</h2>
+      <div class="region-card">
+        <h3>Lazio</h3>
+        <p><strong>Costo:</strong> €29,13 / <strong>Esenzione:</strong> Under 18, Over 65</p>
+        <p><strong>Modalità:</strong> Versamento + tesserino, da portare con sé</p>
+      </div>
+      <div class="region-card">
+        <h3>Lombardia</h3>
+        <p><strong>Costo:</strong> €23,00 / <strong>Esenzione:</strong> Under 18, Over 65, Disabili</p>
+        <p><strong>Modalità:</strong> PagoPA – ricevuta valida come licenza</p>
+      </div>
+      <div class="region-card">
+        <h3>Sardegna</h3>
+        <p><strong>Costo:</strong> €20,00 – Valida 5 anni / <strong>Esenzione:</strong> Under 14, Over 65</p>
+        <p><strong>Modalità:</strong> PagoPA – ricevuta valida come licenza</p>
+      </div>
+      <!-- Altre regioni da inserire con lo stesso schema -->
     </div>
   </div>
 
@@ -124,6 +182,7 @@
           const temp = data.main.temp;
           const wind = data.wind.speed;
           const name = data.name;
+
           const moonPhase = getMoonPhase();
           const advice = getFishingAdvice(wind, moonPhase);
 
@@ -132,8 +191,7 @@
             <strong>Condizioni:</strong> ${weather}<br/>
             <strong>Temperatura:</strong> ${temp} °C<br/>
             <strong>Vento:</strong> ${wind} m/s<br/>
-            <strong>Fase lunare:</strong> ${moonPhase}
-          `;
+            <strong>Fase lunare:</strong> ${moonPhase}`;
 
           document.getElementById('fishingAdvice').innerHTML = `<strong>🎣 Consiglio pesca:</strong> ${advice}`;
         })
