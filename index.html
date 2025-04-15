@@ -16,7 +16,7 @@
       min-height: 100vh;
     }
     #hamburger {
-      display: none;
+      display: block;
       background: rgba(0,0,0,0.8);
       padding: 10px;
       position: fixed;
@@ -39,6 +39,7 @@
       top: 0;
       left: 0;
       width: 100%;
+      height: 100%;
       background: rgba(0,0,0,0.95);
       z-index: 1001;
       padding: 60px 0;
@@ -117,7 +118,7 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.5);
       text-decoration: none;
       font-size: 16px;
-      z-index: 1001;
+      z-index: 1000;
     }
     .bottom-nav {
       position: fixed;
@@ -145,9 +146,6 @@
       .content {
         margin-left: 0;
         padding: 10px;
-      }
-      #hamburger {
-        display: block;
       }
     }
   </style>
@@ -208,7 +206,7 @@
     </div>
   </div>
 
-  <!-- SEZIONI COMPLETE da mostrare cliccando il menu -->
+  <!-- SEZIONI -->
   <div id="meteo" class="section">
     <h2>Meteo Live</h2>
     <input id="cityInput" class="input" placeholder="Inserisci città o usa GPS">
@@ -304,82 +302,17 @@
 </div>
 
 <script>
-// Funzione mostra webcam correttamente in iframe
-function mostraWebcam() {
-  const url = document.getElementById("localita").value;
-  const frame = document.getElementById("webcamFrame");
-  if (url) {
-    frame.innerHTML = `<iframe src="${url}" width="100%" height="400" style="border:0; border-radius:10px;"></iframe>`;
-  } else {
-    frame.innerHTML = "";
-  }
-}
-
-// Meteo OpenWeatherMap
-const apiKey = "a3b6ead62ce9e333256276f96865a8e1";
-
-function getWeatherByCity() {
-  const city = document.getElementById("cityInput").value;
-  if (!city) return;
-  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=it`)
-    .then(res => res.json())
-    .then(data => displayWeather(data))
-    .catch(err => console.error("Errore meteo:", err));
-}
-
-function getWeatherByLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(pos => {
-      const { latitude, longitude } = pos.coords;
-      fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric&lang=it`)
-        .then(res => res.json())
-        .then(data => displayWeather(data))
-        .catch(err => console.error("Errore meteo:", err));
-    });
-  }
-}
-
-function displayWeather(data) {
-  if (!data || !data.main) {
-    document.getElementById("weatherDisplay").innerHTML = "Impossibile recuperare i dati meteo.";
-    return;
-  }
-  const icon = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-  const sunrise = new Date(data.sys.sunrise * 1000).toLocaleTimeString("it-IT");
-  const sunset = new Date(data.sys.sunset * 1000).toLocaleTimeString("it-IT");
-
-  let consigli = "Condizioni buone per la pesca.";
-  if (data.wind.speed > 25 || data.weather[0].main === "Rain") {
-    consigli = "🌧️ Meglio rimandare la battuta di pesca.";
-  } else if (data.wind.speed < 10 && data.clouds.all < 50) {
-    consigli = "☀️ Ottimo momento per pescare!";
-  }
-
-  document.getElementById("weatherDisplay").innerHTML = `
-    <div style="text-align: center;">
-      <h3>${data.name}</h3>
-      <img src="${icon}" alt="Meteo">
-      <p><strong>Temperatura:</strong> ${data.main.temp} °C</p>
-      <p><strong>Pressione:</strong> ${data.main.pressure} hPa</p>
-      <p><strong>Vento:</strong> ${data.wind.speed} km/h</p>
-      <p><strong>Alba:</strong> ${sunrise} | <strong>Tramonto:</strong> ${sunset}</p>
-      <p><strong>Consiglio pesca:</strong> ${consigli}</p>
-    </div>`;
-}
 function toggleMenu() {
   const menu = document.getElementById("mobileMenu");
-  menu.style.display = menu.style.display === "block" ? "none" : "block";
+  if (menu) menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
 function showSection(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   const section = document.getElementById(id);
   if (section) section.classList.add('active');
-  const menu = document.getElementById("mobileMenu");
-  if (menu) menu.style.display = "none";
-  const whatsappBtn = document.getElementById("whatsappBtn");
-  if (whatsappBtn) whatsappBtn.style.display = "none";
+  document.getElementById("mobileMenu").style.display = "none";
+  document.getElementById("whatsappBtn").style.display = "none";
   window.scrollTo({ top: 0, behavior: 'smooth' });
-});
 }
 function goBack() {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
