@@ -96,8 +96,12 @@
 <body>
   <div id="hamburger" onclick="toggleMenu()">☰</div>
   <header>
-    <h1>MG Fishing App</h1>
-  </header>
+  <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+    <a href="https://www.facebook.com/verde.pesca.7" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" width="30" alt="Facebook"></a>
+    <a href="https://www.instagram.com/mgfishingverdepesca/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" width="30" alt="Instagram"></a>
+    <a href="https://www.tiktok.com/@mgfishing.verdepesca" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/TikTok_logo.svg" width="30" alt="TikTok"></a>
+  </div>
+</header>
   <nav id="sideMenu">
     <a href="#" onclick="showSection('meteo')">☀️ Meteo</a>
     <a href="#" onclick="showSection('webcam')">📷 Webcam</a>
@@ -191,9 +195,13 @@
 
   <script>
     function showSection(id) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const menu = document.getElementById("sideMenu");
+  if (menu.classList.contains("show")) {
+    menu.classList.remove("show");
+  }
+}
 
     function mostraWebcam() {
       const url = document.getElementById("localita").value;
