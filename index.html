@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MG Fishing Pro</title>
   <link rel="icon" type="image/png" href="https://www.mgfishing.eu/img/logo_mgfishing-1619610634.jpg">
   <style>
@@ -12,34 +12,41 @@
       background: url('https://images.unsplash.com/photo-1502786129293-79981df4e689?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
       background-size: cover;
       color: #fff;
+      display: flex;
     }
     nav {
+      width: 200px;
+      background: rgba(0,0,0,0.9);
+      height: 100vh;
       position: fixed;
       top: 0;
-      width: 100%;
-      background: rgba(0,0,0,0.85);
+      left: 0;
       display: flex;
-      justify-content: space-around;
-      padding: 10px;
-      z-index: 1000;
+      flex-direction: column;
+      padding: 20px 0;
+      box-shadow: 2px 0 6px rgba(0,0,0,0.5);
     }
     nav a {
       color: white;
       text-decoration: none;
-      padding: 10px 15px;
-      border-radius: 5px;
+      padding: 12px 20px;
       font-weight: bold;
+      display: block;
     }
     nav a:hover {
-      background: #00aaff;
+      background-color: #00aaff;
+    }
+    .content {
+      margin-left: 200px;
+      padding: 20px;
+      width: 100%;
     }
     .section {
       display: none;
-      max-width: 900px;
-      margin: 80px auto 20px;
-      background: rgba(0,0,0,0.7);
+      background-color: rgba(0,0,0,0.7);
       padding: 20px;
       border-radius: 12px;
+      margin-bottom: 30px;
     }
     .active {
       display: block;
@@ -59,135 +66,71 @@
     .button:hover {
       background: #0077cc;
     }
-    iframe {
-      border: none;
-      width: 100%;
-      height: 400px;
-      border-radius: 8px;
+    #whatsappBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25D366;
+      color: white;
+      padding: 15px 20px;
+      border-radius: 50px;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      text-decoration: none;
+      font-size: 16px;
     }
   </style>
 </head>
 <body>
 
 <nav>
-  <a href="#" onclick="showSection('meteo')">Meteo</a>
-  <a href="#" onclick="showSection('blog')">Blog</a>
-  <a href="#" onclick="showSection('login')">Login</a>
-  <a href="#" onclick="showSection('licenze')">Licenze</a>
-  <a href="#" onclick="showSection('webcam')">Webcam Mare</a>
-  <a href="https://www.mgfishing.eu" target="_blank">MG Fishing</a>
+  <a href="#" onclick="showSection('meteo')">🌦 Meteo</a>
+  <a href="#" onclick="showSection('blog')">📝 Blog</a>
+  <a href="#" onclick="showSection('login')">🔐 Login</a>
+  <a href="#" onclick="showSection('licenze')">🎣 Licenze</a>
+  <a href="#" onclick="showSection('webcam')">📸 Webcam Mare</a>
+  <a href="#" onclick="showSection('esche')">🪱 Esche Vive</a>
+  <a href="https://www.mgfishing.eu" target="_blank">🏪 MG Fishing</a>
 </nav>
 
-<!-- Banner Offerte -->
-<div style="text-align:center; margin: 100px 0 30px;">
-  <a href="https://www.mgfishing.eu" target="_blank" style="text-decoration:none;">
-    <div style="background:#00aaff; padding:15px 25px; border-radius:10px; color:#fff; font-weight:bold; display:inline-block; font-size:18px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
-      🎣 Scopri le offerte su MG Fishing!
-    </div>
-  </a>
+<div class="content">
+  <div id="esche" class="section">
+    <h2>Esche Vive</h2>
+    <form id="escheForm">
+      <div><strong>Arenicola Locale</strong><br><small>Ottima per orate e spigole. Usare con amo sottile.</small><input type="number" class="input" name="Arenicola Locale" placeholder="Quantità"></div>
+      <div><strong>Arenicola Napoli</strong><br><small>Perfetta per surfcasting. Resistente alla corrente.</small><input type="number" class="input" name="Arenicola Napoli" placeholder="Quantità"></div>
+      <div><strong>Americano</strong><br><small>Esca versatile, ideale per mare mosso.</small><input type="number" class="input" name="Americano" placeholder="Quantità"></div>
+      <div><strong>Bibi</strong><br><small>Prediletto dalle orate. Da innescare con ago esca.</small><input type="number" class="input" name="Bibi" placeholder="Quantità"></div>
+      <div><strong>Cordella</strong><br><small>Molto profumata, perfetta per pesca notturna.</small><input type="number" class="input" name="Cordella" placeholder="Quantità"></div>
+      <div><strong>Muriddu</strong><br><small>Esca locale per mormore e saraghi.</small><input type="number" class="input" name="Muriddu" placeholder="Quantità"></div>
+      <div><strong>Bigattino</strong><br><small>Perfetto per acqua dolce e mare. Ottimo pasturatore.</small><input type="number" class="input" name="Bigattino" placeholder="Quantità"></div>
+      <div><strong>Vermi di Terra</strong><br><small>Ottimo per cefali e anguille. Classico multiuso.</small><input type="number" class="input" name="Vermi di Terra" placeholder="Quantità"></div>
+      <div><strong>Camole del Miele</strong><br><small>Ideali per trote e tecniche leggere. Molto attrattive.</small><input type="number" class="input" name="Camole del Miele" placeholder="Quantità"></div>
+      <button type="button" class="button" onclick="inviaOrdineEsche()">📲 Prenota via WhatsApp</button>
+    </form>
+  </div>
 </div>
 
-<div id="meteo" class="section">
-  <h2>Meteo Live</h2>
-  <input id="cityInput" class="input" placeholder="Inserisci città o usa GPS">
-  <button onclick="getWeatherByCity()" class="button">Cerca</button>
-  <button onclick="getWeatherByLocation()" class="button">Usa GPS</button>
-  <div id="weatherDisplay"></div>
-</div>
-
-<div id="blog" class="section">
-  <h2>Blog pescatori</h2>
-  <input class="input" type="text" placeholder="Titolo">
-  <textarea class="input" placeholder="Scrivi la tua esperienza..."></textarea>
-  <input class="input" type="file" accept="image/*">
-  <button class="button">Pubblica</button>
-</div>
-
-<div id="login" class="section">
-  <h2>Login</h2>
-  <input class="input" type="email" placeholder="Email">
-  <input class="input" type="password" placeholder="Password">
-  <button class="button">Accedi</button>
-</div>
-
-<div id="licenze" class="section">
-  <h2>Licenze di Pesca Tipo B – Info per Regione</h2>
-  <ul>
-    <li><strong>Lazio:</strong> €29,13 – Gratuita per under 18, over 65 e disabili (con tesserino obbligatorio).</li>
-    <li><strong>Lombardia:</strong> €23 – esenti under 18, over 65 e disabili. Validità 12 mesi. PagoPA.</li>
-    <li><strong>Piemonte:</strong> €35 – esenti minori di 14 anni e disabili. Validità 12 mesi. PagoPA.</li>
-    <li><strong>Emilia-Romagna:</strong> €22,72 – esenti under 18 e over 65. Validità annuale.</li>
-    <li><strong>Toscana:</strong> €35 (Tipo B), €10 (Tipo C), €1 (Tipo D). No esenzioni.</li>
-    <li><strong>Veneto:</strong> €34 – esenti under 18, over 70, disabili. Validità 12 mesi.</li>
-    <li><strong>Sardegna:</strong> €20 – valida 5 anni. Gratuita per over 65 e under 14.</li>
-    <li><strong>Liguria:</strong> €45,45 (Tipo B), €22,72 (Tipo C). Over 65 pagano ridotto.</li>
-  </ul>
-</div>
-
-<div id="webcam" class="section">
-  <h2>Webcam Mare</h2>
-  <select id="localita" class="input" onchange="mostraWebcam()">
-    <option value="">Scegli località</option>
-    <option value="https://www.vedetta.org/webcam/italia/lazio/latina/lido-di-latina/">Latina Mare (Lazio)</option>
-    <option value="https://www.vedetta.org/webcam/italia/lazio/latina/sabaudia-lungomare-spiaggia/">Sabaudia (Lazio)</option>
-    <option value="https://www.vedetta.org/webcam/italia/liguria/genova/genova-voltri/">Genova Voltri (Liguria)</option>
-    <option value="https://www.vedetta.org/webcam/italia/sardegna/sassari/alghero/">Alghero (Sardegna)</option>
-    <option value="https://www.vedetta.org/webcam/italia/sicilia/palermo/mondello/">Mondello (Sicilia)</option>
-  </select>
-  <div id="webcamFrame"></div>
-</div>
+<a id="whatsappBtn" href="https://wa.me/393494166335" target="_blank">💬 Contattaci su WhatsApp</a>
 
 <script>
 function showSection(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+  const section = document.getElementById(id);
+  if (section) section.classList.add('active');
 }
 
-function mostraWebcam() {
-  const url = document.getElementById('localita').value;
-  if (url) {
-    document.getElementById('webcamFrame').innerHTML = `<a href='${url}' target='_blank' style='color:#fff;'>📷 Apri la webcam in una nuova finestra</a>`;
-  } else {
-    document.getElementById('webcamFrame').innerHTML = '';
+function inviaOrdineEsche() {
+  const form = document.getElementById("escheForm");
+  const data = new FormData(form);
+  let messaggio = "Ciao, vorrei prenotare le seguenti esche vive:%0A";
+  for (const [nome, qta] of data.entries()) {
+    if (qta && parseInt(qta) > 0) {
+      messaggio += `- ${nome}: ${qta}%0A`;
+    }
   }
-}
-
-const apiKey = "a3b6ead62ce9e333256276f96865a8e1";
-function getWeatherByCity() {
-  const city = document.getElementById("cityInput").value;
-  fetchWeather(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=it`);
-}
-function getWeatherByLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(pos => {
-      fetchWeather(`https://api.openweathermap.org/data/2.5/weather?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=${apiKey}&units=metric&lang=it`);
-    });
-  }
-}
-function fetchWeather(url) {
-  fetch(url).then(res => res.json()).then(data => {
-    const moon = getMoonPhase();
-    document.getElementById("weatherDisplay").innerHTML = `
-      <p><strong>Località:</strong> ${data.name}</p>
-      <p><strong>Condizioni:</strong> ${data.weather[0].description}</p>
-      <p><strong>Temperatura:</strong> ${data.main.temp} °C</p>
-      <p><strong>Vento:</strong> ${(data.wind.speed * 3.6).toFixed(1)} km/h</p>
-      <p><strong>Umidità:</strong> ${data.main.humidity}%</p>
-      <p><strong>Luna:</strong> ${moon}</p>
-    `;
-  });
-}
-function getMoonPhase() {
-  const now = new Date();
-  const newMoon = new Date("2023-12-13T00:00:00Z");
-  const synodic = 29.53058867;
-  const days = (now - newMoon) / (1000 * 60 * 60 * 24);
-  const phase = days % synodic;
-  if (phase < 1.5 || phase > 28) return "🌑 Luna Nuova";
-  if (phase < 7) return "🌓 Primo Quarto";
-  if (phase < 15) return "🌕 Luna Piena";
-  if (phase < 22) return "🌗 Ultimo Quarto";
-  return "🌘 Fase Calante";
+  const url = `https://wa.me/393494166335?text=${messaggio}`;
+  window.open(url, '_blank');
 }
 </script>
 
