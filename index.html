@@ -162,14 +162,22 @@
 </head>
 <body>
 
-<div id="sectionMenu" style="text-align:center; margin: 40px auto; max-width: 600px;">
-  <h2 style="margin-bottom: 20px;">📂 Seleziona una sezione</h2>
-  <button class="button" onclick="showSection('meteo')">🌦 Meteo</button>
-  <button class="button" onclick="showSection('blog')">📝 Blog</button>
-  <button class="button" onclick="showSection('login')">🔐 Login</button>
-  <button class="button" onclick="showSection('licenze')">🎣 Licenze</button>
-  <button class="button" onclick="showSection('webcam')">📸 Webcam Mare</button>
-  <button class="button" onclick="showSection('esche')">🪱 Esche Vive</button>
+<div id="hamburgerContainer">
+  <div id="hamburger" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<div id="mobileMenu">
+  <a href="#" onclick="showSection('meteo'); toggleMenu();">🌦 Meteo</a>
+  <a href="#" onclick="showSection('blog'); toggleMenu();">📝 Blog</a>
+  <a href="#" onclick="showSection('login'); toggleMenu();">🔐 Login</a>
+  <a href="#" onclick="showSection('licenze'); toggleMenu();">🎣 Licenze</a>
+  <a href="#" onclick="showSection('webcam'); toggleMenu();">📸 Webcam Mare</a>
+  <a href="#" onclick="showSection('esche'); toggleMenu();">🪱 Esche Vive</a>
+  <a href="https://www.mgfishing.eu" target="_blank">🏪 MG Fishing</a>
 </div>
 
 <div class="content" id="mainContent">
