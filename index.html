@@ -284,7 +284,7 @@
     <option value="https://www.vedetta.org/webcam/italia/sardegna/sassari/alghero/">Alghero (Sardegna)</option>
     <option value="https://www.vedetta.org/webcam/italia/sicilia/palermo/mondello/">Mondello (Sicilia)</option>
   </select>
-  <div id="webcamFrame"></div>
+  <div id="webcamFrame" style="margin-top:20px; text-align:center;"></div>
 </div>
 
 <div id="esche" class="section">
@@ -304,7 +304,7 @@
 </div>
 </div>
 
-<a id="whatsappBtn" href="https://wa.me/393494166335" target="_blank">💬 Contattaci su WhatsApp</a>
+<a id="whatsappBtn" href="https://wa.me/393494166335" target="_blank" style="display: block;">💬 Contattaci su WhatsApp</a>
 
 <div class="bottom-nav">
   <button onclick="resetView()">🏠 Home</button>
@@ -312,6 +312,16 @@
 </div>
 
 <script>
+function mostraWebcam() {
+  const url = document.getElementById("localita").value;
+  const frame = document.getElementById("webcamFrame");
+  if (url) {
+    frame.innerHTML = `<iframe src="${url}" width="100%" height="400" style="border:0; border-radius:10px;"></iframe>`;
+  } else {
+    frame.innerHTML = "";
+  }
+}
+
 const apiKey = "a3b6ead62ce9e333256276f96865a8e1";
 
 function getWeatherByCity() {
@@ -372,16 +382,21 @@ function showSection(id) {
   const section = document.getElementById(id);
   if (section) section.classList.add('active');
   toggleBanner(false);
+  document.getElementById("whatsappBtn").style.display = "none";
   window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 }
 function goBack() {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   toggleBanner(true);
+  document.getElementById("whatsappBtn").style.display = "block";
 }
 function resetView() {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   toggleBanner(true);
+  document.getElementById("whatsappBtn").style.display = "block";
   window.scrollTo({ top: 0 });
+});
 }
 function toggleMenu() {
   const menu = document.getElementById("mobileMenu");
