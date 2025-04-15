@@ -159,7 +159,7 @@
 <body>
 
 <div style="display:flex; align-items:center; gap:10px; position:fixed; top:10px; left:10px; z-index:1003;">
-  <div id="hamburgerContainer" style="display:flex; align-items:center; gap:10px; position:fixed; top:10px; left:10px; z-index:1003;">
+  <div id="hamburgerContainer" style="display:flex; align-items:center; gap:10px; position:fixed; top:10px; left:10px; z-index:9999;">
   <div id="hamburger" onclick="toggleMenu()">
   <span></span>
   <span></span>
@@ -167,7 +167,7 @@
 </div>
   <span style="color:white; font-weight:bold; font-size:16px; display:block;">📂 Menu</span>
 </div>
-<div id="mobileMenu">
+<div id="mobileMenu" style="display:none; position:fixed; top:0; left:0; width:100%; background:rgba(0,0,0,0.95); z-index:9998; padding:60px 0; text-align:center;">
   <a href="#" onclick="showSection('meteo'); toggleMenu();">🌦 Meteo</a>
   <a href="#" onclick="showSection('blog'); toggleMenu();">📝 Blog</a>
   <a href="#" onclick="showSection('login'); toggleMenu();">🔐 Login</a>
@@ -187,7 +187,7 @@
   <a href="https://www.mgfishing.eu" target="_blank">🏪 MG Fishing</a>
 </nav>
 
-<div class="content" id="mainContent">
+<div class="content" id="mainContent" style="position:relative; z-index:1;">
   <!-- Banner Offerte MG Fishing -->
   <div id="bannerOfferte" style="text-align:center; margin: 30px auto; max-width: 600px;" class="banner">
     <a href="https://www.mgfishing.eu" target="_blank" style="text-decoration:none;">
