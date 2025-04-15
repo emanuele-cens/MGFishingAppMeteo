@@ -1,80 +1,69 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MG Fishing Pro</title>
-  <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/png" href="https://www.mgfishing.eu/img/logo_mgfishing-1619610634.jpg">
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
+      font-family: Arial, sans-serif;
       background: url('https://images.unsplash.com/photo-1502786129293-79981df4e689?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
       background-size: cover;
       color: #fff;
     }
     nav {
-      background: rgba(0, 0, 0, 0.7);
+      background-color: rgba(0,0,0,0.85);
       padding: 10px;
       position: fixed;
       width: 100%;
       top: 0;
-      left: 0;
       z-index: 1000;
       display: flex;
       justify-content: space-around;
     }
     nav a {
-      color: #fff;
+      color: white;
       text-decoration: none;
+      font-weight: bold;
       padding: 8px 12px;
-      border-radius: 4px;
     }
     nav a:hover {
-      background: #00aaff;
+      background-color: #00aaff;
+      border-radius: 4px;
     }
-    .container {
+    .section {
+      display: none;
       max-width: 800px;
-      margin: 80px auto 20px;
-      background-color: rgba(0, 0, 0, 0.6);
+      margin: 100px auto 30px;
       padding: 20px;
+      background-color: rgba(0,0,0,0.7);
       border-radius: 12px;
     }
-    h1, h2 {
-      text-align: center;
+    .active {
+      display: block;
     }
-    .input, .button {
+    .button, .input, select {
       width: 100%;
       padding: 10px;
-      margin: 5px 0;
-      border-radius: 8px;
+      margin: 10px 0;
+      border-radius: 6px;
       font-size: 16px;
     }
-    .input {
-      border: none;
-    }
     .button {
-      background: #00aaff;
-      color: #fff;
+      background-color: #00aaff;
+      color: white;
       border: none;
-      cursor: pointer;
     }
     .button:hover {
-      background: #0077cc;
-    }
-    .card {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 15px;
-      border-radius: 10px;
-      margin-top: 20px;
+      background-color: #0077cc;
     }
     #whatsapp {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: #25D366;
+      background-color: #25D366;
       color: white;
       border-radius: 50%;
       width: 60px;
@@ -82,146 +71,108 @@
       font-size: 30px;
       text-align: center;
       line-height: 60px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      z-index: 1001;
-    }
-    .region-card {
-      margin-bottom: 15px;
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
-  <nav>
-    <a href="#meteo">Meteo</a>
-    <a href="#login">Login</a>
-    <a href="#blog">Blog</a>
-    <a href="#licenze">Licenze</a>
-    <a href="https://www.mgfishing.eu" target="_blank">MG Fishing</a>
-  </nav>
 
-  <a id="whatsapp" href="https://wa.me/393494166335" target="_blank">📱</a>
+<nav>
+  <a href="#" onclick="showSection('meteo')">Meteo</a>
+  <a href="#" onclick="showSection('blog')">Blog</a>
+  <a href="#" onclick="showSection('login')">Login</a>
+  <a href="#" onclick="showSection('licenze')">Licenze</a>
+  <a href="#" onclick="showSection('webcam')">Webcam Mare</a>
+  <a href="https://www.mgfishing.eu" target="_blank">MG Fishing</a>
+</nav>
 
-  <div class="container">
-    <h1>MG Fishing Pro 🎣</h1>
+<a id="whatsapp" href="https://wa.me/393494166335" target="_blank">📱</a>
 
-    <div class="card" id="meteo">
-      <h2>Meteo e Condizioni</h2>
-      <input class="input" id="cityInput" placeholder="Inserisci città" />
-      <button class="button" onclick="getWeatherByCity()">Cerca</button>
-      <button class="button" onclick="getWeatherByLocation()">Usa GPS</button>
-      <div id="weatherDisplay"></div>
-      <div id="fishingAdvice"></div>
-    </div>
+<div id="meteo" class="section">
+  <h2>Previsioni Meteo</h2>
+  <p>Funzionalità in aggiornamento...</p>
+</div>
 
-    <div class="card" id="login">
-      <h2>Login</h2>
-      <input class="input" type="email" placeholder="Email">
-      <input class="input" type="password" placeholder="Password">
-      <button class="button">Accedi</button>
-    </div>
+<div id="blog" class="section">
+  <h2>Blog Pescatori</h2>
+  <p>Prossimamente sarà possibile condividere post con foto!</p>
+</div>
 
-    <div class="card" id="blog">
-      <h2>Blog pescatori 🐟</h2>
-      <input class="input" type="text" placeholder="Titolo post">
-      <textarea class="input" placeholder="Scrivi qualcosa..."></textarea>
-      <input class="input" type="file" accept="image/*">
-      <button class="button">Pubblica</button>
-      <div class="blog-post">
-        <h3>Grande cattura al tramonto</h3>
-        <p>Spot perfetto, mare calmo e luna piena 🌕</p>
-        <img class="input" src="https://images.unsplash.com/photo-1597848212624-6a261c4bba06?auto=format&fit=crop&w=600&q=80" alt="pesce" style="border-radius: 10px; max-width: 100%;" />
-      </div>
-    </div>
+<div id="login" class="section">
+  <h2>Login</h2>
+  <p>Accesso utenti (da attivare con Firebase).</p>
+</div>
 
-    <div class="card" id="licenze">
-      <h2>Licenza Tipo B – Info per Regione</h2>
-      <div class="region-card">
-        <h3>Lazio</h3>
-        <p><strong>Costo:</strong> €29,13 / <strong>Esenzione:</strong> Under 18, Over 65</p>
-        <p><strong>Modalità:</strong> Versamento + tesserino, da portare con sé</p>
-      </div>
-      <div class="region-card">
-        <h3>Lombardia</h3>
-        <p><strong>Costo:</strong> €23,00 / <strong>Esenzione:</strong> Under 18, Over 65, Disabili</p>
-        <p><strong>Modalità:</strong> PagoPA – ricevuta valida come licenza</p>
-      </div>
-      <div class="region-card">
-        <h3>Sardegna</h3>
-        <p><strong>Costo:</strong> €20,00 – Valida 5 anni / <strong>Esenzione:</strong> Under 14, Over 65</p>
-        <p><strong>Modalità:</strong> PagoPA – ricevuta valida come licenza</p>
-      </div>
-      <!-- Altre regioni da inserire con lo stesso schema -->
-    </div>
-  </div>
+<div id="licenze" class="section">
+  <h2>Licenze di Pesca Tipo B</h2>
+  <p>Sezione aggiornata con info per tutte le regioni (vedi versione completa in arrivo).</p>
+</div>
 
-  <script>
-    const apiKey = "a3b6ead62ce9e333256276f96865a8e1";
+<div id="webcam" class="section">
+  <h2>Webcam Mare – Seleziona Regione e Località</h2>
+  <select id="regione" onchange="aggiornaLocalita()">
+    <option value="">Seleziona una regione</option>
+    <option value="Lazio">Lazio</option>
+    <option value="Liguria">Liguria</option>
+    <option value="Sicilia">Sicilia</option>
+    <option value="Sardegna">Sardegna</option>
+    <option value="Toscana">Toscana</option>
+  </select>
 
-    function getWeatherByCity() {
-      const city = document.getElementById('cityInput').value;
-      fetchWeather(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=it`);
+  <select id="localita" onchange="mostraWebcam()">
+    <option value="">Seleziona una località</option>
+  </select>
+
+  <div id="webcamFrame" style="margin-top:20px"></div>
+</div>
+
+<script>
+const webcamData = {
+  "Lazio": {
+    "Fregene Sud": "https://vedetta.org/webcam/italia/lazio/roma/fregene-sud/embed",
+    "Sabaudia": "https://vedetta.org/webcam/italia/lazio/latina/sabaudia-lungomare-spiaggia/embed",
+    "Latina Mare": "https://vedetta.org/webcam/italia/lazio/latina/latina-mare/embed",
+    "Anzio": "https://vedetta.org/webcam/italia/lazio/roma/anzio-lido-di-cincinnato/embed"
+  },
+  "Liguria": {
+    "Genova Voltri": "https://vedetta.org/webcam/italia/liguria/genova/genova-voltri/embed"
+  },
+  "Sicilia": {
+    "Mondello": "https://vedetta.org/webcam/italia/sicilia/palermo/mondello/embed"
+  },
+  "Sardegna": {
+    "Alghero": "https://vedetta.org/webcam/italia/sardegna/sassari/alghero/embed"
+  },
+  "Toscana": {
+    "Castiglione della Pescaia": "https://vedetta.org/webcam/italia/toscana/grosseto/castiglione-della-pescaia/embed"
+  }
+};
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function aggiornaLocalita() {
+  const regione = document.getElementById("regione").value;
+  const localitaSelect = document.getElementById("localita");
+  localitaSelect.innerHTML = '<option value="">Seleziona una località</option>';
+  if (webcamData[regione]) {
+    for (const localita in webcamData[regione]) {
+      const option = document.createElement("option");
+      option.value = webcamData[regione][localita];
+      option.text = localita;
+      localitaSelect.appendChild(option);
     }
+  }
+}
 
-    function getWeatherByLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          const lat = position.coords.latitude;
-          const lon = position.coords.longitude;
-          fetchWeather(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=it`);
-        });
-      }
-    }
-
-    function fetchWeather(url) {
-      fetch(url)
-        .then(res => res.json())
-        .then(data => {
-          const weather = data.weather[0].description;
-          const temp = data.main.temp;
-          const wind = data.wind.speed;
-          const name = data.name;
-
-          const moonPhase = getMoonPhase();
-          const advice = getFishingAdvice(wind, moonPhase);
-
-          document.getElementById('weatherDisplay').innerHTML = `
-            <strong>Località:</strong> ${name}<br/>
-            <strong>Condizioni:</strong> ${weather}<br/>
-            <strong>Temperatura:</strong> ${temp} °C<br/>
-            <strong>Vento:</strong> ${wind} m/s<br/>
-            <strong>Fase lunare:</strong> ${moonPhase}`;
-
-          document.getElementById('fishingAdvice').innerHTML = `<strong>🎣 Consiglio pesca:</strong> ${advice}`;
-        })
-        .catch(() => {
-          document.getElementById('weatherDisplay').innerHTML = 'Errore nel recupero dei dati meteo.';
-        });
-    }
-
-    function getMoonPhase() {
-      const now = new Date();
-      const synodicMonth = 29.53058867;
-      const newMoon = new Date("2023-12-13T00:00:00Z");
-      const diff = now - newMoon;
-      const days = diff / (1000 * 60 * 60 * 24);
-      const phase = days % synodicMonth;
-      if (phase < 1.5 || phase > 28) return "🌑 Luna Nuova";
-      if (phase < 7) return "🌓 Primo quarto";
-      if (phase < 15) return "🌕 Luna Piena";
-      if (phase < 22) return "🌗 Ultimo quarto";
-      return "🌘 Fase calante";
-    }
-
-    function getFishingAdvice(wind, moonPhase) {
-      let rating = 0;
-      if (wind < 4) rating++;
-      if (moonPhase.includes("🌕") || moonPhase.includes("🌑")) rating++;
-      if (rating === 2) return "Ottimo momento per pescare!";
-      if (rating === 1) return "Discreto, ma potrebbe andare bene.";
-      return "Non ideale oggi.";
-    }
-  </script>
+function mostraWebcam() {
+  const url = document.getElementById("localita").value;
+  const frame = `<iframe src="${url}" width="100%" height="400" style="border:none;"></iframe>`;
+  document.getElementById("webcamFrame").innerHTML = frame;
+}
+</script>
 </body>
 </html>
