@@ -6,13 +6,14 @@
   <title>MG Fishing Pro</title>
   <link rel="icon" type="image/png" href="https://www.mgfishing.eu/img/logo_mgfishing-1619610634.jpg">
   <style>
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: url('https://images.unsplash.com/photo-1502786129293-79981df4e689?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
       background-size: cover;
       color: #fff;
-      display: flex;
+      min-height: 100vh;
     }
     nav {
       width: 200px;
@@ -39,14 +40,13 @@
     .content {
       margin-left: 200px;
       padding: 20px;
-      width: 100%;
     }
     .section {
       display: none;
       background-color: rgba(0,0,0,0.7);
       padding: 20px;
       border-radius: 12px;
-      margin-bottom: 30px;
+      margin-bottom: 60px;
     }
     .active {
       display: block;
@@ -68,7 +68,7 @@
     }
     #whatsappBtn {
       position: fixed;
-      bottom: 20px;
+      bottom: 80px;
       right: 20px;
       background: #25D366;
       color: white;
@@ -78,6 +78,34 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.5);
       text-decoration: none;
       font-size: 16px;
+    }
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      z-index: 1001;
+    }
+    .bottom-nav button {
+      background: #00aaff;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    @media screen and (max-width: 768px) {
+      nav {
+        display: none;
+      }
+      .content {
+        margin-left: 0;
+        padding: 10px;
+      }
     }
   </style>
 </head>
@@ -94,6 +122,25 @@
 </nav>
 
 <div class="content">
+  <div style="text-align:center; margin: 30px auto; max-width: 600px;">
+    <a href="https://www.mgfishing.eu" target="_blank" style="text-decoration:none;">
+      <div style="background:#00aaff; padding:15px 25px; border-radius:10px; color:#fff; font-weight:bold; display:inline-block; font-size:18px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+        🎣 Scopri le offerte su MG Fishing!
+      </div>
+    </a>
+  </div>
+  <div style="text-align:center; margin: 30px auto;">
+    <a href="https://www.facebook.com/verde.pesca.7" target="_blank" style="margin: 0 10px;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" width="40">
+    </a>
+    <a href="https://www.instagram.com/mgfishingverdepesca/" target="_blank" style="margin: 0 10px;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" width="40">
+    </a>
+    <a href="https://www.tiktok.com/@mgfishing.verdepesca" target="_blank" style="margin: 0 10px;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/TikTok_logo.svg" alt="TikTok" width="40">
+    </a>
+  </div>
+
   <div id="meteo" class="section">
     <h2>Meteo Live</h2>
     <input id="cityInput" class="input" placeholder="Inserisci città o usa GPS">
@@ -103,11 +150,31 @@
   </div>
 
   <div id="blog" class="section">
-    <h2>Blog pescatori</h2>
-    <input class="input" type="text" placeholder="Titolo">
-    <textarea class="input" placeholder="Scrivi la tua esperienza..."></textarea>
-    <input class="input" type="file" accept="image/*">
-    <button class="button">Pubblica</button>
+    <h2>Blog Pescatori</h2>
+    <article>
+      <h3>Nodi da pesca – I 7 nodi essenziali</h3>
+      <p>I nodi sono fondamentali per ogni pescatore. Ecco i 7 nodi più utili:</p>
+      <ul>
+        <li><strong>Nodo Palomar</strong> – Ideale per legare trecciati a girelle.</li>
+        <li><strong>Nodo UNI</strong> – Ottimo per nylon e fluorocarbon.</li>
+        <li><strong>Nodo dell’Amo a Paletta</strong> – Per legare ami senza occhiello.</li>
+        <li><strong>Asola (Loop)</strong> – Utile per collegare accessori.</li>
+        <li><strong>Dropper Loop</strong> – Per aggiungere ami o piombi senza tagliare la lenza.</li>
+        <li><strong>Nodo Clinch</strong> – Classico per nylon e fluorocarbon.</li>
+        <li><strong>Nodo del Tubicino</strong> – Per ami ad occhiello o girelle.</li>
+      </ul>
+      <p>Per approfondire, guarda questo video: <a href="https://www.youtube.com/watch?v=QJx1GYjoSQU" target="_blank">I TRE NODI DA SAPERE PER ANDARE A PESCARE</a></p>
+    </article>
+    <article>
+      <h3>Lettura del mare – Come interpretare le onde</h3>
+      <p>Leggere il mare è essenziale per scegliere lo spot giusto:</p>
+      <ul>
+        <li><strong>Onde e schiume</strong>: indicano canali e canaloni dove i pesci cercano cibo.</li>
+        <li><strong>Granulometria della sabbia</strong>: sabbia fine indica fondali bassi, ciottoli segnalano profondità.</li>
+        <li><strong>Mare mosso</strong>: le correnti scoprono il cibo, attirando i pesci.</li>
+      </ul>
+      <p>Per ulteriori dettagli, consulta questo articolo: <a href="https://www.surfcastingblog.com/condivisione/come-leggere-il-mare-nel-surfcasting/" target="_blank">Come leggere il mare nel surfcasting</a></p>
+    </article>
   </div>
 
   <div id="login" class="section">
@@ -144,8 +211,7 @@
     <div id="webcamFrame"></div>
   </div>
 
-  <!-- Esche Vive già inclusa precedentemente -->
-  <div id="esche" class="section active">
+  <div id="esche" class="section">
     <h2>Esche Vive</h2>
     <form id="escheForm">
       <div><strong>Arenicola Locale</strong><br><small>Ottima per orate e spigole. Usare con amo sottile.</small><input type="number" class="input" name="Arenicola Locale" placeholder="Quantità"></div>
@@ -164,71 +230,23 @@
 
 <a id="whatsappBtn" href="https://wa.me/393494166335" target="_blank">💬 Contattaci su WhatsApp</a>
 
+<div class="bottom-nav">
+  <button onclick="goHome()">🏠 Home</button>
+  <button onclick="goBack()">🔙 Indietro</button>
+</div>
+
 <script>
 function showSection(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   const section = document.getElementById(id);
   if (section) section.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
-function mostraWebcam() {
-  const url = document.getElementById('localita').value;
-  if (url) {
-    document.getElementById('webcamFrame').innerHTML = `<a href='${url}' target='_blank' style='color:#fff;'>📷 Apri la webcam in una nuova finestra</a>`;
-  } else {
-    document.getElementById('webcamFrame').innerHTML = '';
-  }
+function goBack() {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
 }
-
-function inviaOrdineEsche() {
-  const form = document.getElementById("escheForm");
-  const data = new FormData(form);
-  let messaggio = "Ciao, vorrei prenotare le seguenti esche vive:%0A";
-  for (const [nome, qta] of data.entries()) {
-    if (qta && parseInt(qta) > 0) {
-      messaggio += `- ${nome}: ${qta}%0A`;
-    }
-  }
-  const url = `https://wa.me/393494166335?text=${messaggio}`;
-  window.open(url, '_blank');
-}
-
-const apiKey = "a3b6ead62ce9e333256276f96865a8e1";
-function getWeatherByCity() {
-  const city = document.getElementById("cityInput").value;
-  fetchWeather(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=it`);
-}
-function getWeatherByLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(pos => {
-      fetchWeather(`https://api.openweathermap.org/data/2.5/weather?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=${apiKey}&units=metric&lang=it`);
-    });
-  }
-}
-function fetchWeather(url) {
-  fetch(url).then(res => res.json()).then(data => {
-    const moon = getMoonPhase();
-    document.getElementById("weatherDisplay").innerHTML = `
-      <p><strong>Località:</strong> ${data.name}</p>
-      <p><strong>Condizioni:</strong> ${data.weather[0].description}</p>
-      <p><strong>Temperatura:</strong> ${data.main.temp} °C</p>
-      <p><strong>Vento:</strong> ${(data.wind.speed * 3.6).toFixed(1)} km/h</p>
-      <p><strong>Umidità:</strong> ${data.main.humidity}%</p>
-      <p><strong>Luna:</strong> ${moon}</p>
-    `;
-  });
-}
-function getMoonPhase() {
-  const now = new Date();
-  const newMoon = new Date("2023-12-13T00:00:00Z");
-  const synodic = 29.53058867;
-  const days = (now - newMoon) / (1000 * 60 * 60 * 24);
-  const phase = days % synodic;
-  if (phase < 1.5 || phase > 28) return "🌑 Luna Nuova";
-  if (phase < 7) return "🌓 Primo Quarto";
-  if (phase < 15) return "🌕 Luna Piena";
-  if (phase < 22) return "🌗 Ultimo Quarto";
-  return "🌘 Fase Calante";
+function goHome() {
+  window.location.href = "https://www.mgfishing.eu";
 }
 </script>
 
