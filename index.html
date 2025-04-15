@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fishing Pro Demo</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f0f8ff; }
+    h1, h2 { color: #003366; }
+    .button { margin: 10px 0; padding: 10px; background: #007acc; color: white; border: none; border-radius: 5px; font-size: 16px; }
+    .button:hover { background: #005fa3; }
+    .input { padding: 8px; margin: 5px 0; width: 100%; font-size: 14px; }
+    .card { background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-top: 20px; }
+    .catch { border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Fishing Pro 🎣</h1>
+
+  <button class="button" onclick="window.open('https://www.meteopesca.com', '_blank')">Vai su MeteoPesca</button>
+  <button class="button" onclick="window.open('https://www.mgfishing.eu', '_blank')">Visita MG Fishing</button>
+
+  <div class="card">
+    <h2>Registra una cattura</h2>
+    <input class="input" id="species" placeholder="Specie">
+    <input class="input" id="spot" placeholder="Spot">
+    <input class="input" id="date" type="date">
+    <button class="button" onclick="addCatch()">Aggiungi</button>
+  </div>
+
+  <div class="card">
+    <h2>Diario delle catture</h2>
+    <div id="catchList">Nessuna cattura registrata.</div>
+  </div>
+
+  <script>
+    const catches = [];
+
+    function addCatch() {
+      const species = document.getElementById('species').value;
+      const spot = document.getElementById('spot').value;
+      const date = document.getElementById('date').value;
+
+      if (species && spot && date) {
+        catches.push({ species, spot, date });
+        updateCatchList();
+        document.getElementById('species').value = '';
+        document.getElementById('spot').value = '';
+        document.getElementById('date').value = '';
+      }
+    }
+
+    function updateCatchList() {
+      const list = document.getElementById('catchList');
+      if (catches.length === 0) {
+        list.innerHTML = 'Nessuna cattura registrata.';
+      } else {
+        list.innerHTML = catches.map(c => `
+          <div class="catch">
+            <strong>Specie:</strong> ${c.species}<br>
+            <strong>Spot:</strong> ${c.spot}<br>
+            <strong>Data:</strong> ${c.date}
+          </div>
+        `).join('');
+      }
+    }
+  </script>
+</body>
+</html>
