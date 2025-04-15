@@ -78,6 +78,15 @@
   <a href="https://www.mgfishing.eu" target="_blank">MG Fishing</a>
 </nav>
 
+<!-- Banner Offerte -->
+<div style="text-align:center; margin: 100px 0 30px;">
+  <a href="https://www.mgfishing.eu" target="_blank" style="text-decoration:none;">
+    <div style="background:#00aaff; padding:15px 25px; border-radius:10px; color:#fff; font-weight:bold; display:inline-block; font-size:18px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+      🎣 Scopri le offerte su MG Fishing!
+    </div>
+  </a>
+</div>
+
 <div id="meteo" class="section">
   <h2>Meteo Live</h2>
   <input id="cityInput" class="input" placeholder="Inserisci città o usa GPS">
@@ -119,11 +128,11 @@
   <h2>Webcam Mare</h2>
   <select id="localita" class="input" onchange="mostraWebcam()">
     <option value="">Scegli località</option>
-    <option value="https://www.vedetta.org/webcam/italia/lazio/latina/latina-mare">Latina Mare (Lazio)</option>
-    <option value="https://www.vedetta.org/webcam/italia/lazio/latina/sabaudia-lungomare-spiaggia">Sabaudia (Lazio)</option>
-    <option value="https://www.vedetta.org/webcam/italia/liguria/genova/genova-voltri">Genova Voltri (Liguria)</option>
-    <option value="https://www.vedetta.org/webcam/italia/sardegna/sassari/alghero">Alghero (Sardegna)</option>
-    <option value="https://www.vedetta.org/webcam/italia/sicilia/palermo/mondello">Mondello (Sicilia)</option>
+    <option value="https://www.vedetta.org/webcam/italia/lazio/latina/lido-di-latina/">Latina Mare (Lazio)</option>
+    <option value="https://www.vedetta.org/webcam/italia/lazio/latina/sabaudia-lungomare-spiaggia/">Sabaudia (Lazio)</option>
+    <option value="https://www.vedetta.org/webcam/italia/liguria/genova/genova-voltri/">Genova Voltri (Liguria)</option>
+    <option value="https://www.vedetta.org/webcam/italia/sardegna/sassari/alghero/">Alghero (Sardegna)</option>
+    <option value="https://www.vedetta.org/webcam/italia/sicilia/palermo/mondello/">Mondello (Sicilia)</option>
   </select>
   <div id="webcamFrame"></div>
 </div>
@@ -137,7 +146,7 @@ function showSection(id) {
 function mostraWebcam() {
   const url = document.getElementById('localita').value;
   if (url) {
-    document.getElementById('webcamFrame').innerHTML = `<a href='${url}' target='_blank' style='color:#fff;'>Apri la webcam in una nuova finestra</a>`;
+    document.getElementById('webcamFrame').innerHTML = `<a href='${url}' target='_blank' style='color:#fff;'>📷 Apri la webcam in una nuova finestra</a>`;
   } else {
     document.getElementById('webcamFrame').innerHTML = '';
   }
