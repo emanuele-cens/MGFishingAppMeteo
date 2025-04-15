@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MG Fishing Pro</title>
   <link rel="icon" type="image/png" href="https://www.mgfishing.eu/img/logo_mgfishing-1619610634.jpg">
   <style>
@@ -14,31 +14,31 @@
       color: #fff;
     }
     nav {
-      background-color: rgba(0,0,0,0.85);
-      padding: 10px;
       position: fixed;
-      width: 100%;
       top: 0;
-      z-index: 1000;
+      width: 100%;
+      background: rgba(0,0,0,0.85);
       display: flex;
       justify-content: space-around;
+      padding: 10px;
+      z-index: 1000;
     }
     nav a {
       color: white;
       text-decoration: none;
+      padding: 10px 15px;
+      border-radius: 5px;
       font-weight: bold;
-      padding: 8px 12px;
     }
     nav a:hover {
-      background-color: #00aaff;
-      border-radius: 4px;
+      background: #00aaff;
     }
     .section {
       display: none;
-      max-width: 800px;
-      margin: 100px auto 30px;
+      max-width: 900px;
+      margin: 80px auto 20px;
+      background: rgba(0,0,0,0.7);
       padding: 20px;
-      background-color: rgba(0,0,0,0.7);
       border-radius: 12px;
     }
     .active {
@@ -52,27 +52,18 @@
       font-size: 16px;
     }
     .button {
-      background-color: #00aaff;
+      background: #00aaff;
       color: white;
       border: none;
     }
     .button:hover {
-      background-color: #0077cc;
+      background: #0077cc;
     }
-    #whatsapp {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #25D366;
-      color: white;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      font-size: 30px;
-      text-align: center;
-      line-height: 60px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-      text-decoration: none;
+    iframe {
+      border: none;
+      width: 100%;
+      height: 400px;
+      border-radius: 8px;
     }
   </style>
 </head>
@@ -87,92 +78,109 @@
   <a href="https://www.mgfishing.eu" target="_blank">MG Fishing</a>
 </nav>
 
-<a id="whatsapp" href="https://wa.me/393494166335" target="_blank">📱</a>
-
 <div id="meteo" class="section">
-  <h2>Previsioni Meteo</h2>
-  <p>Funzionalità in aggiornamento...</p>
+  <h2>Meteo Live</h2>
+  <input id="cityInput" class="input" placeholder="Inserisci città o usa GPS">
+  <button onclick="getWeatherByCity()" class="button">Cerca</button>
+  <button onclick="getWeatherByLocation()" class="button">Usa GPS</button>
+  <div id="weatherDisplay"></div>
 </div>
 
 <div id="blog" class="section">
-  <h2>Blog Pescatori</h2>
-  <p>Prossimamente sarà possibile condividere post con foto!</p>
+  <h2>Blog pescatori</h2>
+  <input class="input" type="text" placeholder="Titolo">
+  <textarea class="input" placeholder="Scrivi la tua esperienza..."></textarea>
+  <input class="input" type="file" accept="image/*">
+  <button class="button">Pubblica</button>
 </div>
 
 <div id="login" class="section">
   <h2>Login</h2>
-  <p>Accesso utenti (da attivare con Firebase).</p>
+  <input class="input" type="email" placeholder="Email">
+  <input class="input" type="password" placeholder="Password">
+  <button class="button">Accedi</button>
 </div>
 
 <div id="licenze" class="section">
-  <h2>Licenze di Pesca Tipo B</h2>
-  <p>Sezione aggiornata con info per tutte le regioni (vedi versione completa in arrivo).</p>
+  <h2>Licenze di Pesca Tipo B – Info per Regione</h2>
+  <ul>
+    <li><strong>Lazio:</strong> €29,13 – Gratuita per under 18, over 65 e disabili (con tesserino obbligatorio).</li>
+    <li><strong>Lombardia:</strong> €23 – esenti under 18, over 65 e disabili. Validità 12 mesi. PagoPA.</li>
+    <li><strong>Piemonte:</strong> €35 – esenti minori di 14 anni e disabili. Validità 12 mesi. PagoPA.</li>
+    <li><strong>Emilia-Romagna:</strong> €22,72 – esenti under 18 e over 65. Validità annuale.</li>
+    <li><strong>Toscana:</strong> €35 (Tipo B), €10 (Tipo C), €1 (Tipo D). No esenzioni.</li>
+    <li><strong>Veneto:</strong> €34 – esenti under 18, over 70, disabili. Validità 12 mesi.</li>
+    <li><strong>Sardegna:</strong> €20 – valida 5 anni. Gratuita per over 65 e under 14.</li>
+    <li><strong>Liguria:</strong> €45,45 (Tipo B), €22,72 (Tipo C). Over 65 pagano ridotto.</li>
+  </ul>
 </div>
 
 <div id="webcam" class="section">
-  <h2>Webcam Mare – Seleziona Regione e Località</h2>
-  <select id="regione" onchange="aggiornaLocalita()">
-    <option value="">Seleziona una regione</option>
-    <option value="Lazio">Lazio</option>
-    <option value="Liguria">Liguria</option>
-    <option value="Sicilia">Sicilia</option>
-    <option value="Sardegna">Sardegna</option>
-    <option value="Toscana">Toscana</option>
+  <h2>Webcam Mare</h2>
+  <select id="localita" class="input" onchange="mostraWebcam()">
+    <option value="">Scegli località</option>
+    <option value="https://www.vedetta.org/webcam/italia/lazio/latina/latina-mare">Latina Mare (Lazio)</option>
+    <option value="https://www.vedetta.org/webcam/italia/lazio/latina/sabaudia-lungomare-spiaggia">Sabaudia (Lazio)</option>
+    <option value="https://www.vedetta.org/webcam/italia/liguria/genova/genova-voltri">Genova Voltri (Liguria)</option>
+    <option value="https://www.vedetta.org/webcam/italia/sardegna/sassari/alghero">Alghero (Sardegna)</option>
+    <option value="https://www.vedetta.org/webcam/italia/sicilia/palermo/mondello">Mondello (Sicilia)</option>
   </select>
-
-  <select id="localita" onchange="mostraWebcam()">
-    <option value="">Seleziona una località</option>
-  </select>
-
-  <div id="webcamFrame" style="margin-top:20px"></div>
+  <div id="webcamFrame"></div>
 </div>
 
 <script>
-const webcamData = {
-  "Lazio": {
-    "Fregene Sud": "https://vedetta.org/webcam/italia/lazio/roma/fregene-sud/embed",
-    "Sabaudia": "https://vedetta.org/webcam/italia/lazio/latina/sabaudia-lungomare-spiaggia/embed",
-    "Latina Mare": "https://vedetta.org/webcam/italia/lazio/latina/latina-mare/embed",
-    "Anzio": "https://vedetta.org/webcam/italia/lazio/roma/anzio-lido-di-cincinnato/embed"
-  },
-  "Liguria": {
-    "Genova Voltri": "https://vedetta.org/webcam/italia/liguria/genova/genova-voltri/embed"
-  },
-  "Sicilia": {
-    "Mondello": "https://vedetta.org/webcam/italia/sicilia/palermo/mondello/embed"
-  },
-  "Sardegna": {
-    "Alghero": "https://vedetta.org/webcam/italia/sardegna/sassari/alghero/embed"
-  },
-  "Toscana": {
-    "Castiglione della Pescaia": "https://vedetta.org/webcam/italia/toscana/grosseto/castiglione-della-pescaia/embed"
-  }
-};
-
 function showSection(id) {
-  document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
-function aggiornaLocalita() {
-  const regione = document.getElementById("regione").value;
-  const localitaSelect = document.getElementById("localita");
-  localitaSelect.innerHTML = '<option value="">Seleziona una località</option>';
-  if (webcamData[regione]) {
-    for (const localita in webcamData[regione]) {
-      const option = document.createElement("option");
-      option.value = webcamData[regione][localita];
-      option.text = localita;
-      localitaSelect.appendChild(option);
-    }
+function mostraWebcam() {
+  const url = document.getElementById('localita').value;
+  if (url) {
+    document.getElementById('webcamFrame').innerHTML = `<a href='${url}' target='_blank' style='color:#fff;'>Apri la webcam in una nuova finestra</a>`;
+  } else {
+    document.getElementById('webcamFrame').innerHTML = '';
   }
 }
 
-function mostraWebcam() {
-  const url = document.getElementById("localita").value;
-  const frame = `<iframe src="${url}" width="100%" height="400" style="border:none;"></iframe>`;
-  document.getElementById("webcamFrame").innerHTML = frame;
+const apiKey = "a3b6ead62ce9e333256276f96865a8e1";
+function getWeatherByCity() {
+  const city = document.getElementById("cityInput").value;
+  fetchWeather(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=it`);
+}
+function getWeatherByLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(pos => {
+      fetchWeather(`https://api.openweathermap.org/data/2.5/weather?lat=${pos.coords.latitude}&lon=${pos.coords.longitude}&appid=${apiKey}&units=metric&lang=it`);
+    });
+  }
+}
+function fetchWeather(url) {
+  fetch(url).then(res => res.json()).then(data => {
+    const moon = getMoonPhase();
+    document.getElementById("weatherDisplay").innerHTML = `
+      <p><strong>Località:</strong> ${data.name}</p>
+      <p><strong>Condizioni:</strong> ${data.weather[0].description}</p>
+      <p><strong>Temperatura:</strong> ${data.main.temp} °C</p>
+      <p><strong>Vento:</strong> ${(data.wind.speed * 3.6).toFixed(1)} km/h</p>
+      <p><strong>Umidità:</strong> ${data.main.humidity}%</p>
+      <p><strong>Luna:</strong> ${moon}</p>
+    `;
+  });
+}
+function getMoonPhase() {
+  const now = new Date();
+  const newMoon = new Date("2023-12-13T00:00:00Z");
+  const synodic = 29.53058867;
+  const days = (now - newMoon) / (1000 * 60 * 60 * 24);
+  const phase = days % synodic;
+  if (phase < 1.5 || phase > 28) return "🌑 Luna Nuova";
+  if (phase < 7) return "🌓 Primo Quarto";
+  if (phase < 15) return "🌕 Luna Piena";
+  if (phase < 22) return "🌗 Ultimo Quarto";
+  return "🌘 Fase Calante";
 }
 </script>
+
 </body>
 </html>
