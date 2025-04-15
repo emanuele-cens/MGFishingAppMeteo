@@ -7,6 +7,11 @@
   <link rel="icon" type="image/png" href="https://www.mgfishing.eu/img/logo_mgfishing-1619610634.jpg">
   <style>
     * { box-sizing: border-box; }
+    .banner { transition: all 0.3s ease; }
+    .hide { display: none !important; }
+    .section h2, .section article, .section p, .section ul, .section form {
+      text-align: center;
+    }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -154,12 +159,14 @@
 <body>
 
 <div style="display:flex; align-items:center; gap:10px; position:fixed; top:10px; left:10px; z-index:1003;">
+  <div id="hamburgerContainer" style="display:flex; align-items:center; gap:10px; position:fixed; top:10px; left:10px; z-index:1003;">
   <div id="hamburger" onclick="toggleMenu()">
   <span></span>
   <span></span>
   <span></span>
 </div>
-<span style="color:white; font-weight:bold; font-size:16px;">📂 Menu</span>
+  <span style="color:white; font-weight:bold; font-size:16px; display:block;">📂 Menu</span>
+</div>
 <div id="mobileMenu">
   <a href="#" onclick="showSection('meteo'); toggleMenu();">🌦 Meteo</a>
   <a href="#" onclick="showSection('blog'); toggleMenu();">📝 Blog</a>
@@ -180,9 +187,9 @@
   <a href="https://www.mgfishing.eu" target="_blank">🏪 MG Fishing</a>
 </nav>
 
-<div class="content">
+<div class="content" id="mainContent">
   <!-- Banner Offerte MG Fishing -->
-  <div style="text-align:center; margin: 30px auto; max-width: 600px;">
+  <div id="bannerOfferte" style="text-align:center; margin: 30px auto; max-width: 600px;" class="banner">
     <a href="https://www.mgfishing.eu" target="_blank" style="text-decoration:none;">
       <div style="background:#00aaff; padding:15px 25px; border-radius:10px; color:#fff; font-weight:bold; display:inline-block; font-size:18px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); transition: transform 0.3s ease, background 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'; this.style.background='#0099dd';" onmouseout="this.style.transform='scale(1)'; this.style.background='#00aaff';">
         🎣 Scopri le offerte su MG Fishing!
@@ -190,7 +197,7 @@
     </a>
   </div>
   <!-- Banner Social -->
-  <div style="text-align:center; margin: 30px auto;">
+  <div id="bannerSocial" style="text-align:center; margin: 30px auto;" class="banner">
     <a href="https://www.facebook.com/verde.pesca.7" target="_blank" style="margin: 0 10px; transition: transform 0.3s ease;" onmouseover="this.children[0].style.transform='scale(1.2)'" onmouseout="this.children[0].style.transform='scale(1)'">
       <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" style="transition: transform 0.3s ease;" width="40">
     </a>
@@ -296,18 +303,26 @@
 </div>
 
 <script>
+function toggleBanner(show) {
+  document.getElementById('bannerOfferte').classList.toggle('hide', !show);
+  document.getElementById('bannerSocial').classList.toggle('hide', !show);
+}
 function showSection(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   const section = document.getElementById(id);
   if (section) section.classList.add('active');
+  toggleBanner(false);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 function goBack() {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  toggleBanner(true);
 }
 function resetView() {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  toggleBanner(true);
   window.scrollTo({ top: 0 });
+});
 }
 function toggleMenu() {
   const menu = document.getElementById("mobileMenu");
