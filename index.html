@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8">
@@ -256,6 +256,19 @@
   }
 }
 
+function goHome() {
+  showSection('home');
+}
+
+function goBack() {
+  history.back();
+}
+
 </script>
+  <div id="bottomNav" style="position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.8); display: flex; justify-content: space-around; padding: 10px; z-index: 999;">
+    <button onclick="goHome()" style="padding: 10px 20px; background: #00aaff; color: white; border: none; border-radius: 8px; font-size: 16px;">🏠 Home</button>
+    <button onclick="goBack()" style="padding: 10px 20px; background: #0077cc; color: white; border: none; border-radius: 8px; font-size: 16px;">🔙 Indietro</button>
+  </div>
+
 </body>
 </html>
