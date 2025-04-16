@@ -5,93 +5,84 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MG Fishing App</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: url('https://images.unsplash.com/photo-1502786129293-79981df4e689?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
-      background-size: cover;
-      color: #fff;
-    }
-    header {
-      background: rgba(0, 119, 204, 0.8);
-      color: white;
-      padding: 1rem;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    }
-    #hamburger {
-      position: fixed;
-      top: 15px;
-      left: 15px;
-      background: rgba(0, 0, 0, 0.7);
-      color: white;
-      padding: 10px;
-      font-size: 20px;
-      border-radius: 5px;
-      z-index: 1001;
-      cursor: pointer;
-    }
-    nav {
-      position: fixed;
-      top: 0;
-      left: -250px;
-      width: 220px;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      padding-top: 60px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      transition: left 0.3s ease-in-out;
-      z-index: 1000;
-    }
-    nav.show {
-      left: 0;
-    }
-    nav a {
-      text-decoration: none;
-      padding: 0.7rem;
-      background: #00aaff;
-      color: white;
-      border-radius: 5px;
-      text-align: center;
-      font-weight: bold;
-      display: block;
-      margin: 0 10px;
-    }
-    .section {
-      display: none;
-      padding: 1rem;
-      background-color: rgba(0, 0, 0, 0.6);
-      margin: 1rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-      animation: fadeIn 0.5s ease-in-out;
-    }
-    .section.active {
-      display: block;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .button {
-      padding: 10px;
-      background: #0077cc;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    .input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 5px;
-      border: none;
-    }
-  </style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: url('https://images.unsplash.com/photo-1502786129293-79981df4e689?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+  }
+  header {
+    background: rgba(0, 119, 204, 0.8);
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  }
+  #hamburger {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 5px;
+    z-index: 1000;
+    cursor: pointer;
+  }
+  .menu {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 220px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    padding-top: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: left 0.3s ease-in-out;
+    z-index: 999;
+  }
+  .menu.show {
+    left: 0;
+  }
+  .menu a {
+    text-decoration: none;
+    padding: 0.7rem;
+    background: #00aaff;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    margin: 0 10px;
+  }
+  .section {
+    display: none;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    margin: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  }
+  .section.active {
+    display: block;
+  }
+  .input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+  }
+  .button {
+    padding: 10px 15px;
+    background: #00aaff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+</style>
 </head>
 <body>
   <div id="hamburger" onclick="toggleMenu()" style="position: fixed; top: 15px; left: 15px; background: rgba(0, 0, 0, 0.7); color: white; padding: 10px; font-size: 20px; border-radius: 5px; z-index: 3; cursor: pointer;">☰</div>
@@ -102,18 +93,19 @@
     <a href="https://www.tiktok.com/@mgfishing.verdepesca" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/TikTok_logo.svg" width="30" alt="TikTok"></a>
   </div>
 </header>
-  <nav id="sideMenu" style="position: fixed; top: 0; left: -250px; width: 220px; height: 100%; background: rgba(0, 0, 0, 0.85); padding-top: 60px; display: flex; flex-direction: column; gap: 10px; transition: left 0.3s ease-in-out; z-index: 2;">
-    <a href="#" onclick="showSection('condividi')">✍️ Condividi Post</a>
-    <a href="#" onclick="showSection('contattaci')">💬 Contattaci</a>
-    <a href="#" onclick="showSection('home')">🏠 Home</a>
-    <a href="#" onclick="showSection('meteo')">☀️ Meteo</a>
-    <a href="#" onclick="showSection('webcam')">📷 Webcam</a>
-    <a href="#" onclick="showSection('licenze')">🎣 Licenze</a>
-    <a href="#" onclick="showSection('esche')">🪱 Esche Vive</a>
-    <a href="#" onclick="showSection('blog')">📝 Blog</a>
-    <a href="#" onclick="showSection('login')">🔐 Login</a>
-    <a href="#" onclick="showSection('shop')">🛒 Shop</a>
-  </nav>
+  <nav id="sideMenu" class="menu">
+  <a href="#" onclick="showSection('home')">🏠 Home</a>
+  <a href="#" onclick="showSection('meteo')">☀️ Meteo</a>
+  <a href="#" onclick="showSection('webcam')">📷 Webcam</a>
+  <a href="#" onclick="showSection('licenze')">🎣 Licenze</a>
+  <a href="#" onclick="showSection('esche')">🪱 Esche Vive</a>
+  <a href="#" onclick="showSection('blog')">📝 Blog</a>
+  <a href="#" onclick="showSection('login')">🔐 Login</a>
+  <a href="#" onclick="showSection('shop')">🛒 Shop</a>
+  <a href="#" onclick="showSection('contatti')">📞 Contatti</a>
+  <a href="#" onclick="showSection('contattaci')">💬 Contattaci</a>
+  <a href="#" onclick="showSection('condividi')">✍️ Condividi Post</a>
+</nav>
 
   <main>
     <div id="meteo" class="section">
