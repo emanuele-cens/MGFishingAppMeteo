@@ -1,540 +1,59 @@
 <!DOCTYPE html>
- <html lang="it">
- <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>MG Fishing App</title>
-   <style>
-   body {
-     margin: 0;
-     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-     background: linear-gradient(to bottom, #001f3f, #003366);
-     color: #fff;
-   }
-   header {
-     background: #0066cc;
-     padding: 1rem;
-     text-align: center;
-     box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-   }
-   #hamburger {
-     position: fixed;
-     top: 15px;
-     left: 15px;
-     background: #004080;
-     color: white;
-     padding: 10px;
-     font-size: 22px;
-     border-radius: 50%;
-     z-index: 1000;
-     cursor: pointer;
-     box-shadow: 0 0 10px rgba(0,0,0,0.4);
-   }
-   nav {
-     position: fixed;
-     top: 0;
-     left: -250px;
-     width: 220px;
-     height: 100%;
-     background: rgba(0, 0, 51, 0.95);
-     padding-top: 60px;
-     display: flex;
-     flex-direction: column;
-     gap: 10px;
-     transition: left 0.3s ease-in-out;
-     z-index: 999;
-   }
-   nav.show {
-     left: 0;
-   }
-   nav a {
-     text-decoration: none;
-     padding: 0.8rem;
-     background: #005fa3;
-     color: white;
-     border-radius: 5px;
-     text-align: center;
-     margin: 0 10px;
-     font-weight: bold;
-     transition: background 0.2s;
-   }
-   nav a:hover {
-     background: #0088cc;
-   }
-   .section {
-     display: none;
-     padding: 1rem;
-     background-color: rgba(0, 0, 0, 0.55);
-     margin: 1rem;
-     border-radius: 12px;
-     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-     animation: fadeIn 0.5s ease-in-out;
-   }
-   .section.active {
-     display: block;
-   }
-   .button {
-     background: #00aaff;
-     color: white;
-     border: none;
-     border-radius: 6px;
-     padding: 10px 16px;
-     font-size: 16px;
-     cursor: pointer;
-     box-shadow: 0 3px 6px rgba(0,0,0,0.3);
-     transition: background 0.3s;
-   }
-   .button:hover {
-     background: #008ecc;
-   }
-   .input {
-     width: 100%;
-     padding: 10px;
-     margin: 10px 0;
-     border-radius: 5px;
-     border: none;
-     font-size: 16px;
-   }
-   #bottomNav button {
-     box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-     transition: transform 0.2s;
-   }
-   #bottomNav button:hover {
-     transform: scale(1.05);
-   }
-   @keyframes fadeIn {
-     from { opacity: 0; transform: translateY(10px); }
-     to { opacity: 1; transform: translateY(0); }
-   }
-   @media screen and (max-width: 480px) {
-     #hamburger {
-       top: 5px;
-       left: 5px;
-       font-size: 18px;
-       padding: 8px;
-     }
-   }
- 
-   }
- </style>
- </head>
- <body>
-   <div id="hamburger" onclick="toggleMenu()" >☰</div>
-   <nav id="sideMenu">
-   <a href="#" onclick="showSection('contattaci')">💬 Contattaci</a>
-   <a href="#" onclick="showSection('home')">🏠 Home</a>
-   <a href="#" onclick="showSection('meteo')">☀️ Meteo</a>
-   <a href="#" onclick="showSection('webcam')">📷 Webcam</a>
-   <a href="#" onclick="showSection('licenze')">🎣 Licenze</a>
-   <a href="#" onclick="showSection('esche')">🪱 Esche Vive</a>
-   <a href="#" onclick="showSection('blog')">📝 Blog</a>
-   <a href="#" onclick="showSection('contatti')">📞 Contatti</a>
- </nav>
- 
-   <main>
-     <div id="home" class="section active">
-       <h2>Benvenuto su MG Fishing</h2>
-       <p>Scopri tutte le funzionalità e i servizi dedicati ai pescatori!</p>
-       <h3>📝 Ultimi Articoli del Blog</h3>
-       <ul style="list-style: none; padding: 0;">
-         <li><a href="#" onclick="showSection('blog')" style="color: #00aaff; font-weight: bold; text-decoration: underline;">🔗 I 3 Nodi da Pesca Fondamentali</a></li>
-         <li><a href="#" onclick="showSection('blog')" style="color: #00aaff; font-weight: bold; text-decoration: underline;">🔗 Tipi di Montature da Surfcasting</a></li>
-         <li><a href="#" onclick="showSection('blog')" style="color: #00aaff; font-weight: bold; text-decoration: underline;">🔗 Come Leggere il Mare</a></li>
-       </ul>
-     </div>
- 
-     <div id="blog" class="section">
-       <h2>Blog</h2>
-       <article>
-         <h3>I 3 Nodi da Pesca Fondamentali - Guida Passo Passo</h3>
-         <p><strong>Nodo Palomar:</strong> raddoppia il filo, inseriscilo nell’occhiello, fai un nodo semplice, passa l’asola sopra l’amo e stringi. Resistente e facile.</p>
-         <p><strong>Nodo Clinch Migliorato:</strong> avvolgi il filo 5-6 volte sull’asse principale, passa nel piccolo occhiello e stringi. Veloce e molto affidabile.</p>
-         <p><strong>Nodo a Gassa (Loop):</strong> crea un’asola per dare libertà all’artificiale. Fai un nodo semplice, inserisci l’esca, avvolgi 4-5 volte e stringi.</p>
-       </article>
-       <article>
-         <h3>Tipi di Montature da Surfcasting - Quale Scegliere?</h3>
-         <p><strong>Piombo Scorrevole:</strong> ideale per pesci diffidenti come orate e mormore. Nessuna resistenza percepita dal pesce.</p>
-         <p><strong>Due Braccioli:</strong> permette di sondare più zone d’acqua contemporaneamente. Ottimo per arenicola e americano.</p>
-         <p><strong>Long Arm:</strong> bracciolo lungo, perfetto per pesci sospettosi. Ideale con mare calmo e fondale sabbioso.</p>
-         <p><strong>Anti Groviglio:</strong> ottima per mare mosso e fondali misti. Minimizza gli intrecci della lenza.</p>
-       </article>
-       <article>
-         <h3>Come Leggere il Mare - Consigli per Pescatori da Riva</h3>
-         <p><strong>Zone di Schiuma:</strong> ottimi punti per spigole e orate. Indicano turbolenza e presenza di cibo.</p>
-         <p><strong>Correnti Laterali:</strong> trasportano nutrimento. I pesci si posizionano per intercettarlo.</p>
-         <p><strong>Canalette e Fori:</strong> zone più profonde e calme, spesso ricche di prede. Osserva dove le onde si infrangono meno.</p>
-         <p><strong>Condizioni Meteo:</strong> mare calmo = esche più delicate; mare mosso = esche robuste e montature stabili.</p>
-       </article>
-   <h2>Blog</h2>
-   <div>
-     <h3 style="cursor: pointer; color: #00aaff;" onclick="toggleBlog('nodi')">➤ I 3 Nodi da Pesca Fondamentali</h3>
-     <div id="blog-nodi" style="display: none;">
-       <p><strong>Nodo Palomar:</strong> raddoppia il filo, inseriscilo nell’occhiello, fai un nodo semplice, passa l’asola sopra l’amo e stringi. Resistente e facile.</p>
-       <p><strong>Nodo Clinch Migliorato:</strong> avvolgi il filo 5-6 volte sull’asse principale, passa nel piccolo occhiello e stringi. Veloce e molto affidabile.</p>
-       <p><strong>Nodo a Gassa (Loop):</strong> crea un’asola per dare libertà all’artificiale. Fai un nodo semplice, inserisci l’esca, avvolgi 4-5 volte e stringi.</p>
-     </div>
- 
-     <h3 style="cursor: pointer; color: #00aaff;" onclick="toggleBlog('montature')">➤ Tipi di Montature da Surfcasting</h3>
-     <div id="blog-montature" style="display: none;">
-       <p><strong>Piombo Scorrevole:</strong> ideale per pesci diffidenti come orate e mormore. Nessuna resistenza percepita dal pesce.</p>
-       <p><strong>Due Braccioli:</strong> permette di sondare più zone d’acqua contemporaneamente. Ottimo per arenicola e americano.</p>
-       <p><strong>Long Arm:</strong> bracciolo lungo, perfetto per pesci sospettosi. Ideale con mare calmo e fondale sabbioso.</p>
-       <p><strong>Anti Groviglio:</strong> ottima per mare mosso e fondali misti. Minimizza gli intrecci della lenza.</p>
-     </div>
- 
-     <h3 style="cursor: pointer; color: #00aaff;" onclick="toggleBlog('lettura')">➤ Come Leggere il Mare</h3>
-     <div id="blog-lettura" style="display: none;">
-       <p><strong>Zone di Schiuma:</strong> ottimi punti per spigole e orate. Indicano turbolenza e presenza di cibo.</p>
-       <p><strong>Correnti Laterali:</strong> trasportano nutrimento. I pesci si posizionano per intercettarlo.</p>
-       <p><strong>Canalette e Fori:</strong> zone più profonde e calme, spesso ricche di prede. Osserva dove le onde si infrangono meno.</p>
-       <p><strong>Condizioni Meteo:</strong> mare calmo = esche più delicate; mare mosso = esche robuste e montature stabili.</p>
-     </div>
-   </div>
- </div>
- <script>
- function toggleBlog(id) {
-   const el = document.getElementById('blog-' + id);
-   el.style.display = (el.style.display === 'none') ? 'block' : 'none';
- }cche di prede. Osserva dove le onde si infrangono meno.</p>
-       <p><strong>Condizioni Meteo:</strong> mare calmo = esche più delicate; mare mosso = esche robuste e montature stabili.</p>
-     </div>
-   </div>
- </div>
- <script>
- function toggleBlog(id) {
-   const el = document.getElementById('blog-' + id);
-   el.style.display = (el.style.display === 'none') ? 'block' : 'none';
- }
-     <div id="meteo" class="section">
-     <h2>Previsioni Meteo</h2>
-     <input type="text" id="cityInput" placeholder="Inserisci città" class="input">
-     <button onclick="getWeatherByCity()" class="button">Cerca</button>
-     <div id="weatherDisplay"></div>
-   <h2>Previsioni Meteo per la Pesca</h2>
-   <input type="text" id="cityInput" placeholder="Inserisci città" class="input">
-   <button onclick="simulateWeather()" class="button">🔍 Cerca</button>
-   <div id="weatherDisplay" style="margin-top: 20px;"></div>
- </div>
- </div>
-   </div>
- 
-   <div id="webcam" class="section">
-   <h2>Webcam Mare</h2>
-   <p>Seleziona una località per vedere le condizioni in tempo reale:</p>
-   <select id="webcamSelect" onchange="loadWebcam()" class="input">
-   <option value="">-- Seleziona località --</option>
-   <optgroup label="Liguria">
-     <option value="https://www.skylinewebcams.com/it/webcam/italia/liguria/savona/finale-ligure.html">Finale Ligure – Malpasso</option>
-     <option value="https://www.skylinewebcams.com/it/webcam/italia/liguria/genova/boccadasse.html">Genova – Boccadasse</option>
-   </optgroup>
-   <optgroup label="Marche">
-     <option value="https://www.skylinewebcams.com/it/webcam/italia/marche/ancona/portonovo-spiaggia.html">Portonovo – Spiaggia</option>
-     <option value="https://www.skylinewebcams.com/it/webcam/italia/marche/pesaro-urbino/gabicce-mare-marche.html">Gabicce Mare</option>
-   </optgroup>
-   <optgroup label="Abruzzo">
-     <option value="https://www.skylinewebcams.com/it/webcam/italia/abruzzo/teramo/roseto-degli-abruzzi.html">Roseto degli Abruzzi</option>
-   </optgroup>
-   <optgroup label="Molise">
-     <option value="https://vedetta.org/webcam/italia/molise/campobasso/termoli-lungomare/">Termoli – Lungomare</option>
-   </optgroup>
-   <optgroup label="Puglia">
-     <option value="https://www.skylinewebcams.com/it/webcam/italia/puglia/lecce/gallipoli.html">Gallipoli – Spiaggia</option>
-     <option value="https://www.skylinewebcams.com/it/webcam/italia/puglia/brindisi/ostuni-mare.html">Ostuni – Mare</option>
-   </optgroup>
-   <optgroup label="Basilicata">
-     <option value="https://vedetta.org/webcam/italia/basilicata/matera/metaponto/">Metaponto</option>
-   </optgroup>
-   <optgroup label="Calabria">
-     <option value="https://www.skylinewebcams.com/it/webcam/italia/calabria/vibo-valentia/tropea.html">Tropea</option>
-     <option value="https://www.skylinewebcams.com/it/webcam/italia/calabria/reggio-calabria/bova-marina.html">Bova Marina</option>
-   </optgroup>
-   <optgroup label="Sicilia">
-     <option value="https://www.skylinewebcams.com/it/webcam/italia/sicilia/ragusa/marina-di-ragusa.html">Marina di Ragusa</option>
-     <option value="https://www.skylinewebcams.com/it/webcam/italia/sicilia/messina/giardini-naxos.html">Giardini Naxos</option>
-   </optgroup>
-   <optgroup label="Sardegna">
-     <option value="https://www.skylinewebcams.com/it/webcam/italia/sardegna/sassari/stintino.html">Stintino</option>
-     <option value="https://www.skylinewebcams.com/it/webcam/italia/sardegna/sassari/golfo-aranci.html">Golfo Aranci</option>
-   </optgroup>
-   <optgroup label="Lazio">
-     <option value="https://vedetta.org/webcam/italia/lazio/latina/lido-di-latina/">Lido di Latina</option>
-     <option value="https://www.campanialive.it/webcam.asp?localita=gaetasirio">Gaeta</option>
-     <option value="https://vedetta.org/webcam/italia/lazio/latina/sabaudia/">Sabaudia</option>
-     <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/latina/spiaggia-di-formia.html">Formia</option>
-     <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/roma/spiaggia-lido-di-ostia-roma.html">Lido di Ostia</option>
-   </optgroup>
-   <optgroup label="Toscana">
-     <option value="https://www.skylinewebcams.com/it/webcam/italia/toscana/lucca/forte-dei-marmi-lungomare.html">Forte dei Marmi</option>
-     <option value="https://www.skylinewebcams.com/it/webcam/italia/toscana/lucca/lido-di-camaiore.html">Lido di Camaiore</option>
-     <option value="https://www.skylinewebcams.com/it/webcam/italia/toscana/lucca/viareggio.html">Viareggio</option>
-     <option value="https://www.skylinewebcams.com/it/webcam/italia/toscana/pisa/marina-di-pisa.html">Marina di Pisa</option>
-     <option value="https://www.firenzemeteo.it/webcam/toscana/webcam-portoferraio-isola-d-elba.php">Portoferraio – Elba</option>
-   </optgroup>
-   <optgroup label="Campania">
-     <option value="https://www.skylinewebcams.com/it/webcam/italia/campania/salerno/positano.html">Positano</option>
-     <option value="https://www.skylinewebcams.com/it/webcam/italia/campania/salerno/spiaggia-di-amalfi.html">Amalfi</option>
-     <option value="https://www.skylinewebcams.com/it/webcam/italia/campania/salerno/marina-di-camerota.html">Marina di Camerota</option>
-     <option value="https://www.campanialive.it/webcam.asp?localita=capacciopaestum">Paestum</option>
-     <option value="https://vedetta.org/webcam/italia/campania/caserta/castel-volturno/">Castel Volturno</option>
-   </optgroup>
- </select>
-   <div id="webcamContainer" style="margin-top: 20px;"></div>
- </div>
-   </div>
- 
-   <div id="licenze" class="section">
-   <h2>Licenze di Pesca Tipo B – Guida Completa</h2>
-   <p>La Licenza di Tipo B è necessaria per la pesca dilettantistica nelle acque interne italiane. È costituita dalla ricevuta del versamento della tassa regionale, da esibire con un documento d’identità. Validità: 12 mesi (varia in base alla regione).</p>
- 
-   <h3>✅ Esenzioni Comuni</h3>
-   <ul>
-     <li>Minori di 18 anni</li>
-     <li>Over 65</li>
-     <li>Persone con disabilità (art. 3 L. 104/1992)</li>
-   </ul>
-   <p>Le esenzioni si applicano solo con l’uso della canna (con o senza mulinello) e possono variare tra le regioni.</p>
- 
-   <h3>📍 Informazioni Regionali</h3>
- 
-   <h4>🟦 Lazio</h4>
-   <ul>
-     <li>Costo: €29,13</li>
-     <li>Esenzioni: 14-18 anni, over 65, disabili</li>
-     <li>Validità: 12 mesi</li>
-     <li>Pagamento: c/c postale n. 63101000 intestato a Regione Lazio</li>
-     <li>Note: richiesto tesserino segna catture</li>
-   </ul>
- 
-   <h4>🟩 Lombardia</h4>
-   <ul>
-     <li>Costo: €23,00</li>
-     <li>Esenzioni: under 18, over 65, disabili</li>
-     <li>Validità: 12 mesi</li>
-     <li>Pagamento: PagoPA o sportelli abilitati</li>
-   </ul>
- 
-   <h4>🟥 Emilia-Romagna</h4>
-   <ul>
-     <li>Costo: €22,72</li>
-     <li>Esenzioni: minori di 12 anni accompagnati, over 65, minori con attestato corso pesca</li>
-     <li>Validità: 12 mesi</li>
-     <li>Pagamento: c/c postale n. 116400</li>
-   </ul>
- 
-   <h4>🟨 Toscana</h4>
-   <ul>
-     <li>Costo: €35,00</li>
-     <li>Esenzioni: non previste</li>
-     <li>Validità: 12 mesi</li>
-     <li>Pagamento: c/c postale n. 26730507</li>
-   </ul>
- 
-   <h4>🟧 Piemonte</h4>
-   <ul>
-     <li>Costo: €35,00</li>
-     <li>Esenzioni: minori di 14 anni, disabili</li>
-     <li>Validità: 12 mesi</li>
-     <li>Pagamento: PagoPA</li>
-   </ul>
- 
-   <h4>🟫 Veneto</h4>
-   <ul>
-     <li>Costo: €34,00</li>
-     <li>Esenzioni: under 18, over 70 residenti</li>
-     <li>Validità: 12 mesi</li>
-     <li>Pagamento: c/c postale n. 15676107</li>
-   </ul>
- 
-   <h4>🟥 Campania</h4>
-   <ul>
-     <li>Costo: €40,00</li>
-     <li>Esenzioni: over 70, disabili</li>
-     <li>Validità: 12 mesi</li>
-     <li>Pagamento: c/c postale n. 21965181</li>
-   </ul>
- 
-   <h4>🟦 Sardegna</h4>
-   <ul>
-     <li>Costo: €20,00</li>
-     <li>Esenzioni: soggetti esonerati dalla dichiarazione redditi</li>
-     <li>Validità: 5 anni</li>
-     <li>Pagamento: PagoPA</li>
-   </ul>
- 
-   <h3>🌐 Validità Nazionale</h3>
-   <p>La licenza di tipo B è generalmente valida in tutta Italia, ma le esenzioni variano. Verifica sempre con l’ente regionale locale.</p>
- 
-   <h3>📌 Note</h3>
-   <ul>
-     <li>La licenza va esibita con un documento d’identità</li>
-     <li>In alcune regioni è obbligatorio il tesserino segna catture</li>
-     <li>I cittadini stranieri possono ottenere la licenza alle stesse condizioni dei residenti</li>
-   </ul>
- </div>
- 
-   <div id="esche" class="section">
-     <h2>Esche Vive Disponibili</h2>
-     <ul>
-       <li><strong>Arenicola Locale:</strong> ideale per orate e mormore.</li>
-       <li><strong>Arenicola Napoli:</strong> esca resistente, ottima con mare mosso.</li>
-       <li><strong>Americano:</strong> versatile per surfcasting e pesca da scogliera.</li>
-       <li><strong>Bibi:</strong> indicato per grufolatori e prede sospettose.</li>
-       <li><strong>Cordella:</strong> esca dura, perfetta per fondali misti.</li>
-       <li><strong>Muriddu:</strong> efficace con mare formato.</li>
-       <li><strong>Bigattino:</strong> per pesca in acque interne e laghetti.</li>
-       <li><strong>Vermi di Terra:</strong> multiuso, molto attrattivo.</li>
-       <li><strong>Camole del Miele:</strong> ideale per trote e pesci esigenti.</li>
-     </ul>
-     <p>Per prenotare le esche invia un messaggio su WhatsApp cliccando il pulsante sotto:</p>
-     <a href="https://wa.me/393494166335" target="_blank" class="button">📲 Prenota su WhatsApp</a>
-   </div>
-   <h2>Esche Vive Disponibili</h2>
-   <form id="escheForm">
-     <label>Arenicola Locale: <input type="number" name="arenicola_locale" min="0" placeholder="Q.tà"></label><br>
-     <label>Arenicola Napoli: <input type="number" name="arenicola_napoli" min="0" placeholder="Q.tà"></label><br>
-     <label>Americano: <input type="number" name="americano" min="0" placeholder="Q.tà"></label><br>
-     <label>Bibi: <input type="number" name="bibi" min="0" placeholder="Q.tà"></label><br>
-     <label>Cordella: <input type="number" name="cordella" min="0" placeholder="Q.tà"></label><br>
-     <label>Muriddu: <input type="number" name="muriddu" min="0" placeholder="Q.tà"></label><br>
-     <label>Bigattino: <input type="number" name="bigattino" min="0" placeholder="Q.tà"></label><br>
-     <label>Vermi di Terra: <input type="number" name="vermi_terra" min="0" placeholder="Q.tà"></label><br>
-     <label>Camole del Miele: <input type="number" name="camole_miele" min="0" placeholder="Q.tà"></label><br>
-     <br>
-     <button type="button" onclick="inviaOrdineEsche()" class="button">📲 Prenota via WhatsApp</button>
-   </form>
- </div>
- 
-   <div id="contatti" class="section">
-     <h2>Contatti</h2>
-     <p>📞 340 8198180</p>
-     <p>📞 349 4166335</p>
-     <p>📧 info@mgfishing.eu</p>
-     <p>🌐 <a href="https://www.mgfishing.eu" target="_blank" style="color: #00aaff;">Visita il nostro sito</a></p>
-   </div>
-   <div id="contattaci" class="section">
-     <h2>Contattaci su WhatsApp</h2>
-     <p>Hai bisogno di aiuto o vuoi prenotare direttamente? Scrivici!</p>
-     <a href="https://wa.me/393494166335" target="_blank" class="button">💬 Invia Messaggio su WhatsApp</a>
-   </div>
- </main>
- 
-   <script>
-     function toggleMenu() {
-       const menu = document.getElementById("sideMenu");
-       menu.classList.toggle("show");
-     }
- 
-     function showSection(id) {
-       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-       document.getElementById(id).classList.add('active');
-       const menu = document.getElementById("sideMenu");
-       if (menu.classList.contains("show")) {
-         menu.classList.remove("show");
-       }
-     }
-   let sectionHistory = ['home'];
- 
- function showSection(id) {
-   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-   document.getElementById(id).classList.add('active');
-   const menu = document.getElementById("sideMenu");
-   if (menu.classList.contains("show")) {
-     menu.classList.remove("show");
-   }
-   const current = sectionHistory[sectionHistory.length - 1];
-   if (current !== id) {
-     sectionHistory.push(id);
-   }
- }
- 
- function goHome() {
-   showSection('home');
- }
- 
- function goBack() {
-   if (sectionHistory.length > 1) {
-     sectionHistory.pop();
-     const previous = sectionHistory[sectionHistory.length - 1];
-     showSection(previous);
-   }
- }
- 
- function loadWebcam() {
-   const container = document.getElementById("webcamContainer");
-   const url = document.getElementById("webcamSelect").value;
-   container.innerHTML = url ? `<iframe src="${url}" width="100%" height="400" style="border:none;"></iframe>` : "";
- }
- 
- function simulateWeather() {
-   const city = document.getElementById("cityInput").value;
-   const display = document.getElementById("weatherDisplay");
-   if (!city) return display.innerHTML = "<p>Inserisci una località valida.</p>";
- 
-   display.innerHTML = `
-     <h3>Previsioni per ${city}</h3>
-     <ul>
-       <li>🌡️ Temperatura: 22°C (max 25°C / min 18°C)</li>
-       <li>💨 Vento: 18 km/h NE</li>
-       <li>🌊 Altezza onde: 0.6 m</li>
-       <li>🌘 Fase lunare: Luna crescente</li>
-       <li>🌅 Alba: 06:15 – 🌇 Tramonto: 19:45</li>
-       <li>🎣 Consiglio pesca: Buone condizioni per orate e mormore</li>
-     </ul>
-   `;
- }" width="100%" height="400" style="border:none;"></iframe>` : "";
- }
- 
- function simulateWeather() {
-   const city = document.getElementById("cityInput").value;
-   const display = document.getElementById("weatherDisplay");
-   if (!city) return display.innerHTML = "<p>Inserisci una località valida.</p>";
- 
-   display.innerHTML = `
-     <h3>Previsioni per ${city}</h3>
-     <ul>
-       <li>🌡️ Temperatura: 22°C (max 25°C / min 18°C)</li>
-       <li>💨 Vento: 18 km/h NE</li>
-       <li>🌊 Altezza onde: 0.6 m</li>
-       <li>🌘 Fase lunare: Luna crescente</li>
-       <li>🌅 Alba: 06:15 – 🌇 Tramonto: 19:45</li>
-       <li>🎣 Consiglio pesca: Buone condizioni per orate e mormore</li>
-     </ul>
-   `;
- }" width="100%" height="400" style="border:none;"></iframe>` : "";
- }
- function inviaOrdineEsche() {
-   const form = document.getElementById("escheForm");
-   const formData = new FormData(form);
-   let msg = "*Ordine Esche Vive:*
- ";
-   formData.forEach((val, key) => {
-     if (val && parseInt(val) > 0) msg += `${key.replaceAll('_', ' ')}: ${val}
- `;
-   });
-   if (msg.trim() === "*Ordine Esche Vive:*") {
-     alert("Inserisci almeno un'esca."); return;
-   }
-   const encoded = encodeURIComponent(msg);
-   window.open(`https://wa.me/393494166335?text=${encoded}`);
- }
- function inviaOrdineEsche() {
-   const form = document.getElementById("escheForm");
-   const formData = new FormData(form);
-   let msg = "*Ordine Esche Vive:*\n";
-   formData.forEach((val, key) => {
-     if (val && parseInt(val) > 0) msg += `${key.replaceAll('_', ' ')}: ${val}\n`;
-   });
-   if (msg.trim() === "*Ordine Esche Vive:*") {
-     alert("Inserisci almeno un'esca."); return;
-   }
-   const encoded = encodeURIComponent(msg);
-   window.open(`https://wa.me/393494166335?text=${encoded}`);
- }
- </script>
-   <div id="bottomNav" style="position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.85); display: flex; justify-content: space-around; padding: 10px; z-index: 999;">
-     <button onclick="goHome()" style="padding: 10px 20px; background: #00aaff; color: white; border: none; border-radius: 8px; font-size: 16px;">🏠 Home</button>
-     <button onclick="goBack()" style="padding: 10px 20px; background: #0077cc; color: white; border: none; border-radius: 8px; font-size: 16px;">🔙 Indietro</button>
-   </div>
- 
- </body>
- </html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MG Fishing App</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, #001f3f, #003366);
+      color: #fff;
+    }
+    header {
+      background: #0066cc;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+    .section {
+      display: none;
+      padding: 1rem;
+    }
+    .section.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>MG Fishing App</h1>
+  </header>
+  <main>
+    <div id="blog" class="section active">
+      <h2>Blog</h2>
+      <article>
+        <h3>I 3 Nodi da Pesca Fondamentali - Guida Passo Passo</h3>
+        <p><strong>Nodo Palomar:</strong> raddoppia il filo, inseriscilo nell’occhiello, fai un nodo semplice, passa l’asola sopra l’amo e stringi. Resistente e facile.</p>
+        <p><strong>Nodo Clinch Migliorato:</strong> avvolgi il filo 5-6 volte sull’asse principale, passa nel piccolo occhiello e stringi. Veloce e molto affidabile.</p>
+        <p><strong>Nodo a Gassa (Loop):</strong> crea un’asola per dare libertà all’artificiale. Fai un nodo semplice, inserisci l’esca, avvolgi 4-5 volte e stringi.</p>
+      </article>
+      <article>
+        <h3>Tipi di Montature da Surfcasting - Quale Scegliere?</h3>
+        <p><strong>Piombo Scorrevole:</strong> ideale per pesci diffidenti come orate e mormore. Nessuna resistenza percepita dal pesce.</p>
+        <p><strong>Due Braccioli:</strong> permette di sondare più zone d’acqua contemporaneamente. Ottimo per arenicola e americano.</p>
+        <p><strong>Long Arm:</strong> bracciolo lungo, perfetto per pesci sospettosi. Ideale con mare calmo e fondale sabbioso.</p>
+        <p><strong>Anti Groviglio:</strong> ottima per mare mosso e fondali misti. Minimizza gli intrecci della lenza.</p>
+      </article>
+      <article>
+        <h3>Come Leggere il Mare - Consigli per Pescatori da Riva</h3>
+        <p><strong>Zone di Schiuma:</strong> ottimi punti per spigole e orate. Indicano turbolenza e presenza di cibo.</p>
+        <p><strong>Correnti Laterali:</strong> trasportano nutrimento. I pesci si posizionano per intercettarlo.</p>
+        <p><strong>Canalette e Fori:</strong> zone più profonde e calme, spesso ricche di prede. Osserva dove le onde si infrangono meno.</p>
+        <p><strong>Condizioni Meteo:</strong> mare calmo = esche più delicate; mare mosso = esche robuste e montature stabili.</p>
+      </article>
+    </div>
+  </main>
+</body>
+</html>
