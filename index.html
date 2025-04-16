@@ -144,33 +144,53 @@
     </div>
 
     <div id="blog" class="section">
-      <h2>Blog</h2>
-      <article>
-        <h3>I 3 Nodi da Pesca Fondamentali - Guida Passo Passo</h3>
-        <p><strong>Nodo Palomar:</strong> raddoppia il filo, inseriscilo nell’occhiello, fai un nodo semplice, passa l’asola sopra l’amo e stringi. Resistente e facile.</p>
-        <p><strong>Nodo Clinch Migliorato:</strong> avvolgi il filo 5-6 volte sull’asse principale, passa nel piccolo occhiello e stringi. Veloce e molto affidabile.</p>
-        <p><strong>Nodo a Gassa (Loop):</strong> crea un’asola per dare libertà all’artificiale. Fai un nodo semplice, inserisci l’esca, avvolgi 4-5 volte e stringi.</p>
-      </article>
-      <article>
-        <h3>Tipi di Montature da Surfcasting - Quale Scegliere?</h3>
-        <p><strong>Piombo Scorrevole:</strong> ideale per pesci diffidenti come orate e mormore. Nessuna resistenza percepita dal pesce.</p>
-        <p><strong>Due Braccioli:</strong> permette di sondare più zone d’acqua contemporaneamente. Ottimo per arenicola e americano.</p>
-        <p><strong>Long Arm:</strong> bracciolo lungo, perfetto per pesci sospettosi. Ideale con mare calmo e fondale sabbioso.</p>
-        <p><strong>Anti Groviglio:</strong> ottima per mare mosso e fondali misti. Minimizza gli intrecci della lenza.</p>
-      </article>
-      <article>
-        <h3>Come Leggere il Mare - Consigli per Pescatori da Riva</h3>
-        <p><strong>Zone di Schiuma:</strong> ottimi punti per spigole e orate. Indicano turbolenza e presenza di cibo.</p>
-        <p><strong>Correnti Laterali:</strong> trasportano nutrimento. I pesci si posizionano per intercettarlo.</p>
-        <p><strong>Canalette e Fori:</strong> zone più profonde e calme, spesso ricche di prede. Osserva dove le onde si infrangono meno.</p>
-        <p><strong>Condizioni Meteo:</strong> mare calmo = esche più delicate; mare mosso = esche robuste e montature stabili.</p>
-      </article>
+  <h2>Blog</h2>
+  <div>
+    <h3 style="cursor: pointer; color: #00aaff;" onclick="toggleBlog('nodi')">➤ I 3 Nodi da Pesca Fondamentali</h3>
+    <div id="blog-nodi" style="display: none;">
+      <p><strong>Nodo Palomar:</strong> raddoppia il filo, inseriscilo nell’occhiello, fai un nodo semplice, passa l’asola sopra l’amo e stringi. Resistente e facile.</p>
+      <p><strong>Nodo Clinch Migliorato:</strong> avvolgi il filo 5-6 volte sull’asse principale, passa nel piccolo occhiello e stringi. Veloce e molto affidabile.</p>
+      <p><strong>Nodo a Gassa (Loop):</strong> crea un’asola per dare libertà all’artificiale. Fai un nodo semplice, inserisci l’esca, avvolgi 4-5 volte e stringi.</p>
     </div>
+
+    <h3 style="cursor: pointer; color: #00aaff;" onclick="toggleBlog('montature')">➤ Tipi di Montature da Surfcasting</h3>
+    <div id="blog-montature" style="display: none;">
+      <p><strong>Piombo Scorrevole:</strong> ideale per pesci diffidenti come orate e mormore. Nessuna resistenza percepita dal pesce.</p>
+      <p><strong>Due Braccioli:</strong> permette di sondare più zone d’acqua contemporaneamente. Ottimo per arenicola e americano.</p>
+      <p><strong>Long Arm:</strong> bracciolo lungo, perfetto per pesci sospettosi. Ideale con mare calmo e fondale sabbioso.</p>
+      <p><strong>Anti Groviglio:</strong> ottima per mare mosso e fondali misti. Minimizza gli intrecci della lenza.</p>
+    </div>
+
+    <h3 style="cursor: pointer; color: #00aaff;" onclick="toggleBlog('lettura')">➤ Come Leggere il Mare</h3>
+    <div id="blog-lettura" style="display: none;">
+      <p><strong>Zone di Schiuma:</strong> ottimi punti per spigole e orate. Indicano turbolenza e presenza di cibo.</p>
+      <p><strong>Correnti Laterali:</strong> trasportano nutrimento. I pesci si posizionano per intercettarlo.</p>
+      <p><strong>Canalette e Fori:</strong> zone più profonde e calme, spesso ricche di prede. Osserva dove le onde si infrangono meno.</p>
+      <p><strong>Condizioni Meteo:</strong> mare calmo = esche più delicate; mare mosso = esche robuste e montature stabili.</p>
+    </div>
+  </div>
+</div>
+<script>
+function toggleBlog(id) {
+  const el = document.getElementById('blog-' + id);
+  el.style.display = (el.style.display === 'none') ? 'block' : 'none';
+}cche di prede. Osserva dove le onde si infrangono meno.</p>
+      <p><strong>Condizioni Meteo:</strong> mare calmo = esche più delicate; mare mosso = esche robuste e montature stabili.</p>
+    </div>
+  </div>
+</div>
+<script>
+function toggleBlog(id) {
+  const el = document.getElementById('blog-' + id);
+  el.style.display = (el.style.display === 'none') ? 'block' : 'none';
+}
     <div id="meteo" class="section">
-    <h2>Previsioni Meteo</h2>
-    <input type="text" id="cityInput" placeholder="Inserisci città" class="input">
-    <button onclick="getWeatherByCity()" class="button">Cerca</button>
-    <div id="weatherDisplay"></div>
+  <h2>Previsioni Meteo per la Pesca</h2>
+  <input type="text" id="cityInput" placeholder="Inserisci città" class="input">
+  <button onclick="simulateWeather()" class="button">🔍 Cerca</button>
+  <div id="weatherDisplay" style="margin-top: 20px;"></div>
+</div>
+</div>
   </div>
 
   <div id="webcam" class="section">
@@ -328,21 +348,21 @@
 </div>
 
   <div id="esche" class="section">
-    <h2>Esche Vive Disponibili</h2>
-    <ul>
-      <li><strong>Arenicola Locale:</strong> ideale per orate e mormore.</li>
-      <li><strong>Arenicola Napoli:</strong> esca resistente, ottima con mare mosso.</li>
-      <li><strong>Americano:</strong> versatile per surfcasting e pesca da scogliera.</li>
-      <li><strong>Bibi:</strong> indicato per grufolatori e prede sospettose.</li>
-      <li><strong>Cordella:</strong> esca dura, perfetta per fondali misti.</li>
-      <li><strong>Muriddu:</strong> efficace con mare formato.</li>
-      <li><strong>Bigattino:</strong> per pesca in acque interne e laghetti.</li>
-      <li><strong>Vermi di Terra:</strong> multiuso, molto attrattivo.</li>
-      <li><strong>Camole del Miele:</strong> ideale per trote e pesci esigenti.</li>
-    </ul>
-    <p>Per prenotare le esche invia un messaggio su WhatsApp cliccando il pulsante sotto:</p>
-    <a href="https://wa.me/393494166335" target="_blank" class="button">📲 Prenota su WhatsApp</a>
-  </div>
+  <h2>Esche Vive Disponibili</h2>
+  <form id="escheForm">
+    <label>Arenicola Locale: <input type="number" name="arenicola_locale" min="0" placeholder="Q.tà"></label><br>
+    <label>Arenicola Napoli: <input type="number" name="arenicola_napoli" min="0" placeholder="Q.tà"></label><br>
+    <label>Americano: <input type="number" name="americano" min="0" placeholder="Q.tà"></label><br>
+    <label>Bibi: <input type="number" name="bibi" min="0" placeholder="Q.tà"></label><br>
+    <label>Cordella: <input type="number" name="cordella" min="0" placeholder="Q.tà"></label><br>
+    <label>Muriddu: <input type="number" name="muriddu" min="0" placeholder="Q.tà"></label><br>
+    <label>Bigattino: <input type="number" name="bigattino" min="0" placeholder="Q.tà"></label><br>
+    <label>Vermi di Terra: <input type="number" name="vermi_terra" min="0" placeholder="Q.tà"></label><br>
+    <label>Camole del Miele: <input type="number" name="camole_miele" min="0" placeholder="Q.tà"></label><br>
+    <br>
+    <button type="button" onclick="inviaOrdineEsche()" class="button">📲 Prenota via WhatsApp</button>
+  </form>
+</div>
 
   <div id="contatti" class="section">
     <h2>Contatti</h2>
@@ -403,6 +423,72 @@ function loadWebcam() {
   const container = document.getElementById("webcamContainer");
   const url = document.getElementById("webcamSelect").value;
   container.innerHTML = url ? `<iframe src="${url}" width="100%" height="400" style="border:none;"></iframe>` : "";
+}
+
+function simulateWeather() {
+  const city = document.getElementById("cityInput").value;
+  const display = document.getElementById("weatherDisplay");
+  if (!city) return display.innerHTML = "<p>Inserisci una località valida.</p>";
+
+  display.innerHTML = `
+    <h3>Previsioni per ${city}</h3>
+    <ul>
+      <li>🌡️ Temperatura: 22°C (max 25°C / min 18°C)</li>
+      <li>💨 Vento: 18 km/h NE</li>
+      <li>🌊 Altezza onde: 0.6 m</li>
+      <li>🌘 Fase lunare: Luna crescente</li>
+      <li>🌅 Alba: 06:15 – 🌇 Tramonto: 19:45</li>
+      <li>🎣 Consiglio pesca: Buone condizioni per orate e mormore</li>
+    </ul>
+  `;
+}" width="100%" height="400" style="border:none;"></iframe>` : "";
+}
+
+function simulateWeather() {
+  const city = document.getElementById("cityInput").value;
+  const display = document.getElementById("weatherDisplay");
+  if (!city) return display.innerHTML = "<p>Inserisci una località valida.</p>";
+
+  display.innerHTML = `
+    <h3>Previsioni per ${city}</h3>
+    <ul>
+      <li>🌡️ Temperatura: 22°C (max 25°C / min 18°C)</li>
+      <li>💨 Vento: 18 km/h NE</li>
+      <li>🌊 Altezza onde: 0.6 m</li>
+      <li>🌘 Fase lunare: Luna crescente</li>
+      <li>🌅 Alba: 06:15 – 🌇 Tramonto: 19:45</li>
+      <li>🎣 Consiglio pesca: Buone condizioni per orate e mormore</li>
+    </ul>
+  `;
+}" width="100%" height="400" style="border:none;"></iframe>` : "";
+}
+function inviaOrdineEsche() {
+  const form = document.getElementById("escheForm");
+  const formData = new FormData(form);
+  let msg = "*Ordine Esche Vive:*
+";
+  formData.forEach((val, key) => {
+    if (val && parseInt(val) > 0) msg += `${key.replaceAll('_', ' ')}: ${val}
+`;
+  });
+  if (msg.trim() === "*Ordine Esche Vive:*") {
+    alert("Inserisci almeno un'esca."); return;
+  }
+  const encoded = encodeURIComponent(msg);
+  window.open(`https://wa.me/393494166335?text=${encoded}`);
+}
+function inviaOrdineEsche() {
+  const form = document.getElementById("escheForm");
+  const formData = new FormData(form);
+  let msg = "*Ordine Esche Vive:*\n";
+  formData.forEach((val, key) => {
+    if (val && parseInt(val) > 0) msg += `${key.replaceAll('_', ' ')}: ${val}\n`;
+  });
+  if (msg.trim() === "*Ordine Esche Vive:*") {
+    alert("Inserisci almeno un'esca."); return;
+  }
+  const encoded = encodeURIComponent(msg);
+  window.open(`https://wa.me/393494166335?text=${encoded}`);
 }
 </script>
   <div id="bottomNav" style="position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.85); display: flex; justify-content: space-around; padding: 10px; z-index: 999;">
