@@ -72,6 +72,7 @@
 <body>
   <div id="hamburger" onclick="toggleMenu()">☰</div>
   <nav id="sideMenu">
+  <a href="#" onclick="showSection('contattaci')">💬 Contattaci</a>
   <a href="#" onclick="showSection('home')">🏠 Home</a>
   <a href="#" onclick="showSection('meteo')">☀️ Meteo</a>
   <a href="#" onclick="showSection('webcam')">📷 Webcam</a>
@@ -166,6 +167,11 @@
     <p>📧 info@mgfishing.eu</p>
     <p>🌐 <a href="https://www.mgfishing.eu" target="_blank" style="color: #00aaff;">Visita il nostro sito</a></p>
   </div>
+  <div id="contattaci" class="section">
+    <h2>Contattaci su WhatsApp</h2>
+    <p>Hai bisogno di aiuto o vuoi prenotare direttamente? Scrivici!</p>
+    <a href="https://wa.me/393494166335" target="_blank" class="button">💬 Invia Messaggio su WhatsApp</a>
+  </div>
 </main>
 
   <script>
@@ -182,6 +188,38 @@
         menu.classList.remove("show");
       }
     }
-  </script>
+  let sectionHistory = ['home'];
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const menu = document.getElementById("sideMenu");
+  if (menu.classList.contains("show")) {
+    menu.classList.remove("show");
+  }
+  const current = sectionHistory[sectionHistory.length - 1];
+  if (current !== id) {
+    sectionHistory.push(id);
+  }
+}
+
+function goHome() {
+  showSection('home');
+}
+
+function goBack() {
+  if (sectionHistory.length > 1) {
+    sectionHistory.pop();
+    const previous = sectionHistory[sectionHistory.length - 1];
+    showSection(previous);
+  }
+}
+
+</script>
+  <div id="bottomNav" style="position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.85); display: flex; justify-content: space-around; padding: 10px; z-index: 999;">
+    <button onclick="goHome()" style="padding: 10px 20px; background: #00aaff; color: white; border: none; border-radius: 8px; font-size: 16px;">🏠 Home</button>
+    <button onclick="goBack()" style="padding: 10px 20px; background: #0077cc; color: white; border: none; border-radius: 8px; font-size: 16px;">🔙 Indietro</button>
+  </div>
+
 </body>
 </html>
