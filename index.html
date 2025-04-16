@@ -210,8 +210,15 @@
         showSection(previous);
       }
     }
-  </script>
+  function loadWebcam() {
+  const container = document.getElementById("webcamContainer");
+  const url = document.getElementById("webcamSelect").value;
+  if (url) {
+    container.innerHTML = `<iframe src="${url}" width="100%" height="400" style="border:none;" allowfullscreen></iframe>`;
+  } else {
+    container.innerHTML = "";
+  }
+}
+</script>
 </body>
 </html>
-
-  
