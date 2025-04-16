@@ -7,28 +7,22 @@
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: url('https://images.unsplash.com/photo-1502786129293-79981df4e689?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
-      background-size: cover;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, #001f3f, #003366);
       color: #fff;
-    }
-    header {
-      background: rgba(0, 119, 204, 0.8);
-      padding: 1rem;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
     #hamburger {
       position: fixed;
       top: 15px;
       left: 15px;
-      background: rgba(0, 0, 0, 0.7);
+      background: #004080;
       color: white;
       padding: 10px;
-      font-size: 20px;
-      border-radius: 5px;
+      font-size: 22px;
+      border-radius: 50%;
       z-index: 1000;
       cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
     }
     nav {
       position: fixed;
@@ -36,7 +30,7 @@
       left: -250px;
       width: 220px;
       height: 100%;
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(0, 0, 51, 0.95);
       padding-top: 60px;
       display: flex;
       flex-direction: column;
@@ -49,138 +43,87 @@
     }
     nav a {
       text-decoration: none;
-      padding: 0.7rem;
-      background: #00aaff;
+      padding: 0.8rem;
+      background: #005fa3;
       color: white;
       border-radius: 5px;
       text-align: center;
       margin: 0 10px;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    nav a:hover {
+      background: #0088cc;
     }
     .section {
       display: none;
       padding: 1rem;
-      background-color: rgba(0, 0, 0, 0.6);
+      background-color: rgba(0, 0, 0, 0.55);
       margin: 1rem;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      animation: fadeIn 0.5s ease-in-out;
     }
     .section.active {
       display: block;
+    }
+    .button {
+      background: #00aaff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 16px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+      transition: background 0.3s;
+    }
+    .button:hover {
+      background: #008ecc;
+    }
+    .input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+    }
+    @media screen and (max-width: 480px) {
+      #hamburger {
+        top: 5px;
+        left: 5px;
+        font-size: 18px;
+        padding: 8px;
+      }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
   <div id="hamburger" onclick="toggleMenu()">☰</div>
   <nav id="sideMenu">
-  <a href="#" onclick="showSection('home')">🏠 Home</a>
-  <a href="#" onclick="showSection('meteo')">☀️ Meteo</a>
-  <a href="#" onclick="showSection('webcam')">📷 Webcam</a>
-  <a href="#" onclick="showSection('licenze')">🎣 Licenze</a>
-  <a href="#" onclick="showSection('esche')">🪱 Esche Vive</a>
-  <a href="#" onclick="showSection('blog')">📝 Blog</a>
-  <a href="#" onclick="showSection('contatti')">📞 Contatti</a>
-</nav>
-
-  <main>
-    <div id="home" class="section active">
-      <h2>Benvenuto su MG Fishing</h2>
-      <p>Scopri tutte le funzionalità e i servizi dedicati ai pescatori!</p>
-      <h3>📝 Ultimi Articoli del Blog</h3>
-      <ul style="list-style: none; padding: 0;">
-        <li><a href="#" onclick="showSection('blog')" style="color: #00aaff; font-weight: bold; text-decoration: underline;">🔗 I 3 Nodi da Pesca Fondamentali</a></li>
-        <li><a href="#" onclick="showSection('blog')" style="color: #00aaff; font-weight: bold; text-decoration: underline;">🔗 Tipi di Montature da Surfcasting</a></li>
-        <li><a href="#" onclick="showSection('blog')" style="color: #00aaff; font-weight: bold; text-decoration: underline;">🔗 Come Leggere il Mare</a></li>
-      </ul>
-    </div>
-
-    <div id="blog" class="section">
-      <h2>Blog</h2>
-      <article>
-        <h3>I 3 Nodi da Pesca Fondamentali - Guida Passo Passo</h3>
-        <p><strong>Nodo Palomar:</strong> raddoppia il filo, inseriscilo nell’occhiello, fai un nodo semplice, passa l’asola sopra l’amo e stringi. Resistente e facile.</p>
-        <p><strong>Nodo Clinch Migliorato:</strong> avvolgi il filo 5-6 volte sull’asse principale, passa nel piccolo occhiello e stringi. Veloce e molto affidabile.</p>
-        <p><strong>Nodo a Gassa (Loop):</strong> crea un’asola per dare libertà all’artificiale. Fai un nodo semplice, inserisci l’esca, avvolgi 4-5 volte e stringi.</p>
-      </article>
-      <article>
-        <h3>Tipi di Montature da Surfcasting - Quale Scegliere?</h3>
-        <p><strong>Piombo Scorrevole:</strong> ideale per pesci diffidenti come orate e mormore. Nessuna resistenza percepita dal pesce.</p>
-        <p><strong>Due Braccioli:</strong> permette di sondare più zone d’acqua contemporaneamente. Ottimo per arenicola e americano.</p>
-        <p><strong>Long Arm:</strong> bracciolo lungo, perfetto per pesci sospettosi. Ideale con mare calmo e fondale sabbioso.</p>
-        <p><strong>Anti Groviglio:</strong> ottima per mare mosso e fondali misti. Minimizza gli intrecci della lenza.</p>
-      </article>
-      <article>
-        <h3>Come Leggere il Mare - Consigli per Pescatori da Riva</h3>
-        <p><strong>Zone di Schiuma:</strong> ottimi punti per spigole e orate. Indicano turbolenza e presenza di cibo.</p>
-        <p><strong>Correnti Laterali:</strong> trasportano nutrimento. I pesci si posizionano per intercettarlo.</p>
-        <p><strong>Canalette e Fori:</strong> zone più profonde e calme, spesso ricche di prede. Osserva dove le onde si infrangono meno.</p>
-        <p><strong>Condizioni Meteo:</strong> mare calmo = esche più delicate; mare mosso = esche robuste e montature stabili.</p>
-      </article>
-    </div>
-    <div id="meteo" class="section">
-    <h2>Previsioni Meteo</h2>
-    <input type="text" id="cityInput" placeholder="Inserisci città" class="input">
-    <button onclick="getWeatherByCity()" class="button">Cerca</button>
-    <div id="weatherDisplay"></div>
-  </div>
-
-  <div id="webcam" class="section">
-    <h2>Webcam Mare</h2>
-    <select id="webcamSelect" onchange="loadWebcam()" class="input">
-      <option value="">Seleziona una località</option>
-      <option value="https://vedetta.org/webcam/italia/lazio/latina/lido-di-latina/">Latina Mare (Lazio)</option>
-      <option value="https://vedetta.org/webcam/italia/sardegna/alghero/">Alghero (Sardegna)</option>
-      <option value="https://vedetta.org/webcam/italia/toscana/livorno/">Livorno (Toscana)</option>
-    </select>
-    <div id="webcamContainer" style="margin-top: 20px;"></div>
-  </div>
-
-  <div id="licenze" class="section">
-    <h2>Licenze di Pesca Tipo B</h2>
-    <p><strong>Lazio:</strong> Gratuita per under 18 e over 65. Rilascio online tramite Regione Lazio.</p>
-    <p><strong>Toscana:</strong> Rilascio gratuito per residenti. Richiesta online o presso uffici pesca.</p>
-    <p><strong>Emilia-Romagna:</strong> Licenza annuale obbligatoria. Disponibile anche digitale.</p>
-    <p><em>Sezione in aggiornamento per tutte le regioni.</em></p>
-  </div>
-
-  <div id="esche" class="section">
-    <h2>Esche Vive Disponibili</h2>
-    <ul>
-      <li><strong>Arenicola Locale:</strong> ideale per orate e mormore.</li>
-      <li><strong>Arenicola Napoli:</strong> esca resistente, ottima con mare mosso.</li>
-      <li><strong>Americano:</strong> versatile per surfcasting e pesca da scogliera.</li>
-      <li><strong>Bibi:</strong> indicato per grufolatori e prede sospettose.</li>
-      <li><strong>Cordella:</strong> esca dura, perfetta per fondali misti.</li>
-      <li><strong>Muriddu:</strong> efficace con mare formato.</li>
-      <li><strong>Bigattino:</strong> per pesca in acque interne e laghetti.</li>
-      <li><strong>Vermi di Terra:</strong> multiuso, molto attrattivo.</li>
-      <li><strong>Camole del Miele:</strong> ideale per trote e pesci esigenti.</li>
-    </ul>
-    <p>Per prenotare le esche invia un messaggio su WhatsApp cliccando il pulsante sotto:</p>
-    <a href="https://wa.me/393494166335" target="_blank" class="button">📲 Prenota su WhatsApp</a>
-  </div>
-
-  <div id="contatti" class="section">
-    <h2>Contatti</h2>
-    <p>📞 340 8198180</p>
-    <p>📞 349 4166335</p>
-    <p>📧 info@mgfishing.eu</p>
-    <p>🌐 <a href="https://www.mgfishing.eu" target="_blank" style="color: #00aaff;">Visita il nostro sito</a></p>
-  </div>
-</main>
-
+    <a href="#" onclick="showSection('home')">🏠 Home</a>
+    <a href="#" onclick="showSection('meteo')">☀️ Meteo</a>
+    <a href="#" onclick="showSection('webcam')">📷 Webcam</a>
+    <a href="#" onclick="showSection('licenze')">🎣 Licenze</a>
+    <a href="#" onclick="showSection('esche')">🪱 Esche Vive</a>
+    <a href="#" onclick="showSection('blog')">📝 Blog</a>
+    <a href="#" onclick="showSection('contattaci')">💬 Contattaci</a>
+    <a href="#" onclick="showSection('contatti')">📞 Contatti</a>
+  </nav>
   <script>
     function toggleMenu() {
       const menu = document.getElementById("sideMenu");
       menu.classList.toggle("show");
     }
-
     function showSection(id) {
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
       document.getElementById(id).classList.add('active');
-      const menu = document.getElementById("sideMenu");
-      if (menu.classList.contains("show")) {
-        menu.classList.remove("show");
-      }
+      document.getElementById("sideMenu").classList.remove("show");
     }
   </script>
 </body>
