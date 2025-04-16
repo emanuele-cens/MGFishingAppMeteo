@@ -27,9 +27,20 @@
   </style>
 </head>
 <body>
-  <header>
-    <h1>MG Fishing App</h1>
-  </header>
+  <div id="hamburger" onclick="toggleMenu()">☰</div>
+<nav id="sideMenu">
+  <a href="#" onclick="showSection('contattaci')">💬 Contattaci</a>
+  <a href="#" onclick="showSection('home')">🏠 Home</a>
+  <a href="#" onclick="showSection('meteo')">☀️ Meteo</a>
+  <a href="#" onclick="showSection('webcam')">📷 Webcam</a>
+  <a href="#" onclick="showSection('licenze')">🎣 Licenze</a>
+  <a href="#" onclick="showSection('esche')">🪱 Esche Vive</a>
+  <a href="#" onclick="showSection('blog')">📝 Blog</a>
+  <a href="#" onclick="showSection('contatti')">📞 Contatti</a>
+</nav>
+<header>
+  <h1>MG Fishing App</h1>
+</header>
   <main>
     <div id="blog" class="section active">
       <h2>Blog</h2>
