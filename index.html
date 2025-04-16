@@ -174,14 +174,30 @@
   </div>
 
   <div id="webcam" class="section">
-    <h2>Webcam Mare</h2>
-    <select id="webcamSelect" onchange="loadWebcam()" class="input">
-      <option value="">Seleziona una località</option>
-      <option value="https://vedetta.org/webcam/italia/lazio/latina/lido-di-latina/">Latina Mare (Lazio)</option>
-      <option value="https://vedetta.org/webcam/italia/sardegna/alghero/">Alghero (Sardegna)</option>
-      <option value="https://vedetta.org/webcam/italia/toscana/livorno/">Livorno (Toscana)</option>
-    </select>
-    <div id="webcamContainer" style="margin-top: 20px;"></div>
+  <h2>Webcam Mare</h2>
+  <p>Seleziona una località per vedere le condizioni in tempo reale:</p>
+  <select id="webcamSelect" onchange="loadWebcam()" class="input">
+  <option value="">-- Seleziona località --</option>
+  <!-- Lazio -->
+  <option value="https://www.campanialive.it/webcam.asp?localita=gaetasirio">Gaeta – Spiaggia di Serapo (Lazio)</option>
+  <option value="https://vedetta.org/webcam/italia/lazio/latina/sabaudia/">Sabaudia – Lungomare (Lazio)</option>
+  <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/latina/spiaggia-di-formia.html">Formia – Spiaggia di Vindicio (Lazio)</option>
+  <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/roma/spiaggia-lido-di-ostia-roma.html">Lido di Ostia – Roma (Lazio)</option>
+  <!-- Toscana -->
+  <option value="https://www.skylinewebcams.com/it/webcam/italia/toscana/lucca/forte-dei-marmi-lungomare.html">Forte dei Marmi – Lungomare (Toscana)</option>
+  <option value="https://www.skylinewebcams.com/it/webcam/italia/toscana/lucca/lido-di-camaiore.html">Lido di Camaiore – Spiaggia (Toscana)</option>
+  <option value="https://www.skylinewebcams.com/it/webcam/italia/toscana/lucca/viareggio.html">Viareggio – Passeggiata (Toscana)</option>
+  <option value="https://www.skylinewebcams.com/it/webcam/italia/toscana/pisa/marina-di-pisa.html">Marina di Pisa – Porto (Toscana)</option>
+  <option value="https://www.firenzemeteo.it/webcam/toscana/webcam-portoferraio-isola-d-elba.php">Isola d'Elba – Portoferraio (Toscana)</option>
+  <!-- Campania -->
+  <option value="https://www.skylinewebcams.com/it/webcam/italia/campania/salerno/positano.html">Positano – Spiaggia Grande (Campania)</option>
+  <option value="https://www.skylinewebcams.com/it/webcam/italia/campania/salerno/spiaggia-di-amalfi.html">Amalfi – Spiaggia (Campania)</option>
+  <option value="https://www.skylinewebcams.com/it/webcam/italia/campania/salerno/marina-di-camerota.html">Marina di Camerota – Calanca (Campania)</option>
+  <option value="https://www.campanialive.it/webcam.asp?localita=capacciopaestum">Capaccio Paestum – Spiaggia (Campania)</option>
+  <option value="https://vedetta.org/webcam/italia/campania/caserta/castel-volturno/">Castel Volturno – Lido Gallo (Campania)</option>
+</select>
+  <div id="webcamContainer" style="margin-top: 20px;"></div>
+</div>
   </div>
 
   <div id="licenze" class="section">
@@ -346,6 +362,11 @@ function goBack() {
   }
 }
 
+function loadWebcam() {
+  const container = document.getElementById("webcamContainer");
+  const url = document.getElementById("webcamSelect").value;
+  container.innerHTML = url ? `<iframe src="${url}" width="100%" height="400" style="border:none;"></iframe>` : "";
+}
 </script>
   <div id="bottomNav" style="position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.85); display: flex; justify-content: space-around; padding: 10px; z-index: 999;">
     <button onclick="goHome()" style="padding: 10px 20px; background: #00aaff; color: white; border: none; border-radius: 8px; font-size: 16px;">🏠 Home</button>
