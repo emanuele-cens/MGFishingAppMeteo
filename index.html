@@ -178,23 +178,60 @@
   <p>Seleziona una località per vedere le condizioni in tempo reale:</p>
   <select id="webcamSelect" onchange="loadWebcam()" class="input">
   <option value="">-- Seleziona località --</option>
-  <!-- Lazio -->
-  <option value="https://www.campanialive.it/webcam.asp?localita=gaetasirio">Gaeta – Spiaggia di Serapo (Lazio)</option>
-  <option value="https://vedetta.org/webcam/italia/lazio/latina/sabaudia/">Sabaudia – Lungomare (Lazio)</option>
-  <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/latina/spiaggia-di-formia.html">Formia – Spiaggia di Vindicio (Lazio)</option>
-  <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/roma/spiaggia-lido-di-ostia-roma.html">Lido di Ostia – Roma (Lazio)</option>
-  <!-- Toscana -->
-  <option value="https://www.skylinewebcams.com/it/webcam/italia/toscana/lucca/forte-dei-marmi-lungomare.html">Forte dei Marmi – Lungomare (Toscana)</option>
-  <option value="https://www.skylinewebcams.com/it/webcam/italia/toscana/lucca/lido-di-camaiore.html">Lido di Camaiore – Spiaggia (Toscana)</option>
-  <option value="https://www.skylinewebcams.com/it/webcam/italia/toscana/lucca/viareggio.html">Viareggio – Passeggiata (Toscana)</option>
-  <option value="https://www.skylinewebcams.com/it/webcam/italia/toscana/pisa/marina-di-pisa.html">Marina di Pisa – Porto (Toscana)</option>
-  <option value="https://www.firenzemeteo.it/webcam/toscana/webcam-portoferraio-isola-d-elba.php">Isola d'Elba – Portoferraio (Toscana)</option>
-  <!-- Campania -->
-  <option value="https://www.skylinewebcams.com/it/webcam/italia/campania/salerno/positano.html">Positano – Spiaggia Grande (Campania)</option>
-  <option value="https://www.skylinewebcams.com/it/webcam/italia/campania/salerno/spiaggia-di-amalfi.html">Amalfi – Spiaggia (Campania)</option>
-  <option value="https://www.skylinewebcams.com/it/webcam/italia/campania/salerno/marina-di-camerota.html">Marina di Camerota – Calanca (Campania)</option>
-  <option value="https://www.campanialive.it/webcam.asp?localita=capacciopaestum">Capaccio Paestum – Spiaggia (Campania)</option>
-  <option value="https://vedetta.org/webcam/italia/campania/caserta/castel-volturno/">Castel Volturno – Lido Gallo (Campania)</option>
+  <optgroup label="Liguria">
+    <option value="https://www.skylinewebcams.com/it/webcam/italia/liguria/savona/finale-ligure.html">Finale Ligure – Malpasso</option>
+    <option value="https://www.skylinewebcams.com/it/webcam/italia/liguria/genova/boccadasse.html">Genova – Boccadasse</option>
+  </optgroup>
+  <optgroup label="Marche">
+    <option value="https://www.skylinewebcams.com/it/webcam/italia/marche/ancona/portonovo-spiaggia.html">Portonovo – Spiaggia</option>
+    <option value="https://www.skylinewebcams.com/it/webcam/italia/marche/pesaro-urbino/gabicce-mare-marche.html">Gabicce Mare</option>
+  </optgroup>
+  <optgroup label="Abruzzo">
+    <option value="https://www.skylinewebcams.com/it/webcam/italia/abruzzo/teramo/roseto-degli-abruzzi.html">Roseto degli Abruzzi</option>
+  </optgroup>
+  <optgroup label="Molise">
+    <option value="https://vedetta.org/webcam/italia/molise/campobasso/termoli-lungomare/">Termoli – Lungomare</option>
+  </optgroup>
+  <optgroup label="Puglia">
+    <option value="https://www.skylinewebcams.com/it/webcam/italia/puglia/lecce/gallipoli.html">Gallipoli – Spiaggia</option>
+    <option value="https://www.skylinewebcams.com/it/webcam/italia/puglia/brindisi/ostuni-mare.html">Ostuni – Mare</option>
+  </optgroup>
+  <optgroup label="Basilicata">
+    <option value="https://vedetta.org/webcam/italia/basilicata/matera/metaponto/">Metaponto</option>
+  </optgroup>
+  <optgroup label="Calabria">
+    <option value="https://www.skylinewebcams.com/it/webcam/italia/calabria/vibo-valentia/tropea.html">Tropea</option>
+    <option value="https://www.skylinewebcams.com/it/webcam/italia/calabria/reggio-calabria/bova-marina.html">Bova Marina</option>
+  </optgroup>
+  <optgroup label="Sicilia">
+    <option value="https://www.skylinewebcams.com/it/webcam/italia/sicilia/ragusa/marina-di-ragusa.html">Marina di Ragusa</option>
+    <option value="https://www.skylinewebcams.com/it/webcam/italia/sicilia/messina/giardini-naxos.html">Giardini Naxos</option>
+  </optgroup>
+  <optgroup label="Sardegna">
+    <option value="https://www.skylinewebcams.com/it/webcam/italia/sardegna/sassari/stintino.html">Stintino</option>
+    <option value="https://www.skylinewebcams.com/it/webcam/italia/sardegna/sassari/golfo-aranci.html">Golfo Aranci</option>
+  </optgroup>
+  <optgroup label="Lazio">
+    <option value="https://vedetta.org/webcam/italia/lazio/latina/lido-di-latina/">Lido di Latina</option>
+    <option value="https://www.campanialive.it/webcam.asp?localita=gaetasirio">Gaeta</option>
+    <option value="https://vedetta.org/webcam/italia/lazio/latina/sabaudia/">Sabaudia</option>
+    <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/latina/spiaggia-di-formia.html">Formia</option>
+    <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/roma/spiaggia-lido-di-ostia-roma.html">Lido di Ostia</option>
+  </optgroup>
+  <optgroup label="Toscana">
+    <option value="https://www.skylinewebcams.com/it/webcam/italia/toscana/lucca/forte-dei-marmi-lungomare.html">Forte dei Marmi</option>
+    <option value="https://www.skylinewebcams.com/it/webcam/italia/toscana/lucca/lido-di-camaiore.html">Lido di Camaiore</option>
+    <option value="https://www.skylinewebcams.com/it/webcam/italia/toscana/lucca/viareggio.html">Viareggio</option>
+    <option value="https://www.skylinewebcams.com/it/webcam/italia/toscana/pisa/marina-di-pisa.html">Marina di Pisa</option>
+    <option value="https://www.firenzemeteo.it/webcam/toscana/webcam-portoferraio-isola-d-elba.php">Portoferraio – Elba</option>
+  </optgroup>
+  <optgroup label="Campania">
+    <option value="https://www.skylinewebcams.com/it/webcam/italia/campania/salerno/positano.html">Positano</option>
+    <option value="https://www.skylinewebcams.com/it/webcam/italia/campania/salerno/spiaggia-di-amalfi.html">Amalfi</option>
+    <option value="https://www.skylinewebcams.com/it/webcam/italia/campania/salerno/marina-di-camerota.html">Marina di Camerota</option>
+    <option value="https://www.campanialive.it/webcam.asp?localita=capacciopaestum">Paestum</option>
+    <option value="https://vedetta.org/webcam/italia/campania/caserta/castel-volturno/">Castel Volturno</option>
+  </optgroup>
 </select>
   <div id="webcamContainer" style="margin-top: 20px;"></div>
 </div>
