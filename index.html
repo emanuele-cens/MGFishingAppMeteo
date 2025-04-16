@@ -285,7 +285,7 @@ async function fetchWeather() {
     const fishingData = simulateFishingData();
     const sunrise = new Date(weatherData.current.sunrise * 1000).toLocaleTimeString('it-IT');
     const sunset = new Date(weatherData.current.sunset * 1000).toLocaleTimeString('it-IT');
-    display.innerHTML = `
+    display.innerHTML = ` 
       <h3>Previsioni per <span style="color: #00ffff">${city}</span></h3>
       <ul>
         <li>🌡️ <strong>Temperatura attuale:</strong> ${weatherData.current.temp}°C</li>
