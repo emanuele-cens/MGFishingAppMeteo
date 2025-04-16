@@ -5,433 +5,128 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MG Fishing App</title>
   <style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: url('https://images.unsplash.com/photo-1502786129293-79981df4e689?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
-    background-size: cover;
-    color: #fff;
-  }
-  header {
-    background: rgba(0, 119, 204, 0.8);
-    padding: 1rem;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-  }
-  #hamburger {
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 10px;
-    font-size: 20px;
-    border-radius: 5px;
-    z-index: 1000;
-    cursor: pointer;
-  }
-  .menu {
-    position: fixed;
-    top: 0;
-    left: -250px;
-    width: 220px;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    padding-top: 60px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    transition: left 0.3s ease-in-out;
-    z-index: 999;
-  }
-  .menu.show {
-    left: 0;
-  }
-  .menu a {
-    text-decoration: none;
-    padding: 0.7rem;
-    background: #00aaff;
-    color: white;
-    border-radius: 5px;
-    text-align: center;
-    margin: 0 10px;
-  }
-  .section {
-    display: none;
-    padding: 1rem;
-    background-color: rgba(0, 0, 0, 0.6);
-    margin: 1rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-  }
-  .section.active {
-    display: block;
-  }
-  .input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: none;
-  }
-  .button {
-    padding: 10px 15px;
-    background: #00aaff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-</style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('https://images.unsplash.com/photo-1502786129293-79981df4e689?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+    header {
+      background: rgba(0, 119, 204, 0.8);
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+    #hamburger {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 10px;
+      font-size: 20px;
+      border-radius: 5px;
+      z-index: 1000;
+      cursor: pointer;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 220px;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      padding-top: 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: left 0.3s ease-in-out;
+      z-index: 999;
+    }
+    nav.show {
+      left: 0;
+    }
+    nav a {
+      text-decoration: none;
+      padding: 0.7rem;
+      background: #00aaff;
+      color: white;
+      border-radius: 5px;
+      text-align: center;
+      margin: 0 10px;
+    }
+    .section {
+      display: none;
+      padding: 1rem;
+      background-color: rgba(0, 0, 0, 0.6);
+      margin: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+    .section.active {
+      display: block;
+    }
+  </style>
 </head>
 <body>
-  <div id="hamburger" onclick="toggleMenu()" style="position: fixed; top: 15px; left: 15px; background: rgba(0, 0, 0, 0.7); color: white; padding: 10px; font-size: 20px; border-radius: 5px; z-index: 3; cursor: pointer;">☰</div>
-  <header>
-  <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
-    <a href="https://www.facebook.com/verde.pesca.7" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" width="30" alt="Facebook"></a>
-    <a href="https://www.instagram.com/mgfishingverdepesca/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" width="30" alt="Instagram"></a>
-    <a href="https://www.tiktok.com/@mgfishing.verdepesca" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/TikTok_logo.svg" width="30" alt="TikTok"></a>
-  </div>
-</header>
-  <nav id="sideMenu" class="menu">
-  <a href="#" onclick="showSection('home')">🏠 Home</a>
-  <a href="#" onclick="showSection('meteo')">☀️ Meteo</a>
-  <a href="#" onclick="showSection('webcam')">📷 Webcam</a>
-  <a href="#" onclick="showSection('licenze')">🎣 Licenze</a>
-  <a href="#" onclick="showSection('esche')">🪱 Esche Vive</a>
-  <a href="#" onclick="showSection('blog')">📝 Blog</a>
-  <a href="#" onclick="showSection('login')">🔐 Login</a>
-  <a href="#" onclick="showSection('shop')">🛒 Shop</a>
-  <a href="#" onclick="showSection('contatti')">📞 Contatti</a>
-  <a href="#" onclick="showSection('contattaci')">💬 Contattaci</a>
-  <a href="#" onclick="showSection('condividi')">✍️ Condividi Post</a>
-</nav>
+  <div id="hamburger" onclick="toggleMenu()">☰</div>
+  <nav id="sideMenu">
+    <a href="#" onclick="showSection('home')">🏠 Home</a>
+    <a href="#" onclick="showSection('blog')">📝 Blog</a>
+  </nav>
 
   <main>
-    <div id="meteo" class="section">
-  <h2>Meteo</h2>
-  <input id="cityInput" class="input" placeholder="Inserisci città">
-  <button onclick="getWeatherByCity()" class="button">Cerca</button>
-  <div id="weatherDisplay"></div>
-  <p>Consulta le previsioni meteo per pianificare la tua battuta di pesca. Vento, temperatura e condizioni ideali!</p>
-</div>
+    <div id="home" class="section active">
+      <h2>Benvenuto su MG Fishing</h2>
+      <p>Scopri tutte le funzionalità e i servizi dedicati ai pescatori!</p>
+      <h3>📝 Ultimi Articoli del Blog</h3>
+      <ul style="list-style: none; padding: 0;">
+        <li><a href="#" onclick="showSection('blog')" style="color: #00aaff; font-weight: bold; text-decoration: underline;">🔗 I 3 Nodi da Pesca Fondamentali</a></li>
+        <li><a href="#" onclick="showSection('blog')" style="color: #00aaff; font-weight: bold; text-decoration: underline;">🔗 Tipi di Montature da Surfcasting</a></li>
+        <li><a href="#" onclick="showSection('blog')" style="color: #00aaff; font-weight: bold; text-decoration: underline;">🔗 Come Leggere il Mare</a></li>
+      </ul>
     </div>
 
-    <div id="webcam" class="section">
-  <h2>Webcam</h2>
-  <select id="localita" class="input" onchange="mostraWebcam()">
-    <option value="">Scegli località</option>
-    <option value="https://www.vedetta.org/webcam/italia/lazio/latina/lido-di-latina/">Latina</option>
-    <option value="https://www.vedetta.org/webcam/italia/sardegna/sassari/alghero/">Alghero</option>
-  </select>
-  <div id="webcamFrame"></div>
-  <p>Controlla in tempo reale le condizioni del mare prima di uscire a pescare.</p>
-</div>
-    </div>
-
-    <div id="licenze" class="section">
-  <h2>Licenze</h2>
-  <ul>
-    <li><strong>Lazio:</strong> Gratuita under 18, over 65. €29,13 per gli altri.</li>
-    <li><strong>Lombardia:</strong> €23 - esenti under 18 e over 65.</li>
-    <li><strong>Piemonte:</strong> €35 - esenti minori di 14 anni e disabili.</li>
-    <li><strong>Emilia-Romagna:</strong> €22,72 - esenti under 18 e over 65.</li>
-    <li><strong>Toscana:</strong> €35 - nessuna esenzione.</li>
-    <li><strong>Veneto:</strong> €34 - esenti under 18, over 70 e disabili.</li>
-    <li><strong>Sardegna:</strong> €20 - valida 5 anni, gratuita over 65 e under 14.</li>
-    <li><strong>Liguria:</strong> €45,45 - ridotta per over 65.</li>
-  </ul>
-</div>
-
-    <div id="esche" class="section">
-  <h2>Esche Vive</h2>
-  <form id="escheForm">
-    <label>Arenicola Locale<br><small>Ottima per orate e spigole.</small><input type="number" name="Arenicola Locale" class="input"></label>
-    <label>Americano<br><small>Esca resistente ideale per mare mosso.</small><input type="number" name="Americano" class="input"></label>
-    <label>Bibi<br><small>Prediletto dalle orate. Da innescare con ago.</small><input type="number" name="Bibi" class="input"></label>
-    <label>Cordella<br><small>Profumata, perfetta per la pesca notturna.</small><input type="number" name="Cordella" class="input"></label>
-    <label>Muriddu<br><small>Esca locale per mormore e saraghi.</small><input type="number" name="Muriddu" class="input"></label>
-    <label>Bigattino<br><small>Ottimo per acque dolci e marine.</small><input type="number" name="Bigattino" class="input"></label>
-    <label>Vermi di Terra<br><small>Esca multiuso per cefali e anguille.</small><input type="number" name="Vermi di Terra" class="input"></label>
-    <label>Camole del Miele<br><small>Ideale per la pesca alla trota.</small><input type="number" name="Camole del Miele" class="input"></label>
-    <button type="button" class="button" onclick="inviaOrdineEsche()">📲 Prenota via WhatsApp</button>
-  </form>
-</div>
     <div id="blog" class="section">
-  <h2>Blog</h2>
-
-  <article>
-    <h3>I 3 Nodi da Pesca Fondamentali - Guida Passo Passo</h3>
-    <p><strong>Nodo Palomar:</strong> ideale per ami e artificiali. Raddoppia il filo, inseriscilo nell’occhiello, fai un nodo semplice, passa l’asola sopra l’amo e stringi. Resistente e facile.</p>
-    <p><strong>Nodo Clinch Migliorato:</strong> per monofilo e fluorocarbon. Avvolgi il filo 5-6 volte sull’asse principale, passa nel piccolo occhiello e stringi. Veloce e molto affidabile.</p>
-    <p><strong>Nodo a Gassa (Loop):</strong> crea un’asola per dare libertà all’artificiale. Fai un nodo semplice, inserisci l’esca, avvolgi 4-5 volte e stringi. Ideale per esche mobili.</p>
-    <p>Questi nodi coprono la maggior parte delle esigenze in pesca sportiva. Allenati spesso per eseguirli alla perfezione!</p>
-  </article>
-
-  <article>
-    <h3>Tipi di Montature da Surfcasting - Quale Scegliere?</h3>
-    <p><strong>Montatura a Piombo Scorrevole:</strong> perfetta per pesci sospettosi come orate e mormore. Il pesce non avverte resistenza quando prende l’esca. Ideale con mare calmo.</p>
-    <p><strong>Montatura a Due Braccioli:</strong> adatta per esplorare più strati d’acqua e attirare diverse specie. Si usa bene con arenicola, americano e coreano. Buona per fondali sabbiosi.</p>
-    <p><strong>Montatura Long Arm:</strong> bracciolo lungo e sottile, utile con mare calmo e pesce diffidente. Ottima per mormore, spigole e cefali.</p>
-    <p><strong>Montatura Anti Groviglio:</strong> consigliata con mare mosso o fondale roccioso. Riduce i nodi del trave e mantiene l’esca ben presentata.</p>
-    <p>Scegli la montatura in base alle condizioni del mare, alla preda e alla sensibilità che vuoi ottenere sulla vetta della canna.</p>
-  </article>
-
-  <article>
-    <h3>Come Leggere il Mare - Consigli per Pescatori da Riva</h3>
-    <p><strong>Zone di Schiuma:</strong> sono punti dove le onde si infrangono sul fondale e muovono sedimenti ed esche naturali. Ottime per cercare spigole e orate.</p>
-    <p><strong>Correnti Laterali:</strong> attirano i pesci in cerca di cibo trasportato. In questi casi, usa esche robuste e montature stabili.</p>
-    <p><strong>Canalette e Fori:</strong> spesso invisibili dalla spiaggia, ma rilevabili osservando le onde. Dove l’onda si rompe meno, il fondale è più profondo: ottimi spot!</p>
-    <p><strong>Mare Calmo o Mosso:</strong> con mare calmo, usa esche più delicate (bibi, americano); con mare mosso, preferisci esche resistenti (coreano, muriddu) e montature anti groviglio.</p>
-    <p>Guardare il mare con attenzione prima di lanciare fa la differenza tra una giornata vuota e una pescata memorabile!</p>
-  </article>
-</div>
-
-  <div id="login" class="section">
-    <h2>Login</h2>
-    <input type="email" class="input" placeholder="Email">
-    <input type="password" class="input" placeholder="Password">
-    <button class="button">Accedi</button>
-  </div>
-  <div id="shop" class="section">
-    <h2>Visita il nostro shop online</h2>
-    <p>Scopri tutte le offerte e le novità sul nostro sito ufficiale.</p>
-    <a href="https://www.mgfishing.eu" target="_blank" class="button">🌐 Vai a MG Fishing</a>
-  </div>
-  <div id="contatti" class="section">
-    <h2>Contatti</h2>
-    <p>📞 Telefono: <a href="tel:3408198180" style="color: #fff;">340 8198180</a></p>
-    <p>📞 Telefono: <a href="tel:3494166335" style="color: #fff;">349 4166335</a></p>
-    <p>📧 Email: <a href="mailto:info@mgfishing.eu" style="color: #fff;">info@mgfishing.eu</a></p>
-    <p>🏪 Vieni a trovarci sul nostro sito ufficiale: <a href="https://www.mgfishing.eu" target="_blank" style="color: #00aaff;">www.mgfishing.eu</a></p>
-  </div>
-
-  <div id="home" class="section active">
-  <h2>Benvenuto su MG Fishing</h2>
-  <p>Scopri tutte le funzionalità e i servizi dedicati ai pescatori!</p>
-
-  <h3>🎯 Scopri le Offerte Speciali</h3>
-  <a href="https://www.mgfishing.eu" target="_blank" style="background: #ff9800; color: white; padding: 12px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block; margin-bottom: 20px;">🔥 Vai alle Offerte su MGFishing.eu</a>
-
-  <h3>📝 Ultimi Articoli del Blog</h3>
-  <ul style="list-style: none; padding: 0;">
-    <li><a href="#" onclick="showSection('blog')" style="color: #00aaff; font-weight: bold; text-decoration: underline;">🔗 Nodi da pesca indispensabili</a></li>
-    <li><a href="#" onclick="showSection('blog')" style="color: #00aaff; font-weight: bold; text-decoration: underline;">🔗 Come leggere il mare per pescare meglio</a></li>
-  </ul>
-</div>
-<script async src="https://www.tiktok.com/embed.js">let sectionHistory = ['home'];
-
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  const menu = document.getElementById("sideMenu");
-  if (menu.classList.contains("show")) {
-    menu.classList.remove("show");
-  }
-  const current = sectionHistory[sectionHistory.length - 1];
-  if (current !== id) {
-    sectionHistory.push(id);
-  }
-}
-
-function goBack() {
-  if (sectionHistory.length > 1) {
-    sectionHistory.pop();
-    const previous = sectionHistory[sectionHistory.length - 1];
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.getElementById(previous).classList.add('active');
-  }
-}
-
-function inviaPostWhatsApp() {
-  const titolo = document.getElementById("titoloPost").value.trim();
-  const testo = document.getElementById("testoPost").value.trim();
-  if (!titolo || !testo) {
-    alert("Per favore compila tutti i campi.");
-    return;
-  }
-  const messaggio = `🎣 Nuovo post da approvare:%0A%0A📝 Titolo: ${encodeURIComponent(titolo)}%0A📄 Testo: ${encodeURIComponent(testo)}`;
-  const numero = "393494166335";
-  window.open(`https://wa.me/${numero}?text=${messaggio}`, '_blank');
-}
-
-</script>
-  <div id="contattaci" class="section">
-    <h2>Contatto WhatsApp</h2>
-    <p>Hai bisogno di assistenza o vuoi prenotare direttamente? Contattaci subito!</p>
-    <a href="https://wa.me/393494166335" target="_blank" style="background: #25D366; color: white; padding: 15px 20px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block;">💬 Scrivici su WhatsApp</a>
-  </div>
-  <div id="condividi" class="section" style="z-index: 1; position: relative;">$1</div>
-</main>
+      <h2>Blog</h2>
+      <article>
+        <h3>I 3 Nodi da Pesca Fondamentali - Guida Passo Passo</h3>
+        <p><strong>Nodo Palomar:</strong> raddoppia il filo, inseriscilo nell’occhiello, fai un nodo semplice, passa l’asola sopra l’amo e stringi. Resistente e facile.</p>
+        <p><strong>Nodo Clinch Migliorato:</strong> avvolgi il filo 5-6 volte sull’asse principale, passa nel piccolo occhiello e stringi. Veloce e molto affidabile.</p>
+        <p><strong>Nodo a Gassa (Loop):</strong> crea un’asola per dare libertà all’artificiale. Fai un nodo semplice, inserisci l’esca, avvolgi 4-5 volte e stringi.</p>
+      </article>
+      <article>
+        <h3>Tipi di Montature da Surfcasting - Quale Scegliere?</h3>
+        <p><strong>Piombo Scorrevole:</strong> ideale per pesci diffidenti come orate e mormore. Nessuna resistenza percepita dal pesce.</p>
+        <p><strong>Due Braccioli:</strong> permette di sondare più zone d’acqua contemporaneamente. Ottimo per arenicola e americano.</p>
+        <p><strong>Long Arm:</strong> bracciolo lungo, perfetto per pesci sospettosi. Ideale con mare calmo e fondale sabbioso.</p>
+        <p><strong>Anti Groviglio:</strong> ottima per mare mosso e fondali misti. Minimizza gli intrecci della lenza.</p>
+      </article>
+      <article>
+        <h3>Come Leggere il Mare - Consigli per Pescatori da Riva</h3>
+        <p><strong>Zone di Schiuma:</strong> ottimi punti per spigole e orate. Indicano turbolenza e presenza di cibo.</p>
+        <p><strong>Correnti Laterali:</strong> trasportano nutrimento. I pesci si posizionano per intercettarlo.</p>
+        <p><strong>Canalette e Fori:</strong> zone più profonde e calme, spesso ricche di prede. Osserva dove le onde si infrangono meno.</p>
+        <p><strong>Condizioni Meteo:</strong> mare calmo = esche più delicate; mare mosso = esche robuste e montature stabili.</p>
+      </article>
+    </div>
+  </main>
 
   <script>
-    let sectionHistory = ['home'];
-
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  const menu = document.getElementById("sideMenu");
-  if (menu.classList.contains("show")) {
-    menu.classList.remove("show");
-  }
-  if (sectionHistory[sectionHistory.length - 1] !== id) {
-    sectionHistory.push(id);
-  }
-}
-  lastSection = id;
-}
-}
-
-    function mostraWebcam() {
-      const url = document.getElementById("localita").value;
-      document.getElementById("webcamFrame").innerHTML = url ? `<iframe src="${url}" width="100%" height="400"></iframe>` : "";
+    function toggleMenu() {
+      const menu = document.getElementById("sideMenu");
+      menu.classList.toggle("show");
     }
 
-    function inviaOrdineEsche() {
-      const form = document.getElementById("escheForm");
-      const dati = new FormData(form);
-      let messaggio = "Prenotazione esche:%0A";
-      for (const [nome, quantita] of dati.entries()) {
-        if (quantita) messaggio += `${nome}: ${quantita}%0A`;
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      const menu = document.getElementById("sideMenu");
+      if (menu.classList.contains("show")) {
+        menu.classList.remove("show");
       }
-      const link = `https://wa.me/393494166335?text=${messaggio}`;
-      window.open(link, '_blank');
     }
-
-    function getWeatherByCity() {
-      const city = document.getElementById("cityInput").value;
-      if (!city) return;
-      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=a3b6ead62ce9e333256276f96865a8e1&units=metric&lang=it`)
-        .then(res => res.json())
-        .then(data => {
-          const icon = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-          document.getElementById("weatherDisplay").innerHTML = `
-            <h3>${data.name}</h3>
-            <img src="${icon}" alt="meteo">
-            <p>Temp: ${data.main.temp}°C</p>
-            <p>Vento: ${data.wind.speed} km/h</p>`;
-        });
-    }
-  function toggleMenu() {
-  const menu = document.getElementById("sideMenu");
-  if (menu.classList.contains("show")) {
-    menu.classList.remove("show");
-  } else {
-    menu.classList.add("show");
-  }
-}
-
-function goHome() {
-  showSection('home');
-}
-
-function goBack() {
-  if (sectionHistory.length > 1) {
-    sectionHistory.pop();
-    const previousSection = sectionHistory[sectionHistory.length - 1];
-    showSection(previousSection);
-  }
-} else {
-    showSection(lastSection);
-  }
-}
-
-async function getWeatherByCity() {
-  const city = document.getElementById("cityInput").value;
-  if (!city) return;
-
-  try {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=a3b6ead62ce9e333256276f96865a8e1&units=metric&lang=it`);
-    const data = await response.json();
-
-    const sunrise = new Date(data.sys.sunrise * 1000).toLocaleTimeString('it-IT');
-    const sunset = new Date(data.sys.sunset * 1000).toLocaleTimeString('it-IT');
-    const icon = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-
-    const consigli = data.wind.speed > 25 || data.weather[0].main === 'Rain'
-      ? "🌧️ Meglio rimandare la battuta di pesca."
-      : data.wind.speed < 10 && data.clouds.all < 50
-        ? "☀️ Ottimo momento per pescare!"
-        : "⚠️ Controlla bene le condizioni in zona.";
-
-    // API fase lunare + maree simulata (sarebbe da integrare con API reali esterne tipo weatherapi o tides)
-    const now = new Date();
-    const dayOfMonth = now.getDate();
-    const phaseIndex = dayOfMonth % 8;
-    const fasiLunari = ["🌑 Nuova", "🌒 Crescente", "🌓 Primo Quarto", "🌔 Gibbosa Crescente", "🌕 Piena", "🌖 Gibbosa Calante", "🌗 Ultimo Quarto", "🌘 Calante"];
-    const faseLunare = fasiLunari[phaseIndex];
-
-    const mareeSimulate = ["Alta alle 06:30, Bassa alle 12:45", "Bassa alle 07:10, Alta alle 13:20"];
-    const maree = mareeSimulate[dayOfMonth % 2];
-
-    document.getElementById("weatherDisplay").innerHTML = `
-      <div style="text-align: center;">
-        <h3>${data.name}</h3>
-        <img src="${icon}" alt="meteo">
-        <p><strong>🌡️ Temperatura:</strong> ${data.main.temp}°C</p>
-        <p><strong>🧭 Vento:</strong> ${data.wind.speed} km/h</p>
-        <p><strong>🔽 Pressione:</strong> ${data.main.pressure} hPa</p>
-        <p><strong>🌅 Alba:</strong> ${sunrise} | <strong>🌇 Tramonto:</strong> ${sunset}</p>
-        <p><strong>🌊 Maree:</strong> ${maree}</p>
-        <p><strong>🌕 Fase Lunare:</strong> ${faseLunare}</p>
-        <p><strong>🎣 Consiglio pesca:</strong> ${consigli}</p>
-      </div>`;
-  } catch (err) {
-    console.error("Errore nel caricamento meteo:", err);
-    document.getElementById("weatherDisplay").innerText = "Errore nel caricamento dei dati meteo.";
-  }
-}
-
-function displayWeather(data) {
-  if (!data || !data.main) {
-    document.getElementById("weatherDisplay").innerHTML = "Dati meteo non disponibili.";
-    return;
-  }
-
-  const icon = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-  const sunrise = new Date(data.sys.sunrise * 1000).toLocaleTimeString("it-IT");
-  const sunset = new Date(data.sys.sunset * 1000).toLocaleTimeString("it-IT");
-  const windSpeed = data.wind.speed;
-  const pressure = data.main.pressure;
-  const temp = data.main.temp;
-  const clouds = data.clouds.all;
-
-  let onda = "🌊 Mare calmo (~0.3 m)";
-  if (windSpeed > 20) onda = "🌊 Onde alte (~1.5 m)";
-  else if (windSpeed > 10) onda = "🌊 Onde moderate (~1 m)";
-
-  let consigli = "🎣 Ottime condizioni per pescare.";
-  if (windSpeed > 25 || data.weather[0].main === "Rain") {
-    consigli = "⚠️ Meglio evitare: vento forte o pioggia.";
-  } else if (clouds > 70) {
-    consigli = "🌥️ Buone condizioni ma cielo molto nuvoloso.";
-  }
-
-  fetch('https://api.farmsense.net/v1/moonphases/?d=' + Math.floor(Date.now() / 1000))
-    .then(res => res.json())
-    .then(moon => {
-      const fase = moon[0].Phase;
-      document.getElementById("weatherDisplay").innerHTML = `
-        <div style="text-align: center;">
-          <h3>${data.name}</h3>
-          <img src="${icon}" alt="Meteo">
-          <p><strong>Temperatura:</strong> ${temp} °C</p>
-          <p><strong>Vento:</strong> ${windSpeed} km/h</p>
-          <p><strong>Pressione:</strong> ${pressure} hPa</p>
-          <p><strong>Copertura nuvolosa:</strong> ${clouds}%</p>
-          <p><strong>Alba:</strong> ${sunrise} | <strong>Tramonto:</strong> ${sunset}</p>
-          <p><strong>${onda}</strong></p>
-          <p><strong>Fase lunare:</strong> ${fase}</p>
-          <p><strong>Consiglio pesca:</strong> ${consigli}</p>
-        </div>`;
-    });
-}
-
-</script>
-  <div id="bottomNav" style="position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.8); display: flex; justify-content: space-around; padding: 10px; z-index: 2;">
-    <button onclick="goHome()" style="padding: 10px 20px; background: #00aaff; color: white; border: none; border-radius: 8px; font-size: 16px;">🏠 Home</button>
-    <button onclick="goBack()" style="padding: 10px 20px; background: #0077cc; color: white; border: none; border-radius: 8px; font-size: 16px;">🔙 Indietro</button>
-  </div>
-
+  </script>
 </body>
 </html>
