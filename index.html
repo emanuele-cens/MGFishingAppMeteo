@@ -72,9 +72,14 @@
 <body>
   <div id="hamburger" onclick="toggleMenu()">☰</div>
   <nav id="sideMenu">
-    <a href="#" onclick="showSection('home')">🏠 Home</a>
-    <a href="#" onclick="showSection('blog')">📝 Blog</a>
-  </nav>
+  <a href="#" onclick="showSection('home')">🏠 Home</a>
+  <a href="#" onclick="showSection('meteo')">☀️ Meteo</a>
+  <a href="#" onclick="showSection('webcam')">📷 Webcam</a>
+  <a href="#" onclick="showSection('licenze')">🎣 Licenze</a>
+  <a href="#" onclick="showSection('esche')">🪱 Esche Vive</a>
+  <a href="#" onclick="showSection('blog')">📝 Blog</a>
+  <a href="#" onclick="showSection('contatti')">📞 Contatti</a>
+</nav>
 
   <main>
     <div id="home" class="section active">
@@ -111,7 +116,57 @@
         <p><strong>Condizioni Meteo:</strong> mare calmo = esche più delicate; mare mosso = esche robuste e montature stabili.</p>
       </article>
     </div>
-  </main>
+    <div id="meteo" class="section">
+    <h2>Previsioni Meteo</h2>
+    <input type="text" id="cityInput" placeholder="Inserisci città" class="input">
+    <button onclick="getWeatherByCity()" class="button">Cerca</button>
+    <div id="weatherDisplay"></div>
+  </div>
+
+  <div id="webcam" class="section">
+    <h2>Webcam Mare</h2>
+    <select id="webcamSelect" onchange="loadWebcam()" class="input">
+      <option value="">Seleziona una località</option>
+      <option value="https://vedetta.org/webcam/italia/lazio/latina/lido-di-latina/">Latina Mare (Lazio)</option>
+      <option value="https://vedetta.org/webcam/italia/sardegna/alghero/">Alghero (Sardegna)</option>
+      <option value="https://vedetta.org/webcam/italia/toscana/livorno/">Livorno (Toscana)</option>
+    </select>
+    <div id="webcamContainer" style="margin-top: 20px;"></div>
+  </div>
+
+  <div id="licenze" class="section">
+    <h2>Licenze di Pesca Tipo B</h2>
+    <p><strong>Lazio:</strong> Gratuita per under 18 e over 65. Rilascio online tramite Regione Lazio.</p>
+    <p><strong>Toscana:</strong> Rilascio gratuito per residenti. Richiesta online o presso uffici pesca.</p>
+    <p><strong>Emilia-Romagna:</strong> Licenza annuale obbligatoria. Disponibile anche digitale.</p>
+    <p><em>Sezione in aggiornamento per tutte le regioni.</em></p>
+  </div>
+
+  <div id="esche" class="section">
+    <h2>Esche Vive Disponibili</h2>
+    <ul>
+      <li><strong>Arenicola Locale:</strong> ideale per orate e mormore.</li>
+      <li><strong>Arenicola Napoli:</strong> esca resistente, ottima con mare mosso.</li>
+      <li><strong>Americano:</strong> versatile per surfcasting e pesca da scogliera.</li>
+      <li><strong>Bibi:</strong> indicato per grufolatori e prede sospettose.</li>
+      <li><strong>Cordella:</strong> esca dura, perfetta per fondali misti.</li>
+      <li><strong>Muriddu:</strong> efficace con mare formato.</li>
+      <li><strong>Bigattino:</strong> per pesca in acque interne e laghetti.</li>
+      <li><strong>Vermi di Terra:</strong> multiuso, molto attrattivo.</li>
+      <li><strong>Camole del Miele:</strong> ideale per trote e pesci esigenti.</li>
+    </ul>
+    <p>Per prenotare le esche invia un messaggio su WhatsApp cliccando il pulsante sotto:</p>
+    <a href="https://wa.me/393494166335" target="_blank" class="button">📲 Prenota su WhatsApp</a>
+  </div>
+
+  <div id="contatti" class="section">
+    <h2>Contatti</h2>
+    <p>📞 340 8198180</p>
+    <p>📞 349 4166335</p>
+    <p>📧 info@mgfishing.eu</p>
+    <p>🌐 <a href="https://www.mgfishing.eu" target="_blank" style="color: #00aaff;">Visita il nostro sito</a></p>
+  </div>
+</main>
 
   <script>
     function toggleMenu() {
