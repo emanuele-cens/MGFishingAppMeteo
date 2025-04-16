@@ -165,22 +165,34 @@
   </form>
 </div>
     <div id="blog" class="section">
-    <h2>Blog</h2>
-    <article>
-      <h3>7 nodi da pesca indispensabili</h3>
-      <ul>
-        <li>Palomar – ideale per treccia</li>
-        <li>Clinch – nodo classico</li>
-        <li>Uni to Uni – per unire due fili</li>
-        <li>Asola – per montaggi scorrevoli</li>
-      </ul>
-      <p><a href="https://www.youtube.com/watch?v=QJx1GYjoSQU" target="_blank">Guarda il video tutorial</a></p>
-    </article>
-    <article>
-      <h3>Come leggere il mare</h3>
-      <p>Onde, schiume e fondali rivelano dove cercare i pesci. Le zone calme indicano buoni spot.</p>
-    </article>
-  </div>
+  <h2>Blog</h2>
+
+  <article>
+    <h3>I 3 Nodi da Pesca Fondamentali - Guida Passo Passo</h3>
+    <p><strong>Nodo Palomar:</strong> ideale per ami e artificiali. Raddoppia il filo, inseriscilo nell’occhiello, fai un nodo semplice, passa l’asola sopra l’amo e stringi. Resistente e facile.</p>
+    <p><strong>Nodo Clinch Migliorato:</strong> per monofilo e fluorocarbon. Avvolgi il filo 5-6 volte sull’asse principale, passa nel piccolo occhiello e stringi. Veloce e molto affidabile.</p>
+    <p><strong>Nodo a Gassa (Loop):</strong> crea un’asola per dare libertà all’artificiale. Fai un nodo semplice, inserisci l’esca, avvolgi 4-5 volte e stringi. Ideale per esche mobili.</p>
+    <p>Questi nodi coprono la maggior parte delle esigenze in pesca sportiva. Allenati spesso per eseguirli alla perfezione!</p>
+  </article>
+
+  <article>
+    <h3>Tipi di Montature da Surfcasting - Quale Scegliere?</h3>
+    <p><strong>Montatura a Piombo Scorrevole:</strong> perfetta per pesci sospettosi come orate e mormore. Il pesce non avverte resistenza quando prende l’esca. Ideale con mare calmo.</p>
+    <p><strong>Montatura a Due Braccioli:</strong> adatta per esplorare più strati d’acqua e attirare diverse specie. Si usa bene con arenicola, americano e coreano. Buona per fondali sabbiosi.</p>
+    <p><strong>Montatura Long Arm:</strong> bracciolo lungo e sottile, utile con mare calmo e pesce diffidente. Ottima per mormore, spigole e cefali.</p>
+    <p><strong>Montatura Anti Groviglio:</strong> consigliata con mare mosso o fondale roccioso. Riduce i nodi del trave e mantiene l’esca ben presentata.</p>
+    <p>Scegli la montatura in base alle condizioni del mare, alla preda e alla sensibilità che vuoi ottenere sulla vetta della canna.</p>
+  </article>
+
+  <article>
+    <h3>Come Leggere il Mare - Consigli per Pescatori da Riva</h3>
+    <p><strong>Zone di Schiuma:</strong> sono punti dove le onde si infrangono sul fondale e muovono sedimenti ed esche naturali. Ottime per cercare spigole e orate.</p>
+    <p><strong>Correnti Laterali:</strong> attirano i pesci in cerca di cibo trasportato. In questi casi, usa esche robuste e montature stabili.</p>
+    <p><strong>Canalette e Fori:</strong> spesso invisibili dalla spiaggia, ma rilevabili osservando le onde. Dove l’onda si rompe meno, il fondale è più profondo: ottimi spot!</p>
+    <p><strong>Mare Calmo o Mosso:</strong> con mare calmo, usa esche più delicate (bibi, americano); con mare mosso, preferisci esche resistenti (coreano, muriddu) e montature anti groviglio.</p>
+    <p>Guardare il mare con attenzione prima di lanciare fa la differenza tra una giornata vuota e una pescata memorabile!</p>
+  </article>
+</div>
 
   <div id="login" class="section">
     <h2>Login</h2>
@@ -214,7 +226,31 @@
     <li><a href="#" onclick="showSection('blog')" style="color: #00aaff; font-weight: bold; text-decoration: underline;">🔗 Come leggere il mare per pescare meglio</a></li>
   </ul>
 </div>
-<script async src="https://www.tiktok.com/embed.js"></script>
+<script async src="https://www.tiktok.com/embed.js">let sectionHistory = ['home'];
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const menu = document.getElementById("sideMenu");
+  if (menu.classList.contains("show")) {
+    menu.classList.remove("show");
+  }
+  const current = sectionHistory[sectionHistory.length - 1];
+  if (current !== id) {
+    sectionHistory.push(id);
+  }
+}
+
+function goBack() {
+  if (sectionHistory.length > 1) {
+    sectionHistory.pop();
+    const previous = sectionHistory[sectionHistory.length - 1];
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(previous).classList.add('active');
+  }
+}
+
+</script>
   <div id="contattaci" class="section">
     <h2>Contatto WhatsApp</h2>
     <p>Hai bisogno di assistenza o vuoi prenotare direttamente? Contattaci subito!</p>
@@ -223,13 +259,21 @@
 </main>
 
   <script>
-    function showSection(id) {
+    let sectionHistory = ['home'];
+
+function showSection(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   const menu = document.getElementById("sideMenu");
   if (menu.classList.contains("show")) {
     menu.classList.remove("show");
   }
+  if (sectionHistory[sectionHistory.length - 1] !== id) {
+    sectionHistory.push(id);
+  }
+}
+  lastSection = id;
+}
 }
 
     function mostraWebcam() {
@@ -276,7 +320,14 @@ function goHome() {
 }
 
 function goBack() {
-  history.back();
+  if (sectionHistory.length > 1) {
+    sectionHistory.pop();
+    const previousSection = sectionHistory[sectionHistory.length - 1];
+    showSection(previousSection);
+  }
+} else {
+    showSection(lastSection);
+  }
 }
 
 async function getWeatherByCity() {
