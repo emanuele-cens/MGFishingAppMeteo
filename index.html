@@ -2,306 +2,109 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MG Fishing App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MG Fishing Meteo</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(to bottom, #001f3f, #003366);
-      color: #fff;
-    }
-    header {
-      background: #0066cc;
-      padding: 1rem;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    }
-    #hamburger {
-      position: fixed;
-      top: 5px;
-      left: 5px;
-      background: #004080;
       color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #00ffff;
+    }
+    .input, .button {
       padding: 10px;
-      font-size: 20px;
-      border-radius: 50%;
-      z-index: 1000;
-      cursor: pointer;
-    }
-    nav {
-      position: fixed;
-      top: 0;
-      left: -250px;
-      width: 220px;
-      height: 100%;
-      background: rgba(0, 0, 51, 0.95);
-      padding-top: 60px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      transition: left 0.3s ease-in-out;
-      z-index: 999;
-    }
-    nav.show {
-      left: 0;
-    }
-    nav a {
-      text-decoration: none;
-      padding: 0.8rem;
-      background: #005fa3;
-      color: white;
-      border-radius: 5px;
-      text-align: center;
-      margin: 0 10px;
-      font-weight: bold;
-    }
-    .section {
-      display: none;
-      padding: 1rem;
-    }
-    .section.active {
-      display: block;
-    }
-    .button {
-      background: #00aaff;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      padding: 10px 16px;
+      margin-top: 10px;
       font-size: 16px;
-      cursor: pointer;
+      border-radius: 5px;
+      border: none;
     }
     .input {
       width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 5px;
-      border: none;
-      font-size: 16px;
+      max-width: 300px;
     }
-    #bottomNav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      display: flex;
-      justify-content: space-around;
-      padding: 10px;
-      z-index: 999;
-    }
-    #bottomNav button {
-      padding: 10px 20px;
-      background: #00aaff;
+    .button {
+      background-color: #00aaff;
       color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
+      cursor: pointer;
+    }
+    #weatherDisplay ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    #weatherDisplay li {
+      margin: 6px 0;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>MG Fishing App</h1>
-  </header>
-  <div id="hamburger" onclick="toggleMenu()">☰</div>
-  <nav id="sideMenu">
-    <a href="#" onclick="showSection('home')">🏠 Home</a>
-    <a href="#" onclick="showSection('meteo')">☀️ Meteo</a>
-    <a href="#" onclick="showSection('webcam')">📷 Webcam</a>
-    <a href="#" onclick="showSection('licenze')">🎫 Licenze</a>
-    <a href="#" onclick="showSection('esche')">🪱 Esche Vive</a>
-    <a href="#" onclick="showSection('blog')">📝 Blog</a>
-    <a href="#" onclick="showSection('contattaci')">📞 Contattaci</a>
-  </nav>
-  <main>
-    <div id="home" class="section active">
-  <h2>Benvenuto su MG Fishing App</h2>
-  <p>Scopri tutte le funzionalità per la tua esperienza di pesca.</p>
-</div>
-<div id="meteo" class="section">
-  <h2>Previsioni Meteo per la Pesca</h2>
-  <input type="text" id="cityInput" class="input" placeholder="Inserisci la località">
+  <h1>Previsioni Meteo per la Pesca 🎣</h1>
+  <p>Inserisci una località per visualizzare le previsioni meteo reali + dati simulati per la pesca.</p>
+  
+  <input type="text" id="cityInput" class="input" placeholder="Es. Latina, Napoli, Viareggio" />
   <button class="button" onclick="fetchWeather()">🔍 Cerca</button>
-  <div id="weatherDisplay" style="margin-top: 1rem;"></div>
-</div>
-</div>
-    <div id="webcam" class="section">
-  <h2>Webcam Mare</h2>
-  <select id="webcamSelect" onchange="loadWebcam()" class="input">
-    <option value="">-- Seleziona località --</option>
-    <optgroup label="Liguria">
-      <option value="https://www.skylinewebcams.com/it/webcam/italia/liguria/savona/finale-ligure.html">Finale Ligure – Malpasso</option>
-      <option value="https://www.skylinewebcams.com/it/webcam/italia/liguria/genova/boccadasse.html">Genova – Boccadasse</option>
-    </optgroup>
-    <optgroup label="Marche">
-      <option value="https://www.skylinewebcams.com/it/webcam/italia/marche/ancona/portonovo-spiaggia.html">Portonovo – Spiaggia</option>
-      <option value="https://www.skylinewebcams.com/it/webcam/italia/marche/pesaro-urbino/gabicce-mare-marche.html">Gabicce Mare</option>
-    </optgroup>
-    <optgroup label="Abruzzo">
-      <option value="https://www.skylinewebcams.com/it/webcam/italia/abruzzo/teramo/roseto-degli-abruzzi.html">Roseto degli Abruzzi</option>
-    </optgroup>
-    <optgroup label="Molise">
-      <option value="https://vedetta.org/webcam/italia/molise/campobasso/termoli-lungomare/">Termoli – Lungomare</option>
-    </optgroup>
-    <optgroup label="Puglia">
-      <option value="https://www.skylinewebcams.com/it/webcam/italia/puglia/lecce/gallipoli.html">Gallipoli – Spiaggia</option>
-      <option value="https://www.skylinewebcams.com/it/webcam/italia/puglia/brindisi/ostuni-mare.html">Ostuni – Mare</option>
-    </optgroup>
-    <optgroup label="Basilicata">
-      <option value="https://vedetta.org/webcam/italia/basilicata/matera/metaponto/">Metaponto</option>
-    </optgroup>
-    <optgroup label="Calabria">
-      <option value="https://www.skylinewebcams.com/it/webcam/italia/calabria/vibo-valentia/tropea.html">Tropea</option>
-      <option value="https://www.skylinewebcams.com/it/webcam/italia/calabria/reggio-calabria/bova-marina.html">Bova Marina</option>
-    </optgroup>
-    <optgroup label="Sicilia">
-      <option value="https://www.skylinewebcams.com/it/webcam/italia/sicilia/ragusa/marina-di-ragusa.html">Marina di Ragusa</option>
-      <option value="https://www.skylinewebcams.com/it/webcam/italia/sicilia/messina/giardini-naxos.html">Giardini Naxos</option>
-    </optgroup>
-    <optgroup label="Sardegna">
-      <option value="https://www.skylinewebcams.com/it/webcam/italia/sardegna/sassari/stintino.html">Stintino</option>
-      <option value="https://www.skylinewebcams.com/it/webcam/italia/sardegna/sassari/golfo-aranci.html">Golfo Aranci</option>
-    </optgroup>
-    <optgroup label="Lazio">
-      <option value="https://vedetta.org/webcam/italia/lazio/latina/lido-di-latina/">Lido di Latina</option>
-      <option value="https://www.campanialive.it/webcam.asp?localita=gaetasirio">Gaeta</option>
-      <option value="https://vedetta.org/webcam/italia/lazio/latina/sabaudia/">Sabaudia</option>
-      <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/latina/spiaggia-di-formia.html">Formia</option>
-      <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/roma/spiaggia-lido-di-ostia-roma.html">Lido di Ostia</option>
-    </optgroup>
-    <optgroup label="Toscana">
-      <option value="https://www.skylinewebcams.com/it/webcam/italia/toscana/lucca/forte-dei-marmi-lungomare.html">Forte dei Marmi</option>
-      <option value="https://www.skylinewebcams.com/it/webcam/italia/toscana/lucca/lido-di-camaiore.html">Lido di Camaiore</option>
-      <option value="https://www.skylinewebcams.com/it/webcam/italia/toscana/lucca/viareggio.html">Viareggio</option>
-      <option value="https://www.skylinewebcams.com/it/webcam/italia/toscana/pisa/marina-di-pisa.html">Marina di Pisa</option>
-      <option value="https://www.firenzemeteo.it/webcam/toscana/webcam-portoferraio-isola-d-elba.php">Portoferraio – Elba</option>
-    </optgroup>
-    <optgroup label="Campania">
-      <option value="https://www.skylinewebcams.com/it/webcam/italia/campania/salerno/positano.html">Positano</option>
-      <option value="https://www.skylinewebcams.com/it/webcam/italia/campania/salerno/spiaggia-di-amalfi.html">Amalfi</option>
-      <option value="https://www.skylinewebcams.com/it/webcam/italia/campania/salerno/marina-di-camerota.html">Marina di Camerota</option>
-      <option value="https://www.campanialive.it/webcam.asp?localita=capacciopaestum">Paestum</option>
-      <option value="https://vedetta.org/webcam/italia/campania/caserta/castel-volturno/">Castel Volturno</option>
-    </optgroup>
-  </select>
-  <div id="webcamContainer" style="margin-top: 20px;"></div>
-</div>
-  </main>
-  <div id="bottomNav">
-    <button onclick="goHome()">🏠 Home</button>
-    <button onclick="goBack()">🔙 Indietro</button>
-  </div>
+
+  <div id="weatherDisplay" style="margin-top: 20px;"></div>
+
   <script>
-    let sectionHistory = ['home'];
-    function toggleMenu() {
-      document.getElementById('sideMenu').classList.toggle('show');
+    const apiKey = 'a3b6ead62ce9e333256276f96865a8e1';
+
+    async function getCoordinates(city) {
+      const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(city)}&limit=1&appid=${apiKey}`;
+      const response = await fetch(geoUrl);
+      const data = await response.json();
+      if (data.length === 0) throw new Error('Località non trovata.');
+      return { lat: data[0].lat, lon: data[0].lon };
     }
-    function showSection(id) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      const sec = document.getElementById(id);
-      if (sec) {
-        sec.classList.add('active');
-        sectionHistory.push(id);
+
+    async function getWeatherData(lat, lon) {
+      const weatherUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,daily,alerts&units=metric&lang=it&appid=${apiKey}`;
+      const response = await fetch(weatherUrl);
+      const data = await response.json();
+      return data;
+    }
+
+    function simulateFishingData() {
+      return {
+        waveHeight: '0.8 metri',
+        moonPhase: 'Primo quarto',
+        fishingAdvice: 'Buona attività di pesce bianco e spigole in tarda serata'
+      };
+    }
+
+    async function fetchWeather() {
+      const city = document.getElementById('cityInput').value;
+      const display = document.getElementById('weatherDisplay');
+      if (!city) {
+        display.innerHTML = '<p style="color: orange;">⚠️ Inserisci una località valida.</p>';
+        return;
       }
-      document.getElementById('sideMenu').classList.remove('show');
-    }
-    function goHome() {
-      showSection('home');
-    }
-    function goBack() {
-      if (sectionHistory.length > 1) {
-        sectionHistory.pop();
-        const previous = sectionHistory[sectionHistory.length - 1];
-        showSection(previous);
+      try {
+        const { lat, lon } = await getCoordinates(city);
+        const weatherData = await getWeatherData(lat, lon);
+        const fishingData = simulateFishingData();
+        const sunrise = new Date(weatherData.current.sunrise * 1000).toLocaleTimeString('it-IT');
+        const sunset = new Date(weatherData.current.sunset * 1000).toLocaleTimeString('it-IT');
+
+        display.innerHTML = `
+          <h2>Previsioni per <span style="color: #00ffff">${city}</span></h2>
+          <ul>
+            <li>🌡️ <strong>Temperatura attuale:</strong> ${weatherData.current.temp}°C</li>
+            <li>💧 <strong>Umidità:</strong> ${weatherData.current.humidity}%</li>
+            <li>💨 <strong>Vento:</strong> ${weatherData.current.wind_speed} km/h</li>
+            <li>🕰️ <strong>Pressione:</strong> ${weatherData.current.pressure} hPa</li>
+            <li>🌅 <strong>Alba:</strong> ${sunrise} – 🌇 <strong>Tramonto:</strong> ${sunset}</li>
+            <li>🌊 <strong>Altezza onde (simulata):</strong> ${fishingData.waveHeight}</li>
+            <li>🌘 <strong>Fase lunare (simulata):</strong> ${fishingData.moonPhase}</li>
+            <li>🎣 <strong>Consiglio pesca:</strong> ${fishingData.fishingAdvice}</li>
+          </ul>
+        `;
+      } catch (error) {
+        display.innerHTML = `<p style="color: red;">❌ Errore: ${error.message}</p>`;
       }
     }
-  function loadWebcam() {
-  const container = document.getElementById("webcamContainer");
-  const url = document.getElementById("webcamSelect").value;
-  if (url) {
-    container.innerHTML = `<iframe src="${url}" width="100%" height="400" style="border:none;" allowfullscreen></iframe>`;
-  } else {
-    container.innerHTML = "";
-  }
-}
-function simulateWeather() {
-  const city = document.getElementById("cityInput").value;
-  const display = document.getElementById("weatherDisplay");
-  if (!city) {
-    display.innerHTML = '<p style="color: orange;">Inserisci una località valida.</p>';
-    return;
-  }
-  display.innerHTML = `
-    <h3>Previsioni simulate per <span style="color: #00ffff">${city}</span></h3>
-    <ul>
-      <li>🌡️ <strong>Temperatura attuale:</strong> 21°C</li>
-      <li>🌡️ <strong>Massima/Minima:</strong> 24°C / 17°C</li>
-      <li>💨 <strong>Vento:</strong> 14 km/h da NE</li>
-      <li>🌊 <strong>Altezza onde:</strong> 0.8 metri</li>
-      <li>🌘 <strong>Fase lunare:</strong> Primo quarto</li>
-      <li>🕰️ <strong>Pressione:</strong> 1015 hPa</li>
-      <li>🌅 <strong>Alba:</strong> 06:32 – 🌇 <strong>Tramonto:</strong> 19:58</li>
-      <li>🎣 <strong>Consiglio pesca:</strong> Buona attività di pesce bianco e spigole in tarda serata</li>
-    </ul>
-  `;
-}
-const apiKey = 'a3b6ead62ce9e333256276f96865a8e1';
-
-async function getCoordinates(city) {
-  const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(city)}&limit=1&appid=${apiKey}`;
-  const response = await fetch(geoUrl);
-  const data = await response.json();
-  if (data.length === 0) throw new Error('Località non trovata.');
-  return { lat: data[0].lat, lon: data[0].lon };
-}
-
-async function getWeatherData(lat, lon) {
-  const weatherUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,daily,alerts&units=metric&lang=it&appid=${apiKey}`;
-  const response = await fetch(weatherUrl);
-  const data = await response.json();
-  return data;
-}
-
-function simulateFishingData() {
-  return {
-    waveHeight: '0.8 metri',
-    moonPhase: 'Primo quarto',
-    fishingAdvice: 'Buona attività di pesce bianco e spigole in tarda serata'
-  };
-}
-
-async function fetchWeather() {
-  const city = document.getElementById('cityInput').value;
-  const display = document.getElementById('weatherDisplay');
-  if (!city) {
-    display.innerHTML = '<p style="color: orange;">Inserisci una località valida.</p>';
-    return;
-  }
-  try {
-    const { lat, lon } = await getCoordinates(city);
-    const weatherData = await getWeatherData(lat, lon);
-    const fishingData = simulateFishingData();
-    const sunrise = new Date(weatherData.current.sunrise * 1000).toLocaleTimeString('it-IT');
-    const sunset = new Date(weatherData.current.sunset * 1000).toLocaleTimeString('it-IT');
-    display.innerHTML = `
-      <h3>Previsioni per <span style="color: #00ffff">${city}</span></h3>
-      <ul>
-        <li>🌡️ <strong>Temperatura attuale:</strong> ${weatherData.current.temp}°C</li>
-        <li>💧 <strong>Umidità:</strong> ${weatherData.current.humidity}%</li>
-        <li>💨 <strong>Vento:</strong> ${weatherData.current.wind_speed} km/h</li>
-        <li>🕰️ <strong>Pressione:</strong> ${weatherData.current.pressure} hPa</li>
-        <li>🌅 <strong>Alba:</strong> ${sunrise} – 🌇 <strong>Tramonto:</strong> ${sunset}</li>
-        <li>🌊 <strong>Altezza onde:</strong> ${fishingData.waveHeight}</li>
-        <li>🌘 <strong>Fase lunare:</strong> ${fishingData.moonPhase}</li>
-        <li>🎣 <strong>Consiglio pesca:</strong> ${fishingData.fishingAdvice}</li>
-      </ul>
-    `;
-  } catch (error) {
-    display.innerHTML = `<p style="color: red;">Errore: ${error.message}</p>`;
-  }
-}
-</script>
+  </script>
 </body>
 </html>
