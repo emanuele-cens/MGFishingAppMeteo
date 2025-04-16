@@ -5,69 +5,108 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MG Fishing App</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: url('https://images.unsplash.com/photo-1502786129293-79981df4e689?auto=format&fit=crop&w=1400&q=80') no-repeat center center fixed;
-      background-size: cover;
-      color: #fff;
-    }
-    header {
-      background: rgba(0, 119, 204, 0.8);
-      padding: 1rem;
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    }
-    #hamburger {
-      position: fixed;
-      top: 15px;
-      left: 15px;
-      background: rgba(0, 0, 0, 0.7);
-      color: white;
-      padding: 10px;
-      font-size: 20px;
-      border-radius: 5px;
-      z-index: 1000;
-      cursor: pointer;
-    }
-    nav {
-      position: fixed;
-      top: 0;
-      left: -250px;
-      width: 220px;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      padding-top: 60px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      transition: left 0.3s ease-in-out;
-      z-index: 999;
-    }
-    nav.show {
-      left: 0;
-    }
-    nav a {
-      text-decoration: none;
-      padding: 0.7rem;
-      background: #00aaff;
-      color: white;
-      border-radius: 5px;
-      text-align: center;
-      margin: 0 10px;
-    }
-    .section {
-      display: none;
-      padding: 1rem;
-      background-color: rgba(0, 0, 0, 0.6);
-      margin: 1rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    }
-    .section.active {
-      display: block;
-    }
-  </style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom, #001f3f, #003366);
+    color: #fff;
+  }
+  header {
+    background: #0066cc;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  }
+  #hamburger {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: #004080;
+    color: white;
+    padding: 10px;
+    font-size: 22px;
+    border-radius: 50%;
+    z-index: 1000;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  }
+  nav {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 220px;
+    height: 100%;
+    background: rgba(0, 0, 51, 0.95);
+    padding-top: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: left 0.3s ease-in-out;
+    z-index: 999;
+  }
+  nav.show {
+    left: 0;
+  }
+  nav a {
+    text-decoration: none;
+    padding: 0.8rem;
+    background: #005fa3;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    margin: 0 10px;
+    font-weight: bold;
+    transition: background 0.2s;
+  }
+  nav a:hover {
+    background: #0088cc;
+  }
+  .section {
+    display: none;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.55);
+    margin: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  .section.active {
+    display: block;
+  }
+  .button {
+    background: #00aaff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+    transition: background 0.3s;
+  }
+  .button:hover {
+    background: #008ecc;
+  }
+  .input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+  }
+  #bottomNav button {
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    transition: transform 0.2s;
+  }
+  #bottomNav button:hover {
+    transform: scale(1.05);
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
 </head>
 <body>
   <div id="hamburger" onclick="toggleMenu()">☰</div>
