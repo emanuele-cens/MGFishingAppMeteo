@@ -94,7 +94,7 @@
   </style>
 </head>
 <body>
-  <div id="hamburger" onclick="toggleMenu()">☰</div>
+  <div id="hamburger" onclick="toggleMenu()" style="position: fixed; top: 15px; left: 15px; background: rgba(0, 0, 0, 0.7); color: white; padding: 10px; font-size: 20px; border-radius: 5px; z-index: 3; cursor: pointer;">☰</div>
   <header>
   <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
     <a href="https://www.facebook.com/verde.pesca.7" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" width="30" alt="Facebook"></a>
@@ -102,7 +102,8 @@
     <a href="https://www.tiktok.com/@mgfishing.verdepesca" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/TikTok_logo.svg" width="30" alt="TikTok"></a>
   </div>
 </header>
-  <nav id="sideMenu">
+  <nav id="sideMenu" style="position: fixed; top: 0; left: -250px; width: 220px; height: 100%; background: rgba(0, 0, 0, 0.85); padding-top: 60px; display: flex; flex-direction: column; gap: 10px; transition: left 0.3s ease-in-out; z-index: 2;">
+    <a href="#" onclick="showSection('condividi')">✍️ Condividi Post</a>
     <a href="#" onclick="showSection('contattaci')">💬 Contattaci</a>
     <a href="#" onclick="showSection('home')">🏠 Home</a>
     <a href="#" onclick="showSection('meteo')">☀️ Meteo</a>
@@ -250,12 +251,25 @@ function goBack() {
   }
 }
 
+function inviaPostWhatsApp() {
+  const titolo = document.getElementById("titoloPost").value.trim();
+  const testo = document.getElementById("testoPost").value.trim();
+  if (!titolo || !testo) {
+    alert("Per favore compila tutti i campi.");
+    return;
+  }
+  const messaggio = `🎣 Nuovo post da approvare:%0A%0A📝 Titolo: ${encodeURIComponent(titolo)}%0A📄 Testo: ${encodeURIComponent(testo)}`;
+  const numero = "393494166335";
+  window.open(`https://wa.me/${numero}?text=${messaggio}`, '_blank');
+}
+
 </script>
   <div id="contattaci" class="section">
     <h2>Contatto WhatsApp</h2>
     <p>Hai bisogno di assistenza o vuoi prenotare direttamente? Contattaci subito!</p>
     <a href="https://wa.me/393494166335" target="_blank" style="background: #25D366; color: white; padding: 15px 20px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block;">💬 Scrivici su WhatsApp</a>
   </div>
+  <div id="condividi" class="section" style="z-index: 1; position: relative;">$1</div>
 </main>
 
   <script>
@@ -422,7 +436,7 @@ function displayWeather(data) {
 }
 
 </script>
-  <div id="bottomNav" style="position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.8); display: flex; justify-content: space-around; padding: 10px; z-index: 999;">
+  <div id="bottomNav" style="position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.8); display: flex; justify-content: space-around; padding: 10px; z-index: 2;">
     <button onclick="goHome()" style="padding: 10px 20px; background: #00aaff; color: white; border: none; border-radius: 8px; font-size: 16px;">🏠 Home</button>
     <button onclick="goBack()" style="padding: 10px 20px; background: #0077cc; color: white; border: none; border-radius: 8px; font-size: 16px;">🔙 Indietro</button>
   </div>
