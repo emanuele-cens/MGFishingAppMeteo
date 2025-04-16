@@ -117,9 +117,16 @@
   </nav>
   <main>
     <div id="home" class="section active">
-      <h2>Benvenuto su MG Fishing App</h2>
-      <p>Scopri tutte le funzionalità per la tua esperienza di pesca.</p>
-    </div>
+  <h2>Benvenuto su MG Fishing App</h2>
+  <p>Scopri tutte le funzionalità per la tua esperienza di pesca.</p>
+</div>
+<div id="meteo" class="section">
+  <h2>Previsioni Meteo per la Pesca</h2>
+  <input type="text" id="cityInput" class="input" placeholder="Inserisci la località">
+  <button class="button" onclick="fetchWeather()">🔍 Cerca</button>
+  <div id="weatherDisplay" style="margin-top: 1rem;"></div>
+</div>
+</div>
     <div id="webcam" class="section">
   <h2>Webcam Mare</h2>
   <select id="webcamSelect" onchange="loadWebcam()" class="input">
@@ -217,6 +224,82 @@
     container.innerHTML = `<iframe src="${url}" width="100%" height="400" style="border:none;" allowfullscreen></iframe>`;
   } else {
     container.innerHTML = "";
+  }
+}
+function simulateWeather() {
+  const city = document.getElementById("cityInput").value;
+  const display = document.getElementById("weatherDisplay");
+  if (!city) {
+    display.innerHTML = '<p style="color: orange;">Inserisci una località valida.</p>';
+    return;
+  }
+  display.innerHTML = `
+    <h3>Previsioni simulate per <span style="color: #00ffff">${city}</span></h3>
+    <ul>
+      <li>🌡️ <strong>Temperatura attuale:</strong> 21°C</li>
+      <li>🌡️ <strong>Massima/Minima:</strong> 24°C / 17°C</li>
+      <li>💨 <strong>Vento:</strong> 14 km/h da NE</li>
+      <li>🌊 <strong>Altezza onde:</strong> 0.8 metri</li>
+      <li>🌘 <strong>Fase lunare:</strong> Primo quarto</li>
+      <li>🕰️ <strong>Pressione:</strong> 1015 hPa</li>
+      <li>🌅 <strong>Alba:</strong> 06:32 – 🌇 <strong>Tramonto:</strong> 19:58</li>
+      <li>🎣 <strong>Consiglio pesca:</strong> Buona attività di pesce bianco e spigole in tarda serata</li>
+    </ul>
+  `;
+}
+const apiKey = 'a3b6ead62ce9e333256276f96865a8e1';
+
+async function getCoordinates(city) {
+  const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(city)}&limit=1&appid=${apiKey}`;
+  const response = await fetch(geoUrl);
+  const data = await response.json();
+  if (data.length === 0) throw new Error('Località non trovata.');
+  return { lat: data[0].lat, lon: data[0].lon };
+}
+
+async function getWeatherData(lat, lon) {
+  const weatherUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,daily,alerts&units=metric&lang=it&appid=${apiKey}`;
+  const response = await fetch(weatherUrl);
+  const data = await response.json();
+  return data;
+}
+
+function simulateFishingData() {
+  return {
+    waveHeight: '0.8 metri',
+    moonPhase: 'Primo quarto',
+    fishingAdvice: 'Buona attività di pesce bianco e spigole in tarda serata'
+  };
+}
+
+async function fetchWeather() {
+  const city = document.getElementById('cityInput').value;
+  const display = document.getElementById('weatherDisplay');
+  if (!city) {
+    display.innerHTML = '<p style="color: orange;">Inserisci una località valida.</p>';
+    return;
+  }
+  try {
+    const { lat, lon } = await getCoordinates(city);
+    const weatherData = await getWeatherData(lat, lon);
+    const fishingData = simulateFishingData();
+    const sunrise = new Date(weatherData.current.sunrise * 1000).toLocaleTimeString('it-IT');
+    const sunset = new Date(weatherData.current.sunset * 1000).toLocaleTimeString('it-IT');
+    display.innerHTML = `
+      <h3>Previsioni per <span style="color: #00ffff">${city}</span></h3>
+      <ul>
+        <li>🌡️ <strong>Temperatura attuale:</strong> ${weatherData.current.temp}°C</li>
+        <li>💧 <strong>Umidità:</strong> ${weatherData.current.humidity}%</li>
+        <li>💨 <strong>Vento:</strong> ${weatherData.current.wind_speed} km/h</li>
+        <li>🕰️ <strong>Pressione:</strong> ${weatherData.current.pressure} hPa</li>
+        <li>🌅 <strong>Alba:</strong> ${sunrise} – 🌇 <strong>Tramonto:</strong> ${sunset}</li>
+        <li>🌊 <strong>Altezza onde:</strong> ${fishingData.waveHeight}</li>
+        <li>🌘 <strong>Fase lunare:</strong> ${fishingData.moonPhase}</li>
+        <li>🎣 <strong>Consiglio pesca:</strong> ${fishingData.fishingAdvice}</li>
+      </ul>
+    `;
+  } catch (error) {
+    display.innerHTML = `<p style="color: red;">Errore: ${error.message}</p>`;
   }
 }
 </script>
