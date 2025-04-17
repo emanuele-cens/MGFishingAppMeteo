@@ -105,7 +105,23 @@
 
     <section id="webcam" class="section"><h2>Webcam</h2></section>
     <section id="licenze" class="section"><h2>Licenze</h2></section>
-    <section id="esche" class="section"><h2>Esche Vive</h2></section>
+    <section id="esche" class="section">
+  <h2>Esche Vive Disponibili</h2>
+
+  <form id="escheForm">
+    <label>Arenicola Locale: <input type="number" name="arenicola_locale" min="0" placeholder="Quantità" class="input"></label>
+    <label>Arenicola Napoli: <input type="number" name="arenicola_napoli" min="0" placeholder="Quantità" class="input"></label>
+    <label>Americano: <input type="number" name="americano" min="0" placeholder="Quantità" class="input"></label>
+    <label>Bibi: <input type="number" name="bibi" min="0" placeholder="Quantità" class="input"></label>
+    <label>Cordella: <input type="number" name="cordella" min="0" placeholder="Quantità" class="input"></label>
+    <label>Muriddu: <input type="number" name="muriddu" min="0" placeholder="Quantità" class="input"></label>
+    <label>Bigattino: <input type="number" name="bigattino" min="0" placeholder="Quantità" class="input"></label>
+    <label>Vermi di Terra: <input type="number" name="vermi_di_terra" min="0" placeholder="Quantità" class="input"></label>
+    <label>Camole del Miele: <input type="number" name="camole_del_miele" min="0" placeholder="Quantità" class="input"></label>
+
+    <button type="button" onclick="inviaOrdineEsche()" class="button">📲 Ordina via WhatsApp</button>
+  </form>
+</section>
     <section id="blog" class="section">
   <h2>Blog MG Fishing</h2>
 
@@ -180,6 +196,22 @@ function toggleArticle(id) {
   article.style.display = article.style.display === 'none' ? 'block' : 'none';
 }
 
+function inviaOrdineEsche() {
+  const form = document.getElementById('escheForm');
+  const formData = new FormData(form);
+  let messaggio = 'Ordine Esche Vive:%0A';
+
+  formData.forEach((quantita, esca) => {
+    if (quantita > 0) messaggio += `${esca.replace(/_/g, ' ')}: ${quantita}%0A`;
+  });
+
+  if (messaggio === 'Ordine Esche Vive:%0A') {
+    alert('Inserisci almeno una quantità per ordinare.');
+    return;
+  }
+
+  window.open(`https://wa.me/393494166335?text=${messaggio}`, '_blank');
+}
 </script>
 </body>
 </html>
