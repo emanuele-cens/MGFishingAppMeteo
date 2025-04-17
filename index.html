@@ -464,8 +464,9 @@ function inviaOrdineWhatsApp() {
   });
   messaggio += `🚚 Spedizione: €9.00%0A`;
   const totale = carrello.reduce((sum, item) => sum + item.prezzo * item.quantità, 0) + 9;
-  messaggio += `💶 Totale: €${totale.toFixed(2)}% 
-    }
+  messaggio += `💶 Totale: €${totale.toFixed(2)}`;
+  window.open(`https://wa.me/393494166335?text=${encodeURIComponent(messaggio)}`, "_blank");
+}
   </script>
 </body>
 </html>
