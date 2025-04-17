@@ -322,9 +322,11 @@
     <section id="offerte" class="section">
   <h2>🎣 Offerte Speciali</h2>
   <div id="productList" class="product-list"></div>
-  <h3>🛒 Carrello</h3>
-  <div id="cartDisplay"></div>
-  <button class="button" onclick="inviaOrdineWhatsApp()">📲 Invia Ordine via WhatsApp</button>
+  <div id="cartContainer" style="margin-top: 30px;">
+    <h3>🛒 Carrello</h3>
+    <div id="cartDisplay"></div>
+    <button class="button" onclick="inviaOrdineWhatsApp()">📲 Invia Ordine via WhatsApp</button>
+  </div>
 </section>
   </main>
 
@@ -415,12 +417,14 @@ function mostraProdotti() {
     const div = document.createElement("div");
     div.className = "product";
     div.innerHTML = `
-      <img src="${prodotto.immagine}" alt="${prodotto.nome}">
-      <h4>${prodotto.nome}</h4>
-      <p>${prodotto.descrizione}</p>
-      <p>💶 Prezzo: €${prodotto.prezzo.toFixed(2)}</p>
-      <input type="number" id="qty-${prodotto.id}" min="1" value="1">
-      <button class="button" onclick="aggiungiAlCarrello(${prodotto.id})">➕ Aggiungi al Carrello</button>
+      <h4 style="cursor:pointer" onclick="toggleDescrizione(${prodotto.id})">${prodotto.nome}</h4>
+      <img src="${prodotto.immagine}" alt="${prodotto.nome}" onclick="toggleDescrizione(${prodotto.id})" style="cursor:pointer">
+      <div id="desc-${prodotto.id}" style="display:none; margin-top:10px;">
+        <p>${prodotto.descrizione}</p>
+        <p>💶 Prezzo: €${prodotto.prezzo.toFixed(2)}</p>
+        <input type="number" id="qty-${prodotto.id}" min="1" value="1">
+        <button class="button" onclick="aggiungiAlCarrello(${prodotto.id})">➕ Aggiungi al Carrello</button>
+      </div>
     `;
     productList.appendChild(div);
   });
@@ -470,6 +474,10 @@ function inviaOrdineWhatsApp() {
   const totale = carrello.reduce((sum, item) => sum + item.prezzo * item.quantità, 0) + 9;
   messaggio += `💶 Totale: €${totale.toFixed(2)}%0A`;
   window.open(`https://wa.me/393494166335?text=${messaggio}`, '_blank');
+}
+    function toggleDescrizione(id) {
+  const desc = document.getElementById(`desc-${id}`);
+  desc.style.display = desc.style.display === 'block' ? 'none' : 'block';
 }
   </script>
 </body>
