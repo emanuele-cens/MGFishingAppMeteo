@@ -219,71 +219,96 @@
     <button onclick="goBack()">🔙 Indietro</button>
   </div>
 
-  <script>
-    let sectionHistory = ['home'];
+<script>
+  let sectionHistory = ['home'];
 
-    function toggleMenu() {
-      document.getElementById("sideMenu").classList.toggle("show");
+  function toggleMenu() {
+    document.getElementById("sideMenu").classList.toggle("show");
+  }
+
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.getElementById("sideMenu").classList.remove("show");
+    const current = sectionHistory[sectionHistory.length - 1];
+    if (current !== id) sectionHistory.push(id);
+  }
+
+  function goHome() {
+    showSection('home');
+  }
+
+  function goBack() {
+    if (sectionHistory.length > 1) {
+      sectionHistory.pop();
+      const previous = sectionHistory[sectionHistory.length - 1];
+      showSection(previous);
     }
+  }
 
-    function showSection(id) {
-      document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      document.getElementById("sideMenu").classList.remove("show");
-      const current = sectionHistory[sectionHistory.length - 1];
-      if (current !== id) sectionHistory.push(id);
-    }
+  function toggleBlog(header) {
+    const content = header.nextElementSibling;
+    content.style.display = content.style.display === 'block' ? 'none' : 'block';
+  }
 
-    function goHome() {
-      showSection('home');
-    }
+  function openArticle(index) {
+    showSection('blog');
+    const headers = document.querySelectorAll("#blog .blog-entry h3");
+    headers.forEach((h, i) => {
+      const content = h.nextElementSibling;
+      content.style.display = (i === index) ? 'block' : 'none';
+    });
+  }
 
-    function goBack() {
-      if (sectionHistory.length > 1) {
-        sectionHistory.pop();
-        const previous = sectionHistory[sectionHistory.length - 1];
-        showSection(previous);
+  async function fetchWeather() {
+    const city = document.getElementById("cityInput").value;
+    const apiKey = 'a3b6ead62ce9e333256276f96865a8e1';
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=it`;
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      if (response.ok) {
+        document.getElementById("weatherDisplay").innerHTML = `
+          <h3>Meteo a ${data.name}</h3>
+          <p>🌡️ Temperatura: ${data.main.temp}°C</p>
+          <p>💨 Vento: ${data.wind.speed} km/h</p>
+          <p>💧 Umidità: ${data.main.humidity}%</p>
+          <p>🌊 Altezza onde: ${(Math.random() * 1.2 + 0.3).toFixed(1)} m (simulato)</p>
+          <p>🌘 Fase lunare: Luna crescente (simulato)</p>
+          <p>🎣 Consiglio pesca: Ottimo per cefali e orate (simulato)</p>
+        `;
+      } else {
+        throw new Error(data.message);
       }
+    } catch (error) {
+      document.getElementById("weatherDisplay").innerHTML = `<p>Errore: ${error.message}</p>`;
     }
+  }
 
-    function toggleBlog(header) {
-      const content = header.nextElementSibling;
-      content.style.display = content.style.display === 'block' ? 'none' : 'block';
+  function inviaOrdineEsche() {
+    const form = document.getElementById("escheForm");
+    const formData = new FormData(form);
+    let msg = "*Ordine Esche Vive:*\n";
+    formData.forEach((val, key) => {
+      if (val && parseInt(val) > 0) msg += `${key.replace(/_/g, ' ')}: ${val}\n`;
+    });
+    if (msg.trim() === "*Ordine Esche Vive:*") {
+      alert("Inserisci almeno una quantità di esche.");
+      return;
     }
+    const encodedMsg = encodeURIComponent(msg);
+    window.open(`https://wa.me/393494166335?text=${encodedMsg}`, '_blank');
+  }
 
-    function openArticle(index) {
-      showSection('blog');
-      const headers = document.querySelectorAll("#blog .blog-entry h3");
-      headers.forEach((h, i) => {
-        const content = h.nextElementSibling;
-        content.style.display = (i === index) ? 'block' : 'none';
-      });
+  function loadWebcam() {
+    const url = document.getElementById("webcamSelect").value;
+    const container = document.getElementById("webcamContainer");
+    if (url) {
+      container.innerHTML = `<iframe src="${url}" width="100%" height="400" frameborder="0" allowfullscreen></iframe>`;
+    } else {
+      container.innerHTML = '';
     }
-
-    async function fetchWeather() {
-      const city = document.getElementById("cityInput").value;
-      const apiKey = 'a3b6ead62ce9e333256276f96865a8e1';
-      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=it`;
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        if (response.ok) {
-          document.getElementById("weatherDisplay").innerHTML = `
-            <h3>Meteo a ${data.name}</h3>
-            <p>🌡️ Temperatura: ${data.main.temp}°C</p>
-            <p>💨 Vento: ${data.wind.speed} km/h</p>
-            <p>💧 Umidità: ${data.main.humidity}%</p>
-            <p>🌊 Altezza onde: ${(Math.random() * 1.2 + 0.3).toFixed(1)} m (simulato)</p>
-            <p>🌘 Fase lunare: Luna crescente (simulato)</p>
-            <p>🎣 Consiglio pesca: Ottimo per cefali e orate (simulato)</p>
-          `;
-        } else {
-          throw new Error(data.message);
-        }
-      } catch (error) {
-        document.getElementById("weatherDisplay").innerHTML = `<p>Errore: ${error.message}</p>`;
-      }
-    }
-  </script>
+  }
+</script>
 </body>
 </html>
