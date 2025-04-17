@@ -2,44 +2,24 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MG Fishing App</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center center fixed;
+      background: url('https://cdn.pixabay.com/photo/2016/11/29/02/50/beach-1867285_1280.jpg') no-repeat center center fixed;
       background-size: cover;
-      color: #ffffff;
-    }
-    #splash {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: #001f3f;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-    }
-    #splash img {
-      max-width: 60%;
-      animation: splashFade 2s ease-in-out forwards;
-    }
-    @keyframes splashFade {
-      0% { opacity: 0; transform: scale(0.9); }
-      100% { opacity: 1; transform: scale(1); }
+      color: white;
     }
     #hamburger {
       position: fixed;
-      top: 10px;
-      left: 10px;
+      top: 5px;
+      left: 5px;
       background: #004080;
       color: white;
-      padding: 10px;
-      font-size: 24px;
+      padding: 8px 12px;
+      font-size: 20px;
       border-radius: 6px;
       z-index: 1001;
       cursor: pointer;
@@ -75,8 +55,8 @@
       display: none;
       padding: 2.5rem 1.5rem 1.5rem 1.5rem;
       margin-top: 20px;
-      background-color: rgba(0, 0, 0, 0.6);
-      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
     }
     .section.active {
       display: block;
@@ -99,13 +79,42 @@
     .button:hover {
       background: #008ecc;
     }
+    .blog-entry {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .blog-entry h3 {
+      color: #00c3ff;
+      cursor: pointer;
+    }
+    .blog-content {
+      display: none;
+    }
+    #bottomNav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      background: rgba(0, 0, 0, 0.85);
+      padding: 10px;
+      z-index: 999;
+    }
+    #bottomNav button {
+      padding: 10px 20px;
+      background: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <div id="splash">
-    <img src="https://www.mgfishing.eu/img/logo-1725547317.jpg" alt="MG Fishing Logo" />
-  </div>
-
   <div id="hamburger" onclick="toggleMenu()">☰</div>
   <nav id="sideMenu">
     <a href="#" onclick="showSection('home')">🏠 Home</a>
@@ -120,7 +129,12 @@
   <main>
     <section id="home" class="section active">
       <h2>Benvenuto su MG Fishing</h2>
-      <p>Scopri tutte le funzionalità e i servizi per i pescatori!</p>
+      <p>Inizia a esplorare l'app usando il menu.</p>
+      <ul>
+        <li><a href="#" onclick="showSection('blog')">📝 I 3 Nodi da Pesca Fondamentali</a></li>
+        <li><a href="#" onclick="showSection('blog')">📝 Tipi di Montature da Surfcasting</a></li>
+        <li><a href="#" onclick="showSection('blog')">📝 Come Leggere il Mare</a></li>
+      </ul>
     </section>
 
     <section id="meteo" class="section">
@@ -132,7 +146,6 @@
 
     <section id="esche" class="section">
       <h2>Esche Vive Disponibili</h2>
-      <p>Seleziona le esche e la quantità desiderata per prenotare:</p>
       <form id="escheForm">
         <label>Arenicola Locale: <input type="number" name="arenicola_locale" min="0" class="input"></label>
         <label>Arenicola Napoli: <input type="number" name="arenicola_napoli" min="0" class="input"></label>
@@ -148,54 +161,62 @@
     </section>
 
     <section id="webcam" class="section">
-      <h2>Webcam Mare - Lazio</h2>
+      <h2>Webcam Coste Laziali</h2>
       <select id="webcamSelect" class="input" onchange="loadWebcam()">
         <option value="">-- Seleziona località --</option>
         <option value="https://vedetta.org/webcam/italia/lazio/latina/lido-di-latina/">Latina - Lido</option>
         <option value="https://vedetta.org/webcam/italia/lazio/latina/sabaudia/">Sabaudia</option>
-        <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/roma/spiaggia-lido-di-ostia-roma.html">Ostia</option>
+        <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/roma/spiaggia-lido-di-ostia-roma.html">Ostia - Roma</option>
+        <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/latina/spiaggia-di-formia.html">Formia</option>
+        <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/latina/terracina.html">Terracina</option>
       </select>
       <div id="webcamContainer" style="margin-top: 20px;"></div>
     </section>
 
     <section id="blog" class="section">
-      <h2>Articoli del Blog</h2>
+      <h2>Blog</h2>
       <div class="blog-entry">
         <h3 onclick="toggleBlog(this)">I 3 Nodi da Pesca Fondamentali</h3>
         <div class="blog-content">
-          <p><strong>Palomar</strong>: semplice e resistente per terminali.</p>
-          <p><strong>Clinch migliorato</strong>: ottimo per ami ad occhiello.</p>
-          <p><strong>Gassa</strong>: ideale per esche mobili.</p>
+          <p><strong>Nodo Palomar:</strong> facile da eseguire e molto resistente.</p>
+          <p><strong>Nodo Clinch Migliorato:</strong> affidabile per ami con occhiello.</p>
+          <p><strong>Nodo a Gassa:</strong> utile per esche artificiali e montature scorrevoli.</p>
         </div>
       </div>
       <div class="blog-entry">
-        <h3 onclick="toggleBlog(this)">Montature da Surfcasting</h3>
+        <h3 onclick="toggleBlog(this)">Tipi di Montature da Surfcasting</h3>
         <div class="blog-content">
-          <p>Scopri le principali montature: scorrevole, due braccioli, long arm e anti-groviglio.</p>
+          <p>Piombo scorrevole per pesci sospettosi, due braccioli per più esche, long arm per distanze e anti-groviglio per acque agitate.</p>
         </div>
       </div>
       <div class="blog-entry">
         <h3 onclick="toggleBlog(this)">Come Leggere il Mare</h3>
         <div class="blog-content">
-          <p>Impara a riconoscere canaloni, zone schiumose, correnti favorevoli e fondali.</p>
+          <p>Riconosci le zone di schiuma, le canalette tra le onde e le variazioni di colore per trovare le zone migliori per la pesca.</p>
         </div>
       </div>
     </section>
 
     <section id="contattaci" class="section">
       <h2>Contattaci</h2>
-      <p>📞 3494166335 <a href="https://wa.me/393494166335" class="button" target="_blank">WhatsApp</a></p>
-      <p>📞 3408198180 <a href="https://wa.me/393408198180" class="button" target="_blank">WhatsApp</a></p>
+      <p>📞 3494166335 <a class="button" style="display:inline-block; width:auto; margin-left:10px" href="https://wa.me/393494166335" target="_blank">💬 WhatsApp</a></p>
+      <p>📞 3408198180 <a class="button" style="display:inline-block; width:auto; margin-left:10px" href="https://wa.me/393408198180" target="_blank">💬 WhatsApp</a></p>
       <p>📧 Email: <a href="mailto:info@mgfishing.eu" style="color:#00c3ff;">info@mgfishing.eu</a></p>
     </section>
 
     <section id="store" class="section">
-      <h2>🛒 Visita lo Store Online</h2>
-      <a href="https://www.mgfishing.eu" class="button" target="_blank">🌐 www.mgfishing.eu</a>
+      <h2>🛒 Visita il nostro Store Online</h2>
+      <p>Scopri tutti i prodotti disponibili sul nostro sito!</p>
+      <a class="button" href="https://www.mgfishing.eu" target="_blank">🌐 Vai allo Store MG Fishing</a>
     </section>
   </main>
 
-  <script>
+  <div id="bottomNav">
+    <button onclick="goHome()">🏠 Home</button>
+    <button onclick="goBack()">🔙 Indietro</button>
+  </div>
+
+   <script>
     window.onload = () => setTimeout(() => document.getElementById("splash").style.display = "none", 2000);
 
     function toggleMenu() {
@@ -256,3 +277,4 @@
   </script>
 </body>
 </html>
+
