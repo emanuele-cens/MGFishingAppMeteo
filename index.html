@@ -75,6 +75,17 @@
     .button:hover {
       background: #008ecc;
     }
+    .blog-entry {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .blog-entry h3 {
+      color: #00c3ff;
+      cursor: pointer;
+    }
+    .blog-content { display: none; }
   </style>
 </head>
 <body>
@@ -84,6 +95,7 @@
     <a href="#" onclick="showSection('meteo')">☀️ Meteo</a>
     <a href="#" onclick="showSection('esche')">🪱 Esche Vive</a>
     <a href="#" onclick="showSection('webcam')">📷 Webcam</a>
+    <a href="#" onclick="showSection('blog')">📝 Blog</a>
   </nav>
 
   <main>
@@ -127,6 +139,30 @@
         <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/latina/terracina.html">Terracina</option>
       </select>
       <div id="webcamContainer" style="margin-top: 20px;"></div>
+    </section>
+
+    <section id="blog" class="section">
+      <h2>Blog</h2>
+      <div class="blog-entry">
+        <h3 onclick="toggleBlog(this)">I 3 Nodi da Pesca Fondamentali</h3>
+        <div class="blog-content">
+          <p><strong>Nodo Palomar:</strong> facile da eseguire e molto resistente.</p>
+          <p><strong>Nodo Clinch Migliorato:</strong> affidabile per ami con occhiello.</p>
+          <p><strong>Nodo a Gassa:</strong> utile per esche artificiali e montature scorrevoli.</p>
+        </div>
+      </div>
+      <div class="blog-entry">
+        <h3 onclick="toggleBlog(this)">Tipi di Montature da Surfcasting</h3>
+        <div class="blog-content">
+          <p>Piombo scorrevole per pesci sospettosi, due braccioli per più esche, long arm per distanze e anti-groviglio per acque agitate.</p>
+        </div>
+      </div>
+      <div class="blog-entry">
+        <h3 onclick="toggleBlog(this)">Come Leggere il Mare</h3>
+        <div class="blog-content">
+          <p>Riconosci le zone di schiuma, le canalette tra le onde e le variazioni di colore per trovare le zone migliori per la pesca.</p>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -187,6 +223,11 @@ function loadWebcam() {
   const url = document.getElementById("webcamSelect").value;
   const container = document.getElementById("webcamContainer");
   container.innerHTML = url ? `<iframe src="${url}" width="100%" height="400" frameborder="0" allowfullscreen></iframe>` : '';
+}
+
+function toggleBlog(header) {
+  const content = header.nextElementSibling;
+  content.style.display = content.style.display === 'block' ? 'none' : 'block';
 }
 </script>
 </body>
