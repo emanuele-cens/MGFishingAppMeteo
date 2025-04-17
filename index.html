@@ -2,45 +2,44 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MG Fishing App</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center center fixed;
       background-size: cover;
-      color: white;
+      color: #ffffff;
     }
     #splash {
       position: fixed;
-      z-index: 9999;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: #001f3f;
+      width: 100vw;
+      height: 100vh;
+      background-color: #001f3f;
       display: flex;
       justify-content: center;
       align-items: center;
+      z-index: 2000;
     }
     #splash img {
-      max-width: 200px;
-      animation: fadeInOut 3s forwards;
+      max-width: 60%;
+      animation: splashFade 2s ease-in-out forwards;
     }
-    @keyframes fadeInOut {
-      0% { opacity: 0; transform: scale(0.8); }
-      50% { opacity: 1; transform: scale(1); }
-      100% { opacity: 0; transform: scale(1.2); }
+    @keyframes splashFade {
+      0% { opacity: 0; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
     }
     #hamburger {
       position: fixed;
-      top: 5px;
-      left: 5px;
+      top: 10px;
+      left: 10px;
       background: #004080;
       color: white;
-      padding: 8px 12px;
-      font-size: 20px;
+      padding: 10px;
+      font-size: 24px;
       border-radius: 6px;
       z-index: 1001;
       cursor: pointer;
@@ -76,8 +75,8 @@
       display: none;
       padding: 2.5rem 1.5rem 1.5rem 1.5rem;
       margin-top: 20px;
-      background-color: rgba(0, 0, 0, 0.5);
-      border-radius: 12px;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
     }
     .section.active {
       display: block;
@@ -100,45 +99,11 @@
     .button:hover {
       background: #008ecc;
     }
-    .blog-entry {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      padding: 1rem;
-      margin-bottom: 1rem;
-    }
-    .blog-entry h3 {
-      color: #00c3ff;
-      cursor: pointer;
-    }
-    .blog-content {
-      display: none;
-    }
-    #bottomNav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-around;
-      background: rgba(0, 0, 0, 0.85);
-      padding: 10px;
-      z-index: 999;
-    }
-    #bottomNav button {
-      padding: 10px 20px;
-      background: #0077cc;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-    }
   </style>
 </head>
 <body>
-  <!-- Splash Screen -->
   <div id="splash">
-    <img src="https://www.mgfishing.eu/img/logo-1725547317.jpg" alt="MG Fishing Logo">
+    <img src="https://www.mgfishing.eu/img/logo-1725547317.jpg" alt="MG Fishing Logo" />
   </div>
 
   <div id="hamburger" onclick="toggleMenu()">☰</div>
@@ -155,7 +120,7 @@
   <main>
     <section id="home" class="section active">
       <h2>Benvenuto su MG Fishing</h2>
-      <p>Inizia a esplorare l'app usando il menu.</p>
+      <p>Scopri tutte le funzionalità e i servizi per i pescatori!</p>
     </section>
 
     <section id="meteo" class="section">
@@ -167,77 +132,71 @@
 
     <section id="esche" class="section">
       <h2>Esche Vive Disponibili</h2>
+      <p>Seleziona le esche e la quantità desiderata per prenotare:</p>
       <form id="escheForm">
-        <label>Arenicola Locale: <input type="number" name="arenicola_locale" min="0" class="input" placeholder="Q.tà"></label>
-        <label>Arenicola Napoli: <input type="number" name="arenicola_napoli" min="0" class="input" placeholder="Q.tà"></label>
-        <label>Americano: <input type="number" name="americano" min="0" class="input" placeholder="Q.tà"></label>
-        <label>Bibi: <input type="number" name="bibi" min="0" class="input" placeholder="Q.tà"></label>
-        <label>Cordella: <input type="number" name="cordella" min="0" class="input" placeholder="Q.tà"></label>
-        <label>Muriddu: <input type="number" name="muriddu" min="0" class="input" placeholder="Q.tà"></label>
-        <label>Bigattino: <input type="number" name="bigattino" min="0" class="input" placeholder="Q.tà"></label>
-        <label>Vermi di Terra: <input type="number" name="vermi_terra" min="0" class="input" placeholder="Q.tà"></label>
-        <label>Camole del Miele: <input type="number" name="camole_miele" min="0" class="input" placeholder="Q.tà"></label>
+        <label>Arenicola Locale: <input type="number" name="arenicola_locale" min="0" class="input"></label>
+        <label>Arenicola Napoli: <input type="number" name="arenicola_napoli" min="0" class="input"></label>
+        <label>Americano: <input type="number" name="americano" min="0" class="input"></label>
+        <label>Bibi: <input type="number" name="bibi" min="0" class="input"></label>
+        <label>Cordella: <input type="number" name="cordella" min="0" class="input"></label>
+        <label>Muriddu: <input type="number" name="muriddu" min="0" class="input"></label>
+        <label>Bigattino: <input type="number" name="bigattino" min="0" class="input"></label>
+        <label>Vermi di Terra: <input type="number" name="vermi_terra" min="0" class="input"></label>
+        <label>Camole del Miele: <input type="number" name="camole_miele" min="0" class="input"></label>
         <button type="button" onclick="inviaOrdineEsche()" class="button">📲 Prenota via WhatsApp</button>
       </form>
     </section>
 
     <section id="webcam" class="section">
-      <h2>Webcam Coste Laziali</h2>
+      <h2>Webcam Mare - Lazio</h2>
       <select id="webcamSelect" class="input" onchange="loadWebcam()">
         <option value="">-- Seleziona località --</option>
         <option value="https://vedetta.org/webcam/italia/lazio/latina/lido-di-latina/">Latina - Lido</option>
         <option value="https://vedetta.org/webcam/italia/lazio/latina/sabaudia/">Sabaudia</option>
-        <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/roma/spiaggia-lido-di-ostia-roma.html">Ostia - Roma</option>
-        <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/latina/spiaggia-di-formia.html">Formia</option>
-        <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/latina/terracina.html">Terracina</option>
+        <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/roma/spiaggia-lido-di-ostia-roma.html">Ostia</option>
       </select>
       <div id="webcamContainer" style="margin-top: 20px;"></div>
     </section>
 
-      <section id="blog" class="section">
-      <h2>Blog</h2>
+    <section id="blog" class="section">
+      <h2>Articoli del Blog</h2>
       <div class="blog-entry">
         <h3 onclick="toggleBlog(this)">I 3 Nodi da Pesca Fondamentali</h3>
         <div class="blog-content">
-          <p><strong>Nodo Palomar:</strong> facile da eseguire e molto resistente.</p>
-          <p><strong>Nodo Clinch Migliorato:</strong> affidabile per ami con occhiello.</p>
-          <p><strong>Nodo a Gassa:</strong> utile per esche artificiali e montature scorrevoli.</p>
+          <p><strong>Palomar</strong>: semplice e resistente per terminali.</p>
+          <p><strong>Clinch migliorato</strong>: ottimo per ami ad occhiello.</p>
+          <p><strong>Gassa</strong>: ideale per esche mobili.</p>
         </div>
       </div>
       <div class="blog-entry">
-        <h3 onclick="toggleBlog(this)">Tipi di Montature da Surfcasting</h3>
+        <h3 onclick="toggleBlog(this)">Montature da Surfcasting</h3>
         <div class="blog-content">
-          <p>Piombo scorrevole per pesci sospettosi, due braccioli per più esche, long arm per distanze e anti-groviglio per acque agitate.</p>
+          <p>Scopri le principali montature: scorrevole, due braccioli, long arm e anti-groviglio.</p>
         </div>
       </div>
       <div class="blog-entry">
         <h3 onclick="toggleBlog(this)">Come Leggere il Mare</h3>
         <div class="blog-content">
-          <p>Riconosci le zone di schiuma, le canalette tra le onde e le variazioni di colore per trovare le zone migliori per la pesca.</p>
+          <p>Impara a riconoscere canaloni, zone schiumose, correnti favorevoli e fondali.</p>
         </div>
       </div>
     </section>
 
     <section id="contattaci" class="section">
       <h2>Contattaci</h2>
-      <p>📞 3494166335 <a class="button" href="https://wa.me/393494166335" target="_blank">💬 WhatsApp</a></p>
-      <p>📞 3408198180 <a class="button" href="https://wa.me/393408198180" target="_blank">💬 WhatsApp</a></p>
+      <p>📞 3494166335 <a href="https://wa.me/393494166335" class="button" target="_blank">WhatsApp</a></p>
+      <p>📞 3408198180 <a href="https://wa.me/393408198180" class="button" target="_blank">WhatsApp</a></p>
       <p>📧 Email: <a href="mailto:info@mgfishing.eu" style="color:#00c3ff;">info@mgfishing.eu</a></p>
     </section>
 
     <section id="store" class="section">
-      <h2>🛒 Visita il nostro Store Online</h2>
-      <a class="button" href="https://www.mgfishing.eu" target="_blank">🌐 Vai allo Store MG Fishing</a>
+      <h2>🛒 Visita lo Store Online</h2>
+      <a href="https://www.mgfishing.eu" class="button" target="_blank">🌐 www.mgfishing.eu</a>
     </section>
   </main>
 
-  <div id="bottomNav">
-    <button onclick="goHome()">🏠 Home</button>
-    <button onclick="goBack()">🔙 Indietro</button>
-  </div>
-
   <script>
-    let sectionHistory = ['home'];
+    window.onload = () => setTimeout(() => document.getElementById("splash").style.display = "none", 2000);
 
     function toggleMenu() {
       document.getElementById("sideMenu").classList.toggle("show");
@@ -247,40 +206,52 @@
       document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
       document.getElementById(id).classList.add('active');
       document.getElementById("sideMenu").classList.remove("show");
-      const current = sectionHistory[sectionHistory.length - 1];
-      if (current !== id) {
-        sectionHistory.push(id);
-      }
     }
 
-    function goHome() {
-      showSection('home');
-    }
-
-    function goBack() {
-      if (sectionHistory.length > 1) {
-        sectionHistory.pop();
-        const previous = sectionHistory[sectionHistory.length - 1];
-        showSection(previous);
+    async function fetchWeather() {
+      const city = document.getElementById("cityInput").value;
+      const apiKey = 'a3b6ead62ce9e333256276f96865a8e1';
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=it`;
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        if (res.ok) {
+          document.getElementById("weatherDisplay").innerHTML = `
+            <h3>Meteo a ${data.name}</h3>
+            <p>🌡️ Temperatura: ${data.main.temp}°C</p>
+            <p>💨 Vento: ${data.wind.speed} km/h</p>
+            <p>💧 Umidità: ${data.main.humidity}%</p>
+            <p>🌊 Onde: ${(Math.random()*1+0.3).toFixed(1)} m (simulato)</p>
+            <p>🌘 Fase lunare: Luna crescente (simulato)</p>
+            <p>🎣 Consiglio: Orate attive con mare leggero</p>`;
+        } else {
+          throw new Error(data.message);
+        }
+      } catch (err) {
+        document.getElementById("weatherDisplay").innerHTML = `<p>Errore: ${err.message}</p>`;
       }
     }
 
     function loadWebcam() {
       const url = document.getElementById("webcamSelect").value;
       const container = document.getElementById("webcamContainer");
-      container.innerHTML = url ? `<iframe src="${url}" width="100%" height="400" frameborder="0" allowfullscreen></iframe>` : '';
+      container.innerHTML = url ? `<iframe src="${url}" width="100%" height="400" frameborder="0"></iframe>` : '';
+    }
+
+    function inviaOrdineEsche() {
+      const form = document.getElementById("escheForm");
+      const formData = new FormData(form);
+      let msg = '*Ordine Esche Vive:*\n';
+      formData.forEach((val, key) => {
+        if (val && parseInt(val) > 0) msg += `${key.replace(/_/g, ' ')}: ${val}\n`;
+      });
+      if (msg === '*Ordine Esche Vive:*\n') return alert("Inserisci almeno una quantità di esche.");
+      window.open(`https://wa.me/393494166335?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
     function toggleBlog(header) {
       const content = header.nextElementSibling;
       content.style.display = content.style.display === 'block' ? 'none' : 'block';
-    }
-
-    window.onload = () => {
-      setTimeout(() => {
-        const splash = document.getElementById("splash");
-        if (splash) splash.style.display = 'none';
-      }, 3000);
     }
   </script>
 </body>
