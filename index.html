@@ -109,6 +109,13 @@
       font-size: 16px;
       cursor: pointer;
     }
+    .blog-link {
+      color: #00c3ff;
+      text-decoration: underline;
+      cursor: pointer;
+      display: block;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
@@ -127,6 +134,10 @@
     <section id="home" class="section active">
       <h2>Benvenuto su MG Fishing</h2>
       <p>Inizia a esplorare l'app usando il menu.</p>
+      <h3>📝 Ultimi Articoli del Blog</h3>
+      <span class="blog-link" onclick="openArticle(0)">🔗 I 3 Nodi da Pesca Fondamentali</span>
+      <span class="blog-link" onclick="openArticle(1)">🔗 Tipi di Montature da Surfcasting</span>
+      <span class="blog-link" onclick="openArticle(2)">🔗 Come Leggere il Mare</span>
     </section>
 
     <section id="meteo" class="section">
@@ -136,7 +147,7 @@
       <div id="weatherDisplay"></div>
     </section>
 
-    <section id="esche" class="section">
+     <section id="esche" class="section">
       <h2>Esche Vive Disponibili</h2>
       <form id="escheForm">
         <label>Arenicola Locale: <input type="number" name="arenicola_locale" min="0" class="input" placeholder="Q.tà"></label>
@@ -152,7 +163,7 @@
       </form>
     </section>
 
-    <section id="webcam" class="section">
+     <section id="webcam" class="section">
       <h2>Webcam Coste Laziali</h2>
       <select id="webcamSelect" class="input" onchange="loadWebcam()">
         <option value="">-- Seleziona località --</option>
@@ -191,8 +202,8 @@
 
     <section id="contattaci" class="section">
       <h2>Contattaci</h2>
-      <p>📞 3494166335 <a class="button" style="display:inline-block; width:auto; margin-left:10px" href="https://wa.me/393494166335" target="_blank">💬 WhatsApp</a></p>
-      <p>📞 3408198180 <a class="button" style="display:inline-block; width:auto; margin-left:10px" href="https://wa.me/393408198180" target="_blank">💬 WhatsApp</a></p>
+      <p>📞 3494166335 <a class="button" href="https://wa.me/393494166335" target="_blank">💬 WhatsApp</a></p>
+      <p>📞 3408198180 <a class="button" href="https://wa.me/393408198180" target="_blank">💬 WhatsApp</a></p>
       <p>📧 Email: <a href="mailto:info@mgfishing.eu" style="color:#00c3ff;">info@mgfishing.eu</a></p>
     </section>
 
@@ -220,9 +231,7 @@
       document.getElementById(id).classList.add('active');
       document.getElementById("sideMenu").classList.remove("show");
       const current = sectionHistory[sectionHistory.length - 1];
-      if (current !== id) {
-        sectionHistory.push(id);
-      }
+      if (current !== id) sectionHistory.push(id);
     }
 
     function goHome() {
@@ -235,6 +244,20 @@
         const previous = sectionHistory[sectionHistory.length - 1];
         showSection(previous);
       }
+    }
+
+    function toggleBlog(header) {
+      const content = header.nextElementSibling;
+      content.style.display = content.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function openArticle(index) {
+      showSection('blog');
+      const headers = document.querySelectorAll("#blog .blog-entry h3");
+      headers.forEach((h, i) => {
+        const content = h.nextElementSibling;
+        content.style.display = (i === index) ? 'block' : 'none';
+      });
     }
 
     async function fetchWeather() {
@@ -260,32 +283,6 @@
       } catch (error) {
         document.getElementById("weatherDisplay").innerHTML = `<p>Errore: ${error.message}</p>`;
       }
-    }
-
-    function inviaOrdineEsche() {
-      const form = document.getElementById("escheForm");
-      const formData = new FormData(form);
-      let msg = "*Ordine Esche Vive:*\n";
-      formData.forEach((val, key) => {
-        if (val && parseInt(val) > 0) msg += `${key.replace(/_/g, ' ')}: ${val}\n`;
-      });
-      if (msg.trim() === "*Ordine Esche Vive:*") {
-        alert("Inserisci almeno una quantità di esche.");
-        return;
-      }
-      const encodedMsg = encodeURIComponent(msg);
-      window.open(`https://wa.me/393494166335?text=${encodedMsg}`, '_blank');
-    }
-
-    function loadWebcam() {
-      const url = document.getElementById("webcamSelect").value;
-      const container = document.getElementById("webcamContainer");
-      container.innerHTML = url ? `<iframe src="${url}" width="100%" height="400" frameborder="0" allowfullscreen></iframe>` : '';
-    }
-
-    function toggleBlog(header) {
-      const content = header.nextElementSibling;
-      content.style.display = content.style.display === 'block' ? 'none' : 'block';
     }
   </script>
 </body>
