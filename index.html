@@ -281,6 +281,31 @@
         const splash = document.getElementById("splash");
         if (splash) splash.style.display = 'none';
       }, 3000);
+      async function fetchWeather() {
+  const city = document.getElementById("cityInput").value;
+  const apiKey = 'a3b6ead62ce9e333256276f96865a8e1';
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=it`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (response.ok) {
+      document.getElementById("weatherDisplay").innerHTML = `
+        <h3>Meteo a ${data.name}</h3>
+        <p>🌡️ Temperatura: ${data.main.temp}°C</p>
+        <p>💨 Vento: ${data.wind.speed} km/h</p>
+        <p>💧 Umidità: ${data.main.humidity}%</p>
+        <p>🌊 Altezza onde: ${(Math.random() * 1.2 + 0.3).toFixed(1)} m (simulato)</p>
+        <p>🌘 Fase lunare: Luna crescente (simulato)</p>
+        <p>🌿 Consiglio pesca: Ottimo per cefali e orate (simulato)</p>
+      `;
+    } else {
+      throw new Error(data.message);
+    }
+  } catch (error) {
+    document.getElementById("weatherDisplay").innerHTML = `<p>Errore: ${error.message}</p>`;
+  }
     }
   </script>
 </body>
