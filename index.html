@@ -489,6 +489,7 @@ function aggiungiAlCarrello(id) {
     carrello.push({ ...prodotto, quantità: qty });
   }
   aggiornaCarrello()
+   }
     function rimuoviDalCarrello(id) {
   carrello = carrello.filter(p => p.id !== id);
   aggiornaCarrello();
@@ -556,6 +557,6 @@ function inviaOrdineWhatsApp() {
     <button onclick="inviaOrdineWhatsApp()" class="button" style="margin-top: 10px;">📲 Invia Ordine via WhatsApp</button>
   </div>
   <button onclick="toggleSideCart()" style="position: fixed; top: 10px; right: 10px; z-index: 1600; background: #0077cc; color: white; border: none; padding: 10px; border-radius: 6px;">🛒</button>
-</script>
+
 </body>
 </html>
