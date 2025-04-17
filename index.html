@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MG Fishing App</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: url('https://cdn.pixabay.com/photo/2017/03/16/20/20/sea-2145662_1280.jpg') no-repeat center center fixed;
+      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
       background-size: cover;
       color: white;
     }
     #splash {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: #001f3f;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #001f3f;
       display: flex;
-      align-items: center;
       justify-content: center;
-      z-index: 2000;
+      align-items: center;
     }
     #splash img {
-      width: 200px;
-      animation: fadeIn 2s ease-in-out;
+      max-width: 200px;
+      animation: fadeInOut 3s forwards;
     }
-    @keyframes fadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
+    @keyframes fadeInOut {
+      0% { opacity: 0; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(1.2); }
     }
     #hamburger {
       position: fixed;
@@ -73,6 +76,8 @@
       display: none;
       padding: 2.5rem 1.5rem 1.5rem 1.5rem;
       margin-top: 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 12px;
     }
     .section.active {
       display: block;
@@ -94,6 +99,19 @@
     }
     .button:hover {
       background: #008ecc;
+    }
+    .blog-entry {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .blog-entry h3 {
+      color: #00c3ff;
+      cursor: pointer;
+    }
+    .blog-content {
+      display: none;
     }
     #bottomNav {
       position: fixed;
@@ -118,9 +136,11 @@
   </style>
 </head>
 <body>
+  <!-- Splash Screen -->
   <div id="splash">
     <img src="https://www.mgfishing.eu/img/logo-1725547317.jpg" alt="MG Fishing Logo">
   </div>
+
   <div id="hamburger" onclick="toggleMenu()">☰</div>
   <nav id="sideMenu">
     <a href="#" onclick="showSection('home')">🏠 Home</a>
@@ -135,12 +155,7 @@
   <main>
     <section id="home" class="section active">
       <h2>Benvenuto su MG Fishing</h2>
-           <p>Inizia a esplorare l'app usando il menu.</p>
-      <ul>
-        <li><a href="#" onclick="showSection('blog')">📝 I 3 Nodi da Pesca Fondamentali</a></li>
-        <li><a href="#" onclick="showSection('blog')">📝 Tipi di Montature da Surfcasting</a></li>
-        <li><a href="#" onclick="showSection('blog')">📝 Come Leggere il Mare</a></li>
-      </ul>
+      <p>Inizia a esplorare l'app usando il menu.</p>
     </section>
 
     <section id="meteo" class="section">
@@ -153,15 +168,15 @@
     <section id="esche" class="section">
       <h2>Esche Vive Disponibili</h2>
       <form id="escheForm">
-        <label>Arenicola Locale: <input type="number" name="arenicola_locale" min="0" class="input"></label>
-        <label>Arenicola Napoli: <input type="number" name="arenicola_napoli" min="0" class="input"></label>
-        <label>Americano: <input type="number" name="americano" min="0" class="input"></label>
-        <label>Bibi: <input type="number" name="bibi" min="0" class="input"></label>
-        <label>Cordella: <input type="number" name="cordella" min="0" class="input"></label>
-        <label>Muriddu: <input type="number" name="muriddu" min="0" class="input"></label>
-        <label>Bigattino: <input type="number" name="bigattino" min="0" class="input"></label>
-        <label>Vermi di Terra: <input type="number" name="vermi_terra" min="0" class="input"></label>
-        <label>Camole del Miele: <input type="number" name="camole_miele" min="0" class="input"></label>
+        <label>Arenicola Locale: <input type="number" name="arenicola_locale" min="0" class="input" placeholder="Q.tà"></label>
+        <label>Arenicola Napoli: <input type="number" name="arenicola_napoli" min="0" class="input" placeholder="Q.tà"></label>
+        <label>Americano: <input type="number" name="americano" min="0" class="input" placeholder="Q.tà"></label>
+        <label>Bibi: <input type="number" name="bibi" min="0" class="input" placeholder="Q.tà"></label>
+        <label>Cordella: <input type="number" name="cordella" min="0" class="input" placeholder="Q.tà"></label>
+        <label>Muriddu: <input type="number" name="muriddu" min="0" class="input" placeholder="Q.tà"></label>
+        <label>Bigattino: <input type="number" name="bigattino" min="0" class="input" placeholder="Q.tà"></label>
+        <label>Vermi di Terra: <input type="number" name="vermi_terra" min="0" class="input" placeholder="Q.tà"></label>
+        <label>Camole del Miele: <input type="number" name="camole_miele" min="0" class="input" placeholder="Q.tà"></label>
         <button type="button" onclick="inviaOrdineEsche()" class="button">📲 Prenota via WhatsApp</button>
       </form>
     </section>
@@ -179,7 +194,7 @@
       <div id="webcamContainer" style="margin-top: 20px;"></div>
     </section>
 
-    <section id="blog" class="section">
+      <section id="blog" class="section">
       <h2>Blog</h2>
       <div class="blog-entry">
         <h3 onclick="toggleBlog(this)">I 3 Nodi da Pesca Fondamentali</h3>
@@ -205,14 +220,13 @@
 
     <section id="contattaci" class="section">
       <h2>Contattaci</h2>
-      <p>📞 3494166335 <a class="button" style="display:inline-block; width:auto; margin-left:10px" href="https://wa.me/393494166335" target="_blank">💬 WhatsApp</a></p>
-      <p>📞 3408198180 <a class="button" style="display:inline-block; width:auto; margin-left:10px" href="https://wa.me/393408198180" target="_blank">💬 WhatsApp</a></p>
+      <p>📞 3494166335 <a class="button" href="https://wa.me/393494166335" target="_blank">💬 WhatsApp</a></p>
+      <p>📞 3408198180 <a class="button" href="https://wa.me/393408198180" target="_blank">💬 WhatsApp</a></p>
       <p>📧 Email: <a href="mailto:info@mgfishing.eu" style="color:#00c3ff;">info@mgfishing.eu</a></p>
     </section>
 
     <section id="store" class="section">
       <h2>🛒 Visita il nostro Store Online</h2>
-      <p>Scopri tutti i prodotti disponibili sul nostro sito!</p>
       <a class="button" href="https://www.mgfishing.eu" target="_blank">🌐 Vai allo Store MG Fishing</a>
     </section>
   </main>
@@ -251,11 +265,23 @@
       }
     }
 
-    window.addEventListener('load', () => {
+    function loadWebcam() {
+      const url = document.getElementById("webcamSelect").value;
+      const container = document.getElementById("webcamContainer");
+      container.innerHTML = url ? `<iframe src="${url}" width="100%" height="400" frameborder="0" allowfullscreen></iframe>` : '';
+    }
+
+    function toggleBlog(header) {
+      const content = header.nextElementSibling;
+      content.style.display = content.style.display === 'block' ? 'none' : 'block';
+    }
+
+    window.onload = () => {
       setTimeout(() => {
-        document.getElementById('splash').style.display = 'none';
-      }, 2000);
-    });
+        const splash = document.getElementById("splash");
+        if (splash) splash.style.display = 'none';
+      }, 3000);
+    }
   </script>
 </body>
 </html>
