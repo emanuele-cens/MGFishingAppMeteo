@@ -103,21 +103,43 @@
     <section id="meteo" class="section">
       <h2>Previsioni Meteo per la Pesca</h2>
       <input type="text" id="cityInput" placeholder="Inserisci città" class="input">
-      <button onclick="simulateWeather()" class="button">🔍 Cerca</button>
-      <div id="weatherDisplay" style="margin-top: 20px;"></div>
-    </section>
+      <button onclick="async function simulateWeather() {
+      const city = document.getElementById("cityInput").value;
+      const display = document.getElementById("weatherDisplay");
+      const apiKey = 'a3b6ead62ce9e333256276f96865a8e1';
+      if (!city) return display.innerHTML = "<p>Inserisci una località valida.</p>";
 
-    <section id="webcam" class="section"><h2>Webcam</h2></section>
-    <section id="licenze" class="section"><h2>Licenze</h2></section>
-    <section id="esche" class="section"><h2>Esche Vive</h2></section>
-    <section id="blog" class="section"><h2>Blog</h2></section>
-    <section id="contattaci" class="section"><h2>Contattaci</h2></section>
-    <section id="contatti" class="section"><h2>Contatti</h2></section>
-  </main>
+      try {
+        const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=it`);
+        if (!res.ok) throw new Error("Località non trovata");
+        const data = await res.json();
 
-  <script>
-    function toggleMenu() {
-      document.getElementById("sideMenu").classList.toggle("show");
+        const onde = (Math.random() * (1.5 - 0.3) + 0.3).toFixed(1);
+        const fasi = ["Luna nuova", "Luna crescente", "Luna piena", "Luna calante"];
+        const faseLunare = fasi[Math.floor(Math.random() * fasi.length)];
+        const consigli = [
+          "Ideale per orate e spigole",
+          "Ottimo per cefali e mormore",
+          "Perfette condizioni per la pesca a fondo",
+          "Meglio nelle ore serali o all'alba"
+        ];
+        const consiglio = consigli[Math.floor(Math.random() * consigli.length)];
+
+        display.innerHTML = `
+          <h3>Previsioni per ${data.name}</h3>
+          <ul>
+            <li>🌡️ Temperatura: ${data.main.temp}°C (max ${data.main.temp_max}°C / min ${data.main.temp_min}°C)</li>
+            <li>💨 Vento: ${data.wind.speed} km/h</li>
+            <li>💧 Umidità: ${data.main.humidity}%</li>
+            <li>🌊 Altezza onde: ${onde} m</li>
+            <li>🌘 Fase lunare: ${faseLunare}</li>
+            <li>🌅 Alba: 06:15 – 🌇 Tramonto: 19:45</li>
+            <li>🎣 Consiglio pesca: ${consiglio}</li>
+          </ul>
+        `;
+      } catch (error) {
+        display.innerHTML = `<p>Errore: ${error.message}</p>`;
+      }
     }
     function showSection(id) {
       document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
