@@ -340,14 +340,18 @@
       document.getElementById("sideMenu").classList.toggle("show");
     }
 
-    function showSection(id) {
-      document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      document.getElementById("sideMenu").classList.remove("show");
-      const current = sectionHistory[sectionHistory.length - 1];
-      if (current !== id) {
-        sectionHistory.push(id);
-      }
+   function showSection(id) {
+  document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById("sideMenu").classList.remove("show");
+  const current = sectionHistory[sectionHistory.length - 1];
+  if (current !== id) {
+    sectionHistory.push(id);
+  }
+  if (id === 'offerte') {
+    mostraProdotti();
+  }
+}
     }
 
     function goHome() {
