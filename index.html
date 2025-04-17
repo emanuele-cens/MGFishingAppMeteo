@@ -520,13 +520,16 @@ function inviaOrdineWhatsApp() {
     alert("Il carrello è vuoto.");
     return;
   }
+
   let messaggio = "🛒 *Ordine MG Fishing*%0A";
   carrello.forEach(item => {
     messaggio += `- ${item.nome} x${item.quantità} (€${(item.prezzo * item.quantità).toFixed(2)})%0A`;
   });
+
   messaggio += `🚚 Spedizione: €9.00%0A`;
   const totale = carrello.reduce((sum, item) => sum + item.prezzo * item.quantità, 0) + 9;
   messaggio += `💶 Totale: €${totale.toFixed(2)}%0A`;
+
   window.open(`https://wa.me/393494166335?text=${messaggio}`, '_blank');
 }
     function toggleDescrizione(id) {
