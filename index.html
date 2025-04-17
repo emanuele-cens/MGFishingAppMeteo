@@ -82,6 +82,7 @@
   <nav id="sideMenu">
     <a href="#" onclick="showSection('home')">🏠 Home</a>
     <a href="#" onclick="showSection('meteo')">☀️ Meteo</a>
+    <a href="#" onclick="showSection('esche')">🪱 Esche Vive</a>
   </nav>
 
   <main>
@@ -95,6 +96,22 @@
       <input type="text" id="cityInput" placeholder="Inserisci città" class="input">
       <button onclick="fetchWeather()" class="button">🔍 Cerca</button>
       <div id="weatherDisplay"></div>
+    </section>
+
+    <section id="esche" class="section">
+      <h2>Esche Vive Disponibili</h2>
+      <form id="escheForm">
+        <label>Arenicola Locale: <input type="number" name="arenicola_locale" min="0" placeholder="Quantità" class="input"></label>
+        <label>Arenicola Napoli: <input type="number" name="arenicola_napoli" min="0" placeholder="Quantità" class="input"></label>
+        <label>Americano: <input type="number" name="americano" min="0" placeholder="Quantità" class="input"></label>
+        <label>Bibi: <input type="number" name="bibi" min="0" placeholder="Quantità" class="input"></label>
+        <label>Cordella: <input type="number" name="cordella" min="0" placeholder="Quantità" class="input"></label>
+        <label>Muriddu: <input type="number" name="muriddu" min="0" placeholder="Quantità" class="input"></label>
+        <label>Bigattino: <input type="number" name="bigattino" min="0" placeholder="Quantità" class="input"></label>
+        <label>Vermi di Terra: <input type="number" name="vermi_terra" min="0" placeholder="Quantità" class="input"></label>
+        <label>Camole del Miele: <input type="number" name="camole_miele" min="0" placeholder="Quantità" class="input"></label>
+        <button type="button" onclick="inviaOrdineEsche()" class="button">📲 Prenota via WhatsApp</button>
+      </form>
     </section>
   </main>
 
@@ -134,6 +151,21 @@ async function fetchWeather() {
   } catch (error) {
     document.getElementById("weatherDisplay").innerHTML = `<p>Errore: ${error.message}</p>`;
   }
+}
+
+function inviaOrdineEsche() {
+  const form = document.getElementById("escheForm");
+  const formData = new FormData(form);
+  let msg = "*Ordine Esche Vive:*\n";
+  formData.forEach((val, key) => {
+    if (val && parseInt(val) > 0) msg += `${key.replace(/_/g, ' ')}: ${val}\n`;
+  });
+  if (msg.trim() === "*Ordine Esche Vive:*") {
+    alert("Inserisci almeno una quantità di esche.");
+    return;
+  }
+  const encodedMsg = encodeURIComponent(msg);
+  window.open(`https://wa.me/393494166335?text=${encodedMsg}`, '_blank');
 }
 </script>
 </body>
