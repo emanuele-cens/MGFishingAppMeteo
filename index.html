@@ -108,108 +108,56 @@
       <button onclick="simulateWeather()" class="button">🔍 Cerca</button>
       <div id="weatherDisplay"></div>
     </section>
-        <section id="webcam" class="section">
+
+    <section id="webcam" class="section">
       <h2>Webcam Mare in Tempo Reale</h2>
       <p>Seleziona una località per visualizzare la webcam:</p>
       <select id="webcamSelect" onchange="loadWebcam()" class="input">
         <option value="">-- Seleziona località --</option>
-        <optgroup label="Lazio">
-          <option value="https://vedetta.org/webcam/italia/lazio/latina/lido-di-latina/">Lido di Latina</option>
-          <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/roma/spiaggia-lido-di-ostia-roma.html">Lido di Ostia</option>
-          <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/latina/spiaggia-di-formia.html">Formia</option>
-        </optgroup>
-        <optgroup label="Toscana">
-          <option value="https://www.skylinewebcams.com/it/webcam/italia/toscana/lucca/viareggio.html">Viareggio</option>
-          <option value="https://www.skylinewebcams.com/it/webcam/italia/toscana/pisa/marina-di-pisa.html">Marina di Pisa</option>
-        </optgroup>
-        <optgroup label="Campania">
-          <option value="https://www.skylinewebcams.com/it/webcam/italia/campania/salerno/positano.html">Positano</option>
-          <option value="https://www.skylinewebcams.com/it/webcam/italia/campania/salerno/spiaggia-di-amalfi.html">Amalfi</option>
-        </optgroup>
+        <option value="https://vedetta.org/webcam/italia/lazio/latina/lido-di-latina/">Lido di Latina</option>
       </select>
-      <div id="webcamContainer" style="margin-top:20px;"></div>
+      <div id="webcamContainer"></div>
     </section>
 
-    <section id="blog" class="section">
-      <h2>Blog di MG Fishing</h2>
-      <div>
-        <h3 style="cursor:pointer; color:#00aaff;" onclick="toggleBlog('nodi')">➤ I 3 Nodi da Pesca Fondamentali</h3>
-        <div id="blog-nodi" style="display:none;">
-          <p><strong>Nodo Palomar:</strong> raddoppia il filo, inseriscilo nell’occhiello, fai un nodo semplice, passa l’asola sopra l’amo e stringi. Resistente e facile.</p>
-          <p><strong>Nodo Clinch Migliorato:</strong> avvolgi il filo 5-6 volte sull’asse principale, passa nel piccolo occhiello e stringi. Veloce e molto affidabile.</p>
-          <p><strong>Nodo a Gassa (Loop):</strong> crea un’asola per dare libertà all’artificiale. Fai un nodo semplice, inserisci l’esca, avvolgi 4-5 volte e stringi.</p>
-        </div>
-
-        <h3 style="cursor:pointer; color:#00aaff;" onclick="toggleBlog('montature')">➤ Tipi di Montature da Surfcasting</h3>
-        <div id="blog-montature" style="display:none;">
-          <p><strong>Piombo Scorrevole:</strong> ideale per pesci diffidenti come orate e mormore. Nessuna resistenza percepita dal pesce.</p>
-          <p><strong>Due Braccioli:</strong> permette di sondare più zone d’acqua contemporaneamente. Ottimo per arenicola e americano.</p>
-          <p><strong>Long Arm:</strong> bracciolo lungo, perfetto per pesci sospettosi. Ideale con mare calmo e fondale sabbioso.</p>
-          <p><strong>Anti Groviglio:</strong> ottima per mare mosso e fondali misti. Minimizza gli intrecci della lenza.</p>
-        </div>
-
-        <h3 style="cursor:pointer; color:#00aaff;" onclick="toggleBlog('lettura')">➤ Come Leggere il Mare</h3>
-        <div id="blog-lettura" style="display:none;">
-          <p><strong>Zone di Schiuma:</strong> ottimi punti per spigole e orate. Indicano turbolenza e presenza di cibo.</p>
-          <p><strong>Correnti Laterali:</strong> trasportano nutrimento. I pesci si posizionano per intercettarlo.</p>
-          <p><strong>Canalette e Fori:</strong> zone più profonde e calme, spesso ricche di prede. Osserva dove le onde si infrangono meno.</p>
-          <p><strong>Condizioni Meteo:</strong> mare calmo = esche più delicate; mare mosso = esche robuste e montature stabili.</p>
-        </div>
-      </div>
+    <section id="esche" class="section">
+      <h2>Esche Vive Disponibili</h2>
+      <form id="escheForm">
+        <label>Arenicola Locale: <input type="number" name="arenicola_locale" min="0" placeholder="Quantità" class="input"></label>
+        <button type="button" onclick="inviaOrdineEsche()" class="button">📲 Prenota via WhatsApp</button>
+      </form>
     </section>
-
-    <section id="licenze" class="section"><h2>🎣 Licenze</h2></section>
-    <section id="esche" class="section"><h2>🪱 Esche Vive</h2></section>
-    <section id="contattaci" class="section"><h2>💬 Contattaci</h2></section>
-    <section id="contatti" class="section"><h2>📞 Contatti</h2></section>
   </main>
 
 <script>
 function toggleMenu() {
   document.getElementById("sideMenu").classList.toggle("show");
 }
+
 function showSection(id) {
   document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   document.getElementById("sideMenu").classList.remove("show");
 }
-async function simulateWeather() {
-  const city = document.getElementById("cityInput").value;
-  const display = document.getElementById("weatherDisplay");
-  const apiKey = 'a3b6ead62ce9e333256276f96865a8e1';
-  if (!city) return display.innerHTML = "<p>Inserisci una località valida.</p>";
-  try {
-    const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=it`);
-    if (!res.ok) throw new Error("Località non trovata");
-    const data = await res.json();
-    display.innerHTML = `
-      <h3>Previsioni per ${data.name}</h3>
-      <ul>
-        <li>🌡️ Temperatura: ${data.main.temp}°C (max ${data.main.temp_max}°C / min ${data.main.temp_min}°C)</li>
-        <li>💨 Vento: ${data.wind.speed} km/h</li>
-        <li>💧 Umidità: ${data.main.humidity}%</li>
-        <li>🌊 Altezza onde: ${(Math.random() * 1.2 + 0.3).toFixed(1)} m</li>
-        <li>🌘 Fase lunare: Luna crescente</li>
-        <li>🌅 Alba: 06:15 – 🌇 Tramonto: 19:45</li>
-        <li>🎣 Consiglio pesca: Ottimo per cefali e orate</li>
-      </ul>
-    `;
-  } catch (error) {
-    display.innerHTML = `<p>Errore: ${error.message}</p>`;
-  }
+
+function inviaOrdineEsche() {
+  const form = document.getElementById("escheForm");
+  const formData = new FormData(form);
+  let msg = "*Ordine Esche Vive:*\n";
+  formData.forEach((val, key) => {
+    if (val && parseInt(val) > 0) msg += `${key.replace('_', ' ')}: ${val}\n`;
+  });
+  const encodedMsg = encodeURIComponent(msg);
+  window.open(`https://wa.me/393494166335?text=${encodedMsg}`, '_blank');
 }
+
 function loadWebcam() {
   const url = document.getElementById("webcamSelect").value;
-  const container = document.getElementById("webcamContainer");
-  if (url) {
-    container.innerHTML = `<iframe src="${url}" width="100%" height="400" frameborder="0" allowfullscreen></iframe>`;
-  } else {
-    container.innerHTML = '';
-  }
+  document.getElementById("webcamContainer").innerHTML = `<iframe src="${url}" width="100%" height="400"></iframe>`;
 }
-function toggleBlog(id) {
-  const el = document.getElementById('blog-' + id);
-  el.style.display = (el.style.display === 'none') ? 'block' : 'none';
+
+async function simulateWeather() {
+  const city = document.getElementById("cityInput").value;
+  document.getElementById("weatherDisplay").innerHTML = `Meteo simulato per ${city}`;
 }
 </script>
 </body>
