@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MG Fishing App</title>
   <style>
     body {
@@ -11,7 +11,6 @@
       background-color: #001f3f;
       color: white;
     }
-
     #hamburger {
       position: fixed;
       top: 10px;
@@ -24,7 +23,6 @@
       z-index: 1001;
       cursor: pointer;
     }
-
     nav {
       position: fixed;
       top: 0;
@@ -39,11 +37,9 @@
       transition: left 0.3s ease;
       z-index: 1000;
     }
-
     nav.show {
       left: 0;
     }
-
     nav a {
       padding: 1rem;
       text-decoration: none;
@@ -54,21 +50,13 @@
       border-radius: 6px;
       margin: 0 10px;
     }
-
     .section {
       display: none;
       padding: 1.5rem;
     }
-
     .section.active {
       display: block;
     }
-
-    header {
-      text-align: center;
-      padding: 2rem 1rem;
-    }
-
     .input {
       width: 100%;
       padding: 10px;
@@ -77,7 +65,6 @@
       border: none;
       font-size: 16px;
     }
-
     .button {
       background: #00aaff;
       color: white;
@@ -89,26 +76,13 @@
       box-shadow: 0 3px 6px rgba(0,0,0,0.3);
       transition: background 0.3s;
     }
-
     .button:hover {
       background: #008ecc;
-    }
-
-    @media (max-width: 600px) {
-      #hamburger {
-        font-size: 20px;
-        padding: 8px 12px;
-      }
-
-      nav a {
-        font-size: 16px;
-      }
     }
   </style>
 </head>
 <body>
   <div id="hamburger" onclick="toggleMenu()">☰</div>
-
   <nav id="sideMenu">
     <a href="#" onclick="showSection('home')">🏠 Home</a>
     <a href="#" onclick="showSection('meteo')">☀️ Meteo</a>
@@ -145,13 +119,11 @@
     function toggleMenu() {
       document.getElementById("sideMenu").classList.toggle("show");
     }
-
     function showSection(id) {
       document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
       document.getElementById(id).classList.add('active');
       document.getElementById("sideMenu").classList.remove("show");
     }
-
     function simulateWeather() {
       const city = document.getElementById("cityInput").value;
       const display = document.getElementById("weatherDisplay");
