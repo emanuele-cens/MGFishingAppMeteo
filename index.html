@@ -122,7 +122,7 @@
       justify-content: space-around;
       background: rgba(0, 0, 0, 0.85);
       padding: 10px;
-      z-index: 999;
+      z-index: 3000;
     }
     #bottomNav button {
       padding: 10px 20px;
@@ -488,11 +488,14 @@ function aggiungiAlCarrello(id) {
   } else {
     carrello.push({ ...prodotto, quantità: qty });
   }
+  aggiornaCarrello()
+    function rimuoviDalCarrello(id) {
+  carrello = carrello.filter(p => p.id !== id);
   aggiornaCarrello();
-}
+};
 
 function aggiornaCarrello() {
-  const cartDisplay = document.getElementById("cartDisplay");
+  const cartDisplay = document.getElementById("sideCartDisplay");
   if (carrello.length === 0) {
     cartDisplay.innerHTML = "<p>Il carrello è vuoto.</p>";
     return;
@@ -502,7 +505,10 @@ function aggiornaCarrello() {
   carrello.forEach(item => {
     const subtotale = item.prezzo * item.quantità;
     totale += subtotale;
-    html += `<li>${item.nome} x${item.quantità} - €${subtotale.toFixed(2)}</li>`;
+    html += `<li style="margin-bottom: 8px;">
+      ${item.nome} x${item.quantità} - €${subtotale.toFixed(2)} 
+      <button onclick="rimuoviDalCarrello(${item.id})" style="margin-left:5px;">❌</button>
+    </li>`;
   });
   totale += 9; // Spedizione
   html += `</ul><p>🚚 Spedizione: €9.00</p><p><strong>Totale: €${totale.toFixed(2)}</strong></p>`;
@@ -535,6 +541,19 @@ function inviaOrdineWhatsApp() {
   const sidebar = document.getElementById("cartSidebar");
   sidebar.classList.toggle("show");
 }
-  </script>
+    function toggleSideCart() {
+  const cart = document.getElementById("sideCart");
+  cart.style.right = (cart.style.right === "0px") ? "-350px" : "0px";
+}
+    </script>
+
+  <!-- Carrello Laterale -->
+  <div id="sideCart" style="position: fixed; right: -350px; top: 0; height: 100%; width: 320px; background: #003366; color: white; padding: 20px; overflow-y: auto; transition: right 0.3s ease; z-index: 1500;">
+    <h3>🛒 Il tuo Carrello</h3>
+    <div id="sideCartDisplay"></div>
+    <button onclick="inviaOrdineWhatsApp()" class="button" style="margin-top: 10px;">📲 Invia Ordine via WhatsApp</button>
+  </div>
+  <button onclick="toggleSideCart()" style="position: fixed; top: 10px; right: 10px; z-index: 1600; background: #0077cc; color: white; border: none; padding: 10px; border-radius: 6px;">🛒</button>
+
 </body>
 </html>
