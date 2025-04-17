@@ -106,7 +106,32 @@
     <section id="webcam" class="section"><h2>Webcam</h2></section>
     <section id="licenze" class="section"><h2>Licenze</h2></section>
     <section id="esche" class="section"><h2>Esche Vive</h2></section>
-    <section id="blog" class="section"><h2>Blog</h2></section>
+    <section id="blog" class="section">
+  <h2>Blog MG Fishing</h2>
+
+  <h3 style="cursor:pointer;color:#00aaff;" onclick="toggleArticle('nodi')">🎣 I 3 Nodi da Pesca Fondamentali</h3>
+  <div id="nodi" style="display:none;margin-top:10px;">
+    <p><strong>Nodo Palomar:</strong> raddoppia il filo, inseriscilo nell’occhiello, fai un nodo semplice, passa l’asola sopra l’amo e stringi. Resistente e facile.</p>
+    <p><strong>Nodo Clinch Migliorato:</strong> avvolgi il filo 5-6 volte sull’asse principale, passa nel piccolo occhiello e stringi. Veloce e molto affidabile.</p>
+    <p><strong>Nodo a Gassa (Loop):</strong> crea un’asola per dare libertà all’artificiale. Fai un nodo semplice, inserisci l’esca, avvolgi 4-5 volte e stringi.</p>
+  </div>
+
+  <h3 style="cursor:pointer;color:#00aaff;" onclick="toggleArticle('montature')">🌊 Tipi di Montature da Surfcasting</h3>
+  <div id="montature" style="display:none;margin-top:10px;">
+    <p><strong>Piombo Scorrevole:</strong> ideale per pesci diffidenti come orate e mormore. Nessuna resistenza percepita dal pesce.</p>
+    <p><strong>Due Braccioli:</strong> permette di sondare più zone d’acqua contemporaneamente. Ottimo per arenicola e americano.</p>
+    <p><strong>Long Arm:</strong> bracciolo lungo, perfetto per pesci sospettosi. Ideale con mare calmo e fondale sabbioso.</p>
+    <p><strong>Anti Groviglio:</strong> ottima per mare mosso e fondali misti. Minimizza gli intrecci della lenza.</p>
+  </div>
+
+  <h3 style="cursor:pointer;color:#00aaff;" onclick="toggleArticle('mare')">🌅 Come Leggere il Mare</h3>
+  <div id="mare" style="display:none;margin-top:10px;">
+    <p><strong>Zone di Schiuma:</strong> ottimi punti per spigole e orate. Indicano turbolenza e presenza di cibo.</p>
+    <p><strong>Correnti Laterali:</strong> trasportano nutrimento. I pesci si posizionano per intercettarlo.</p>
+    <p><strong>Canalette e Fori:</strong> zone più profonde e calme, spesso ricche di prede. Osserva dove le onde si infrangono meno.</p>
+    <p><strong>Condizioni Meteo:</strong> mare calmo = esche più delicate; mare mosso = esche robuste e montature stabili.</p>
+  </div>
+</section>
     <section id="contattaci" class="section"><h2>Contattaci</h2></section>
     <section id="contatti" class="section"><h2>Contatti</h2></section>
   </main>
@@ -150,6 +175,11 @@
       display.innerHTML = `<p>Errore: ${error.message}</p>`;
     }
   }
+function toggleArticle(id) {
+  const article = document.getElementById(id);
+  article.style.display = article.style.display === 'none' ? 'block' : 'none';
+}
+
 </script>
 </body>
 </html>
