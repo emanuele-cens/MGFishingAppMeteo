@@ -1,38 +1,554 @@
-// /pages/index.js
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MG Fishing App</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+    #splash {
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #001f3f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #splash img {
+      max-width: 200px;
+      animation: fadeInOut 3s forwards;
+    }
+    @keyframes fadeInOut {
+      0% { opacity: 0; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(1.2); }
+    }
+    #hamburger {
+      position: fixed;
+      top: 5px;
+      left: 5px;
+      background: #004080;
+      color: white;
+      padding: 8px 12px;
+      font-size: 20px;
+      border-radius: 6px;
+      z-index: 1001;
+      cursor: pointer;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 220px;
+      height: 100%;
+      background: rgba(0, 0, 51, 0.95);
+      padding-top: 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: left 0.3s ease;
+      z-index: 1000;
+    }
+    nav.show {
+      left: 0;
+    }
+    nav a {
+      padding: 1rem;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      background: #005fa3;
+      border-radius: 6px;
+      margin: 0 10px;
+    }
+    .section {
+      display: none;
+      padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+      margin-top: 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 12px;
+    }
+    .section.active {
+      display: block;
+    }
+    .input, .button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+    }
+    .button {
+      background: #00aaff;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+      transition: background 0.3s;
+    }
+    .button:hover {
+      background: #008ecc;
+    }
+    .blog-entry {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .blog-entry h3 {
+      color: #00c3ff;
+      cursor: pointer;
+    }
+    .blog-content {
+      display: none;
+    }
+    #bottomNav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      background: rgba(0, 0, 0, 0.85);
+      padding: 10px;
+      z-index: 3000;
+    }
+    #bottomNav button {
+      padding: 10px 20px;
+      background: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.product {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  width: 300px;
+}
+.product img {
+  width: 100%;
+  border-radius: 8px;
+}
+.product h4 {
+  margin: 0.5rem 0;
+}
+.product p {
+  margin: 0.5rem 0;
+}
+.product input {
+  width: 60px;
+  margin-right: 10px;
+}
+    #cartSidebar {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  height: 100%;
+  background-color: #003366;
+  color: white;
+  padding: 20px;
+  box-shadow: -3px 0 5px rgba(0,0,0,0.5);
+  z-index: 9999;
+  overflow-y: auto;
+  transition: right 0.3s ease;
+}
+#cartSidebar.show {
+  right: 0;
+}
+#openCartBtn {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  background-color: #00aaff;
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  font-size: 18px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  cursor: pointer;
+  z-index: 9998;
+}
+.product h4 {
+  cursor: pointer;
+  color: #00c3ff;
+}
+.product-details {
+  display: none;
+  margin-top: 10px;
+}
+  </style>
+</head>
+<body>
+  <!-- Splash Screen -->
+  <div id="splash">
+    <img src="https://www.mgfishing.eu/img/logo-1725547317.jpg" alt="MG Fishing Logo">
+  </div>
 
-export default function Home() {
-  return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#f2f2f2', padding: '2rem' }}>
-      <h1 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '2rem' }}>
-        Benvenuto nel Negozio Virtuale MG Fishing
-      </h1>
+  <div id="hamburger" onclick="toggleMenu()">☰</div>
+  <nav id="sideMenu">
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem' }}>
-        <div style={cardStyle}>
-          <h2>Canne da Pesca</h2>
-          <p>Scopri tutte le canne da surfcasting, bolentino e spinning!</p>
-        </div>
+    <a href="#" onclick="showSection('home')">🏠 Home</a>
+    <a href="#" onclick="showSection('meteo')">☀️ Meteo</a>
+    <a href="#" onclick="showSection('esche')">🪱 Esche Vive</a>
+    <a href="#" onclick="showSection('webcam')">📷 Webcam</a>
+    <a href="#" onclick="showSection('blog')">📝 Blog</a>
+    <a href="#" onclick="showSection('licenze')">🎣 Licenze</a>
+    <a href="#" onclick="showSection('contattaci')">📞 Contattaci</a>
+    <a href="#" onclick="showSection('offerte')">💰 Offerte</a>
+    <a href="#" onclick="showSection('store')">🛒 Store Online</a>
+  </nav>
 
-        <div style={cardStyle}>
-          <h2>Mulinelli</h2>
-          <p>Vasta scelta di mulinelli da pesca per tutte le tecniche.</p>
-        </div>
+  <main>
+    <section id="home" class="section active">
+      <h2>Benvenuto su MG Fishing</h2>
+      <p>Inizia a esplorare l'app usando il menu.</p>
+    </section>
 
-        <div style={cardStyle}>
-          <h2>Accessori</h2>
-          <p>Girelle, ami, piombi, borse e tutti gli accessori per la pesca.</p>
+    <section id="meteo" class="section">
+      <h2>Previsioni Meteo per la Pesca</h2>
+      <input type="text" id="cityInput" placeholder="Inserisci città" class="input">
+      <button onclick="fetchWeather()" class="button">🔍 Cerca</button>
+      <div id="weatherDisplay"></div>
+    </section>
+
+    <section id="esche" class="section">
+      <h2>Esche Vive Disponibili</h2>
+      <form id="escheForm">
+        <label>Arenicola Locale: <input type="number" name="arenicola_locale" min="0" class="input" placeholder="Q.tà"></label>
+        <label>Arenicola Napoli: <input type="number" name="arenicola_napoli" min="0" class="input" placeholder="Q.tà"></label>
+        <label>Americano: <input type="number" name="americano" min="0" class="input" placeholder="Q.tà"></label>
+        <label>Bibi: <input type="number" name="bibi" min="0" class="input" placeholder="Q.tà"></label>
+        <label>Cordella: <input type="number" name="cordella" min="0" class="input" placeholder="Q.tà"></label>
+        <label>Muriddu: <input type="number" name="muriddu" min="0" class="input" placeholder="Q.tà"></label>
+        <label>Bigattino: <input type="number" name="bigattino" min="0" class="input" placeholder="Q.tà"></label>
+        <label>Vermi di Terra: <input type="number" name="vermi_terra" min="0" class="input" placeholder="Q.tà"></label>
+        <label>Camole del Miele: <input type="number" name="camole_miele" min="0" class="input" placeholder="Q.tà"></label>
+        <button type="button" onclick="inviaOrdineEsche()" class="button">📲 Prenota via WhatsApp</button>
+      </form>
+    </section>
+
+    <section id="webcam" class="section">
+      <h2>Webcam Coste Laziali</h2>
+      <select id="webcamSelect" class="input" onchange="loadWebcam()">
+        <option value="">-- Seleziona località --</option>
+        <option value="https://vedetta.org/webcam/italia/lazio/latina/lido-di-latina/">Latina - Lido</option>
+        <option value="https://vedetta.org/webcam/italia/lazio/latina/sabaudia/">Sabaudia</option>
+        <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/roma/spiaggia-lido-di-ostia-roma.html">Ostia - Roma</option>
+        <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/latina/spiaggia-di-formia.html">Formia</option>
+        <option value="https://www.skylinewebcams.com/it/webcam/italia/lazio/latina/terracina.html">Terracina</option>
+      </select>
+      <div id="webcamContainer" style="margin-top: 20px;"></div>
+    </section>
+
+      <section id="blog" class="section">
+      <h2>Blog</h2>
+      <div class="blog-entry">
+        <h3 onclick="toggleBlog(this)">I 3 Nodi da Pesca Fondamentali</h3>
+        <div class="blog-content">
+          <p><strong>Nodo Palomar:</strong> facile da eseguire e molto resistente.</p>
+          <p><strong>Nodo Clinch Migliorato:</strong> affidabile per ami con occhiello.</p>
+          <p><strong>Nodo a Gassa:</strong> utile per esche artificiali e montature scorrevoli.</p>
         </div>
       </div>
-    </div>
-  );
+      <div class="blog-entry">
+        <h3 onclick="toggleBlog(this)">Tipi di Montature da Surfcasting</h3>
+        <div class="blog-content">
+          <p>Piombo scorrevole per pesci sospettosi, due braccioli per più esche, long arm per distanze e anti-groviglio per acque agitate.</p>
+        </div>
+      </div>
+      <div class="blog-entry">
+        <h3 onclick="toggleBlog(this)">Come Leggere il Mare</h3>
+        <div class="blog-content">
+          <p>Riconosci le zone di schiuma, le canalette tra le onde e le variazioni di colore per trovare le zone migliori per la pesca.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contattaci" class="section">
+      <h2>Contattaci</h2>
+      <p>📞 3494166335 <a class="button" href="https://wa.me/393494166335" target="_blank">💬 WhatsApp</a></p>
+      <p>📞 3408198180 <a class="button" href="https://wa.me/393408198180" target="_blank">💬 WhatsApp</a></p>
+      <p>📧 Email: <a href="mailto:info@mgfishing.eu" style="color:#00c3ff;">info@mgfishing.eu</a></p>
+    </section>
+
+    <section id="store" class="section">
+      <h2>🛒 Visita il nostro Store Online</h2>
+      <a class="button" href="https://www.mgfishing.eu" target="_blank">🌐 Vai allo Store MG Fishing</a>
+    </section>
+    <section id="licenze" class="section">
+  <h2>🎣 Licenze di Pesca – Tipo B</h2>
+  <p>Qui trovi informazioni aggiornate sulle licenze di pesca dilettantistica per ogni regione.</p>
+  <div class="region">
+    <h3>🟦 Lazio</h3>
+    <p><strong>Costo:</strong> €29,13</p>
+    <p><strong>Esenzioni:</strong> under 18, over 65</p>
+    <p><strong>Validità:</strong> 12 mesi</p>
+    <p><strong>Pagamento:</strong> c/c postale 63101000 intestato a Regione Lazio</p>
+  </div>
+  <div class="region">
+    <h3>🟩 Lombardia</h3>
+    <p><strong>Costo:</strong> €23,00</p>
+    <p><strong>Esenzioni:</strong> under 18, over 65, disabili</p>
+    <p><strong>Validità:</strong> 12 mesi</p>
+    <p><strong>Pagamento:</strong> PagoPA</p>
+  </div>
+  <div class="region">
+    <h3>🟥 Toscana</h3>
+    <p><strong>Costo:</strong> €35,00</p>
+    <p><strong>Esenzioni:</strong> nessuna</p>
+    <p><strong>Validità:</strong> 12 mesi</p>
+    <p><strong>Pagamento:</strong> c/c postale 26730507</p>
+  </div>
+  <div class="region">
+    <h3>🟫 Veneto</h3>
+    <p><strong>Costo:</strong> €34,00</p>
+    <p><strong>Esenzioni:</strong> under 18, over 70</p>
+    <p><strong>Validità:</strong> 12 mesi</p>
+    <p><strong>Pagamento:</strong> c/c postale 15676107</p>
+  </div>
+  <div class="region">
+    <h3>🟧 Emilia-Romagna</h3>
+    <p><strong>Costo:</strong> €22,72</p>
+    <p><strong>Esenzioni:</strong> under 12 accompagnati</p>
+    <p><strong>Validità:</strong> 12 mesi</p>
+    <p><strong>Pagamento:</strong> c/c postale 116400</p>
+  </div>
+  <div class="region">
+    <h3>🟪 Piemonte</h3>
+    <p><strong>Costo:</strong> €35,00</p>
+    <p><strong>Esenzioni:</strong> under 14</p>
+    <p><strong>Validità:</strong> 12 mesi</p>
+    <p><strong>Pagamento:</strong> PagoPA</p>
+  </div>
+  <div class="region">
+    <h3>🟨 Sardegna</h3>
+    <p><strong>Costo:</strong> €20,00</p>
+    <p><strong>Esenzioni:</strong> soggetti con esonero redditi</p>
+    <p><strong>Validità:</strong> 5 anni</p>
+    <p><strong>Pagamento:</strong> PagoPA</p>
+  </div>
+  <div class="region">
+    <h3>🟥 Campania</h3>
+    <p><strong>Costo:</strong> €40,00</p>
+    <p><strong>Esenzioni:</strong> over 70</p>
+    <p><strong>Validità:</strong> 12 mesi</p>
+    <p><strong>Pagamento:</strong> c/c postale 21965181</p>
+  </div>
+  <p><em>Per altre regioni, consulta i siti ufficiali o contatta gli uffici pesca regionali.</em></p>
+</section>
+    <section id="offerte" class="section">
+  <h2>🎣 Offerte Speciali</h2>
+  <div id="productList" class="product-list"></div>
+  <div id="cartContainer" style="margin-top: 30px;">
+    <h3>🛒 Carrello</h3>
+    <div id="cartDisplay"></div>
+    <button class="button" onclick="inviaOrdineWhatsApp()">📲 Invia Ordine via WhatsApp</button>
+  </div>
+</section>
+   
+  </main>
+
+  <div id="bottomNav">
+    <button onclick="goHome()">🏠 Home</button>
+    <button onclick="goBack()">🔙 Indietro</button>
+  </div>
+
+  <script>
+    let sectionHistory = ['home'];
+
+    function toggleMenu() {
+      document.getElementById("sideMenu").classList.toggle("show");
+    }
+
+   function showSection(id) {
+  document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById("sideMenu").classList.remove("show");
+  const current = sectionHistory[sectionHistory.length - 1];
+  if (current !== id) {
+    sectionHistory.push(id);
+  }
+  if (id === 'offerte') {
+    mostraProdotti();
+  }
 }
 
-const cardStyle = {
-  backgroundColor: '#fff',
-  borderRadius: '12px',
-  padding: '1.5rem',
-  boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
-  textAlign: 'center',
-  transition: 'transform 0.3s',
-  cursor: 'pointer',
+    function goHome() {
+      showSection('home');
+    }
+
+    function goBack() {
+      if (sectionHistory.length > 1) {
+        sectionHistory.pop();
+        const previous = sectionHistory[sectionHistory.length - 1];
+        showSection(previous);
+      }
+    }
+
+    function loadWebcam() {
+      const url = document.getElementById("webcamSelect").value;
+      const container = document.getElementById("webcamContainer");
+      container.innerHTML = url ? `<iframe src="${url}" width="100%" height="400" frameborder="0" allowfullscreen></iframe>` : '';
+    }
+
+    function toggleBlog(header) {
+      const content = header.nextElementSibling;
+      content.style.display = content.style.display === 'block' ? 'none' : 'block';
+    }
+
+    window.onload = () => {
+      setTimeout(() => {
+        const splash = document.getElementById("splash");
+        if (splash) splash.style.display = 'none';
+      }, 3000);
+      }
+      const prodotti = [
+  {
+    id: 1,
+    nome: "Kit Surfcasting Canna Kolpo Long Surf 4.20m + King Sea 8000",
+    descrizione: "Kit completo per il surfcasting con canna Kolpo Long Surf 4.20m e mulinello King Sea 8000.",
+    prezzo: 89.90,
+    immagine: "https://www.mgfishing.eu/1926-large_default/kit-surfcasting-canna-kolpo-long-surf-420mt-230gr-king-sea-8000.jpg"
+  },
+  {
+    id: 2,
+    nome: "Canna Surfcasting Trabucco Oceanic 4.20m 200g",
+    descrizione: "Canna da surfcasting Trabucco Oceanic 4.20m con potenza fino a 200g.",
+    prezzo: 59.90,
+    immagine: "https://www.mgfishing.eu/1949-large_default/canna-surfcasting-trabucco-oceanic-420mt-200gr-mulinello-trabucco.jpg"
+  },
+  {
+    id: 3,
+    nome: "Zaino Trabucco XTR Surf Team",
+    descrizione: "Zaino Trabucco XTR Surf Team, ideale per trasportare l'attrezzatura da pesca.",
+    prezzo: 39.90,
+    immagine: "https://www.mgfishing.eu/1977-large_default/zaino-trabucco-xtr-surf-team-.jpg"
+  }
+];
+
+let carrello = [];
+
+function mostraProdotti() {
+  const productList = document.getElementById("productList");
+  productList.innerHTML = "";
+  prodotti.forEach(prodotto => {
+    const div = document.createElement("div");
+    div.className = "product";
+    div.innerHTML = `
+      <img src="${prodotto.immagine}" alt="${prodotto.nome}">
+      <h4 onclick="toggleDettagli(this)">${prodotto.nome}</h4>
+      <div class="product-details">
+        <p>${prodotto.descrizione}</p>
+        <p>💶 Prezzo: €${prodotto.prezzo.toFixed(2)}</p>
+        <input type="number" id="qty-${prodotto.id}" min="1" value="1">
+        <button class="button" onclick="aggiungiAlCarrello(${prodotto.id})">➕ Aggiungi al Carrello</button>
+      </div>
+    `;
+    productList.appendChild(div);
+  });
+}
+
+function aggiungiAlCarrello(id) {
+  const qty = parseInt(document.getElementById(`qty-${id}`).value);
+  if (qty < 1) return;
+  const prodotto = prodotti.find(p => p.id === id);
+  const esistente = carrello.find(p => p.id === id);
+  if (esistente) {
+    esistente.quantità += qty;
+  } else {
+    carrello.push({ ...prodotto, quantità: qty });
+  }
+  aggiornaCarrello()
+   }
+    function rimuoviDalCarrello(id) {
+  carrello = carrello.filter(p => p.id !== id);
+  aggiornaCarrello();
 };
+
+function aggiornaCarrello() {
+  const cartDisplay = document.getElementById("sideCartDisplay");
+  if (carrello.length === 0) {
+    cartDisplay.innerHTML = "<p>Il carrello è vuoto.</p>";
+    return;
+  }
+  let html = "<ul>";
+  let totale = 0;
+  carrello.forEach(item => {
+    const subtotale = item.prezzo * item.quantità;
+    totale += subtotale;
+    html += `<li style="margin-bottom: 8px;">
+      ${item.nome} x${item.quantità} - €${subtotale.toFixed(2)} 
+      <button onclick="rimuoviDalCarrello(${item.id})" style="margin-left:5px;">❌</button>
+    </li>`;
+  });
+  totale += 9; // Spedizione
+  html += `</ul><p>🚚 Spedizione: €9.00</p><p><strong>Totale: €${totale.toFixed(2)}</strong></p>`;
+  cartDisplay.innerHTML = html;
+}
+
+function inviaOrdineWhatsApp() {
+  if (carrello.length === 0) {
+    alert("Il carrello è vuoto.");
+    return;
+  }
+
+  let messaggio = "🛒 *Ordine MG Fishing*%0A";
+  carrello.forEach(item => {
+    messaggio += `- ${item.nome} x${item.quantità} (€${(item.prezzo * item.quantità).toFixed(2)})%0A`;
+  });
+
+  messaggio += `🚚 Spedizione: €9.00%0A`;
+  const totale = carrello.reduce((sum, item) => sum + item.prezzo * item.quantità, 0) + 9;
+  messaggio += `💶 Totale: €${totale.toFixed(2)}%0A`;
+
+  window.open(`https://wa.me/393494166335?text=${messaggio}`, '_blank');
+}
+    function toggleDescrizione(id) {
+  const desc = document.getElementById(`desc-${id}`);
+  desc.style.display = desc.style.display === 'block' ? 'none' : 'block';
+}
+    function toggleDettagli(header) {
+  const details = header.nextElementSibling;
+  details.style.display = details.style.display === 'block' ? 'none' : 'block';
+}
+    function toggleCart() {
+  const sidebar = document.getElementById("cartSidebar");
+  sidebar.classList.toggle("show");
+}
+    function toggleSideCart() {
+  const cart = document.getElementById("sideCart");
+  cart.style.right = (cart.style.right === "0px") ? "-350px" : "0px";
+}
+    </script>
+
+  <div id="sideCart" style="position: fixed; right: -350px; top: 0; height: 100%; width: 320px; background: #003366; color: white; padding: 20px; overflow-y: auto; transition: right 0.3s ease; z-index: 1500;">
+    <h3>🛒 Il tuo Carrello</h3>
+    <div id="sideCartDisplay"></div>
+    <button onclick="inviaOrdineWhatsApp()" class="button" style="margin-top: 10px;">📲 Invia Ordine via WhatsApp</button>
+  </div>
+  <button onclick="toggleSideCart()" style="position: fixed; top: 10px; right: 10px; z-index: 1600; background: #0077cc; color: white; border: none; padding: 10px; border-radius: 6px;">🛒</button>
+
+</body>
+</html>
